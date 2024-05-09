@@ -1,4 +1,4 @@
-git clone <github repo url>
+git clone https://github.com/jhmbaska3231/emotionsAI_frontend.git
 
 git status
 
