@@ -1,0 +1,20 @@
+.faq-button {
+    position: fixed;  /* Fixes the button position relative to the viewport */
+    bottom: 50px;  /* 20px from the bottom of the viewport */
+    right: 20px;  /* 20px from the right side of the viewport */
+    background-color: black;  /* Black background color */
+    color: white;  /* White text color */
+    width: 50px;  /* Width of the circle */
+    height: 50px;  /* Height of the circle, same as width to make it a perfect circle */
+    border-radius: 50%;  /* Makes the div a circle */
+    display: flex;  /* Enables the use of Flexbox for centering content */
+    justify-content: center;  /* Horizontally centers the content */
+    align-items: center;  /* Vertically centers the content */
+    font-size: 24px;  /* Size of the 'i' inside the button */
+    cursor: pointer;  /* Changes the cursor to a pointer to indicate it's clickable */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);  /* Optional: Adds shadow for better visibility */
+}
+
+.faq-button:hover {
+    background-color: #333;  /* Changes color on hover for visual feedback */
+}

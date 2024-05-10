@@ -1,0 +1,158 @@
+.box-contact {
+    position: fixed;
+    top: 52%; /* Adjusted top position to center vertically */
+    left: 50%; /* Adjusted left position to center horizontally */
+    transform: translate(-50%, -50%); /* Center the box both horizontally and vertically */
+    width: 100%; /* Set width */
+    max-width: 900px; /* Maximum width */
+    height: 600px; /* Auto height */
+    padding: 30px; /* Add padding */
+    padding-left: 80px;
+    background-image: linear-gradient(to bottom, #52C2A5, #344C46); /* Gradient background */
+    border: 1px solid #ccc; /* Add border */
+    box-sizing: border-box; /* Include padding and border in the box's total width and height */
+    border-radius: 10px; /* Make the edges of the box curved */
+}
+
+.text-bold {
+    font-size: 20px; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    color: #fff; /* Set text color */
+    text-align: center; /* Center align text */
+    margin-bottom: 5px; /* Add space between text and button */
+    margin-right: 60px;
+}
+
+.text-normal {
+    font-size: 18px; /* Adjust font size */
+    color: #fff; /* Set text color */
+    text-align: left; /* Center align text */
+    margin-bottom: 5px; /* Add space between text and button */
+}
+.empty-fillable-box {
+    position: relative;
+    width: 200px; /* Set width */
+    height: 40px; /* Set height */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Border radius */
+  }
+  .empty-fillable-box input[type="text"] {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+  }
+
+.text-normal img {
+    margin-right: 5px; /* Add margin-right for spacing */
+}
+
+.black-button {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Change to block */
+    width: 40%; /* Set width to 100% */
+    font-size: 16px;
+    margin-top: 20px ; /* Adjust margin */
+    margin-left: 28%;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.black-button:hover {
+    background-color: #444444; /* Maintain black color on hover */
+}
+
+.black-button::after{
+    
+}
+
+.button-time {
+    background-color: #000; /* Black background */
+    color: #6c6c6c; /* White text color */
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; /* Set display to inline-block */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 20%; /* Set width as a percentage of viewport width */
+    max-width: 200px; /* Maximum width */
+    height: auto; /* Auto height */
+    position: absolute; /* Set position to absolute */
+    top: 14%; /* Adjusted top position */
+    left: 33%; /* Adjusted left position */
+}
+
+.form-row {
+    display: flex;
+  }
+  
+  .form-column {
+    flex: 1;
+    margin-right: 5px; /* Adjust spacing between columns */
+  }
+  
+  .text-normal {
+    margin-bottom: 2px; /* Add space between label and input */
+  }
+  
+  .fillable-box-container {
+    width: 80%; /* Make fillable box container fill the column */
+  }
+
+  .empty-fillable-box {
+    position: relative;
+    width: 300px; /* Set width */
+    height: 40px; /* Set height */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Border radius */
+  }
+  
+  .empty-fillable-box input[type="text"] {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+  }
+
+  .empty-fillable-box2 {
+    position: relative;
+    width: 690px; /* Set width */
+    height: 40px; /* Set height */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Border radius */
+  }
+  .empty-fillable-box2 input[type="text"] {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+  }
+
+  .empty-fillable-box3 {
+    position: relative;
+    width: 690px; /* Set width */
+    height: 100px; /* Set height */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Border radius */
+  }
+  .empty-fillable-box3 input[type="text"] {
+    text-wrap: 80%;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    text-align: left;
+    vertical-align: top;
+  }

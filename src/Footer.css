@@ -1,0 +1,14 @@
+.footer {
+    background-color: #333;  /* Dark background for contrast */
+    color: white;  /* White text for readability */
+    text-align: center;  /* Center the text inside the footer */
+    padding: 10px 0;  /* Padding on top and bottom */
+    position: absolute;  /* Ensures footer is at the bottom of the page */
+    width: 100%;  /* Full width */
+    bottom: 0;  /* Align at the bottom */
+}
+
+.footer p {
+    margin: 0;  /* Removes default margin */
+    font-size: 16px;  /* Adequate font size for footer text */
+}
