@@ -15,7 +15,7 @@ const Navbar = () => {
                     <img src={logo} alt="EmotionsAI Logo" style={{ height: '40px' }} />
                     <span>EmotionsAI</span>
                 </Link>
-            </div>
+            </div> 
             <div className="navbar-right">
                 <Link to="/product">Product</Link>
                 <Link to="/pricing">Pricing</Link>
