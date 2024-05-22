@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Updated to chevron icons
 import './HomePage.css';
 import FAQ from './FaqButton';
 
@@ -40,7 +40,7 @@ const Homepage = () => {
         <div>
             <Navbar />
             <div className="slideshow">
-                <FontAwesomeIcon icon={faArrowLeft} onClick={prevSlide} className="slide-arrow left-arrow"/>
+            <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="slide-arrow left-arrow"/>
                 <div className="slide-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {images.map((image, index) => (
                         <div className="slide" key={index}>
@@ -48,7 +48,7 @@ const Homepage = () => {
                         </div>
                     ))}
                 </div>
-                <FontAwesomeIcon icon={faArrowRight} onClick={nextSlide} className="slide-arrow right-arrow"/>
+                <FontAwesomeIcon icon={faChevronRight} onClick={nextSlide} className="slide-arrow right-arrow"/>
                 <div className="slide-dots">
                     {images.map((_, index) => (
                         <span key={index} className={`dot ${index === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(index)}></span>
