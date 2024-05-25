@@ -1,0 +1,65 @@
+.paid-navbar {
+    background-color: #333;
+    color: white;
+    padding: 0 20px; /* Horizontal padding only */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically centers content */
+    height: 50px; /* Fixed navbar height */
+}
+
+/* Common flex styling for navbar sections */
+.paid-navbar div {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for both left and right sections of the navbar */
+.paid-navbar-left, .paid-navbar-right {
+    flex-grow: 1;
+    display: flex;
+}
+
+/* Right section is justified to the end */
+.paid-navbar-right {
+    justify-content: flex-end;
+}
+
+/* Style adjustments for navbar links */
+.paid-navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    display: flex;
+    align-items: center; /* Vertically center the link content */
+}
+
+/* Pointer cursor on hover for better user feedback */
+.paid-navbar a:hover {
+    cursor: pointer;
+}
+
+/* Specific styling for the navbar logo and accompanying text */
+.paid-navbar-logo {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+/* Margin between logo image and text */
+.paid-navbar-logo img {
+    margin-right: 10px;
+}
+
+/* Font styling for logo text */
+.paid-navbar-logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styling for the user icon */
+.user-icon {
+    height: 20px; /* Adjust the size as needed */
+    margin-right: 5px; /* Space between the icon and the text */
+}

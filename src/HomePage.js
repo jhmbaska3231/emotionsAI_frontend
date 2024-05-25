@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Updated to chevron icons
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import FAQ from './FaqButton';
-
-// Import the specific slide images
 import slide1 from './pictures/Slide_1.png';
 import slide2 from './pictures/Slide_2.png';
 import slide3 from './pictures/Slide_3.png';
@@ -40,7 +39,7 @@ const Homepage = () => {
         <div>
             <Navbar />
             <div className="slideshow">
-            <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="slide-arrow left-arrow"/>
+                <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="slide-arrow left-arrow" />
                 <div className="slide-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {images.map((image, index) => (
                         <div className="slide" key={index}>
@@ -48,7 +47,7 @@ const Homepage = () => {
                         </div>
                     ))}
                 </div>
-                <FontAwesomeIcon icon={faChevronRight} onClick={nextSlide} className="slide-arrow right-arrow"/>
+                <FontAwesomeIcon icon={faChevronRight} onClick={nextSlide} className="slide-arrow right-arrow" />
                 <div className="slide-dots">
                     {images.map((_, index) => (
                         <span key={index} className={`dot ${index === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(index)}></span>
@@ -56,15 +55,17 @@ const Homepage = () => {
                 </div>
             </div>
             <div className="product-introduction">
-            <h1>ABOUT US</h1>
-            <div className="content-wrapper">
-                <div className="text-box">
-                    <p>At EmotionsAI, we specialize in leveraging cutting-edge technology to help you master the emotional nuances of your writing. Our web application, inspired by Grammarly, empowers authors, students, speechwriters, and professionals across diverse fields to craft compelling content that resonates with audiences on a deeper level.</p>
+                <h1>ABOUT US</h1>
+                <div className="content-wrapper">
+                    <div className="text-box">
+                        <p>At EmotionsAI, we specialize in leveraging cutting-edge technology to help you master the emotional nuances of your writing. Our web application, inspired by Grammarly, empowers authors, students, speechwriters, and professionals across diverse fields to craft compelling content that resonates with audiences on a deeper level.</p>
+                    </div>
+                    <img src={intro1} alt="Emotions AI Logo" className="about-image" />
                 </div>
-                <img src={intro1} alt="Emotions AI Logo" className="about-image"/>
+                <Link to="/transcribe">
+                    <button className="get-started-button">Get Started</button>
+                </Link>
             </div>
-            <button className="get-started-button">Get Started</button> {/* New button added here */}
-        </div>
             <Footer />
             <FAQ />
         </div>

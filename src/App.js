@@ -8,6 +8,7 @@ import Home from './HomePage';
 import Product from './Product';
 import Pricing from './Pricing';
 import Contact from './Contact';
+import TranscribeText from './TranscribeText'; 
 // import Login from './Login'; // Future feature for user authentication
 
 // The App component handles routing and layout for the entire application
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/product" element={<Product />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/contact" element={<Contact />} /> 
+                <Route path="/transcribe" element={<TranscribeText />} />
                 {/* <Route path="/login" element={<Login />} />  */}
             </Routes>
             <Footer /> 
@@ -26,5 +28,4 @@ function App() {
     );
 }
 
-// Makes the App component available for import in other parts of the application
 export default App;
