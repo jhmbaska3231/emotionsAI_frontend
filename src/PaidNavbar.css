@@ -1,5 +1,6 @@
+/* Styling for the paid navbar with a dark gray theme */
 .paid-navbar {
-    background-color: #333;
+    background-color: #202123; /* Dark gray background color similar to GPT */
     color: white;
     padding: 0 20px; /* Horizontal padding only */
     display: flex;

@@ -1,0 +1,61 @@
+.diary-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #202123; /* Dark gray background color similar to GPT */
+    padding: 20px;
+    box-shadow: none; /* Remove box shadow */
+    color: white; /* Text color to match navbar */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar h1 {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444; /* Line under each section header */
+    padding-bottom: 5px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+    color: #fff; /* Text color for list items */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    text-align: left; /* Align text to the left */
+    padding-left: 20px; /* Adjust this value to manually align the items */
+}
+
+.sidebar ul li .icon {
+    margin-right: 10px; /* Space between the icon and the text */
+}
+
+.sidebar ul li:hover {
+    background-color: #3a3a3a; /* Slightly lighter background on hover */
+}
+
+.diary-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #333; /* Lighter background color for content area */
+    color: #d4d4d4; /* Text color for content area */
+}
+
+/* Add more specific styles as needed for your Diary page */
