@@ -54,8 +54,65 @@
 .diary-content {
     flex-grow: 1;
     padding: 20px;
-    background-color: #333; /* Lighter background color for content area */
-    color: #d4d4d4; /* Text color for content area */
+    background-color: #d4d4d4; /* Lighter background color for content area */
+    color: #202123; /* Dark text color for content area */
 }
 
-/* Add more specific styles as needed for your Diary page */
+.ledger-box {
+    background-color: #74AA9C; /* Green color similar to GPT */
+    color: #ffffff; /* White text color */
+    padding: 30px;
+    border-radius: 15px; /* Rounded corners */
+    display: flex;
+    flex-direction: column; /* Ensure content stacks vertically */
+    justify-content: flex-start; /* Align content to the start horizontally */
+    align-items: flex-start; /* Align content to the start vertically */
+    height: 630px;
+    width: 1150px;
+    margin: auto; /* Center the box */
+    text-align: left; /* Align text to the left */
+    position: relative; /* Allow positioning of child elements */
+    overflow-y: auto; /* Make the box scrollable vertically */
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.ledger-box h2 {
+    margin: 0;
+    font-size: 24px;
+    position: absolute; /* Position the title absolutely within the box */
+    top: 30px; /* Position from the top */
+    left: 30px; /* Position from the left */
+    padding-bottom: 10px; /* Add padding under the title for spacing */
+    width: calc(100% - 60px); /* Ensure the underline fits within the padding */
+}
+
+.ledger-content {
+    width: 100%;
+    margin-top: 80px; /* Adjust to move content below the title */
+}
+
+.ledger-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px; /* Add space between rows */
+}
+
+.ledger-column {
+    padding: 10px;
+    word-break: break-word; /* Ensure long words break to the next line */
+    white-space: normal; /* Ensure text wraps within the column */
+    overflow-wrap: break-word; /* Break long words and wrap text */
+    text-overflow: clip; /* Ensure text does not overflow with ellipsis */
+}
+
+.date-column {
+    flex: 1; /* Ratio 1 */
+}
+
+.diary-column, .emotion-column {
+    flex: 2; /* Ratio 2 */
+}
+
+.ledger-column h3 {
+    margin: 0 0 10px 0;
+}
