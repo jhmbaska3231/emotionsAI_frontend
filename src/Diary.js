@@ -82,13 +82,30 @@ const Diary = () => {
             );
         } else if (activeTab === 'MonthlyAnalysis') {
             return (
-                <div className="ledger-content">
-                    <div className="ledger-row">
-                        <div className="ledger-column">
-                            <h3>Monthly Analysis</h3>
-                            <p>Monthly analysis content goes here...</p>
-                        </div>
+                <div className="monthly-analysis-content">
+                    <div className="header">
                     </div>
+                    <div className="emotion-bar">
+                        <span>Anger</span>
+                        <div className="bar" style={{ width: '45%' }}>45%</div>
+                    </div>
+                    <div className="emotion-bar">
+                        <span>Guilt</span>
+                        <div className="bar" style={{ width: '8%' }}>8%</div>
+                    </div>
+                    <div className="emotion-bar">
+                        <span>Joy</span>
+                        <div className="bar" style={{ width: '30%' }}>30%</div>
+                    </div>
+                    <div className="emotion-bar">
+                        <span>Excitement</span>
+                        <div className="bar" style={{ width: '12%' }}>12%</div>
+                    </div>
+                    <div className="emotion-bar">
+                        <span>Loneliness</span>
+                        <div className="bar" style={{ width: '5%' }}>5%</div>
+                    </div>
+                    <p className="summary">Your most felt emotion in the month of April is "Anger" at 45%</p>
                 </div>
             );
         }

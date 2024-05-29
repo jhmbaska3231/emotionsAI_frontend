@@ -79,17 +79,14 @@
 .ledger-box h2 {
     margin: 0;
     font-size: 24px;
-    position: absolute; /* Position the title absolutely within the box */
-    top: 30px; /* Position from the top */
-    left: 30px; /* Position from the left */
     padding-bottom: 10px; /* Add padding under the title for spacing */
-    width: calc(100% - 60px); /* Ensure the underline fits within the padding */
+    width: 100%; /* Ensure the underline fits within the padding */
     border-bottom: 2px solid #ffffff; /* Add white line under the title */
 }
 
 .ledger-content {
     width: 100%;
-    margin-top: 80px; /* Adjust to move content below the title */
+    margin-top: 40px; /* Adjust to move content below the title */
 }
 
 .ledger-row {
@@ -127,4 +124,45 @@
 .emotion-column p {
     margin-bottom: -10px; /* Adjust bottom margin as needed */
     line-height: 1.2; /* Adjust line height if needed */
+}
+
+/* Styles for Monthly Analysis section */
+.monthly-analysis-content {
+    width: 100%;
+    margin-top: 40px; /* Align with ledger-content */
+}
+
+.monthly-analysis-content .header h3 {
+    margin: 0;
+    font-size: 24px;
+    padding-bottom: 10px;
+    width: 100%;
+    border-bottom: 2px solid #ffffff; /* Add white line under the title */
+}
+
+.emotion-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.emotion-bar span {
+    width: 100px; /* Adjust width as needed */
+}
+
+.bar {
+    background-color: #ffffff; /* Bar color */
+    color: #202123; /* Text color inside the bar */
+    text-align: right; /* Align text to the right */
+    padding-right: 5px;
+    height: 25px; /* Bar height */
+    line-height: 25px; /* Center text vertically */
+    border-radius: 5px; /* Rounded corners */
+    margin-left: 10px; /* Space between label and bar */
+}
+
+.summary {
+    margin-top: 20px;
+    font-size: 16px;
 }
