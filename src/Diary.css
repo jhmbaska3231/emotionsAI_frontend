@@ -84,6 +84,7 @@
     left: 30px; /* Position from the left */
     padding-bottom: 10px; /* Add padding under the title for spacing */
     width: calc(100% - 60px); /* Ensure the underline fits within the padding */
+    border-bottom: 2px solid #ffffff; /* Add white line under the title */
 }
 
 .ledger-content {
@@ -95,6 +96,11 @@
     display: flex;
     width: 100%;
     margin-bottom: 10px; /* Add space between rows */
+}
+
+.header-row {
+    font-weight: bold;
+    margin-bottom: -30px; /* Reduce space below the header row */
 }
 
 .ledger-column {
@@ -115,4 +121,10 @@
 
 .ledger-column h3 {
     margin: 0 0 10px 0;
+}
+
+/* Reduce margin for the emotion analysis content paragraphs */
+.emotion-column p {
+    margin-bottom: -10px; /* Adjust bottom margin as needed */
+    line-height: 1.2; /* Adjust line height if needed */
 }

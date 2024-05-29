@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PaidNavbar from './PaidNavbar';
 import Footer from './Footer';
 import './Diary.css';
@@ -8,6 +8,92 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Diary = () => {
+    const [activeTab, setActiveTab] = useState('DiaryLedger');
+
+    const renderContent = () => {
+        if (activeTab === 'DiaryLedger') {
+            return (
+                <div className="ledger-content">
+                    <div className="ledger-row header-row">
+                        <div className="ledger-column date-column">
+                            <h3>Date</h3>
+                        </div>
+                        <div className="ledger-column diary-column">
+                            <h3>Diary</h3>
+                        </div>
+                        <div className="ledger-column emotion-column">
+                            <h3>Emotion Analysis</h3>
+                        </div>
+                    </div>
+                    <div className="ledger-row">
+                        <div className="ledger-column date-column">
+                            <p>27/3/24</p>
+                        </div>
+                        <div className="ledger-column diary-column">
+                            <p>No more empty promises. We demand justice, we demand respect. We won't back down until we get what's rightfully ours!</p>
+                        </div>
+                        <div className="ledger-column emotion-column">
+                            <p>Target Emotion(s): Demand (40%), Justice (30%), Determination (30%)</p>
+                            <p>Emotional Intensity: High</p>
+                            <p>Overall Sentiment: Positive</p>
+                        </div>
+                    </div>
+                    <div className="ledger-row">
+                        <div className="ledger-column date-column">
+                            <p>20/3/24</p>
+                        </div>
+                        <div className="ledger-column diary-column">
+                            <p>She just missed the bus so now she has to wait 10 minutes extra!</p>
+                        </div>
+                        <div className="ledger-column emotion-column">
+                            <p>Target Emotion(s): Frustration (60%), Disappointment (40%)</p>
+                            <p>Emotional Intensity: Medium</p>
+                            <p>Overall Sentiment: Negative</p>
+                        </div>
+                    </div>
+                    <div className="ledger-row">
+                        <div className="ledger-column date-column">
+                            <p>3/3/24</p>
+                        </div>
+                        <div className="ledger-column diary-column">
+                            <p>Every day feels like an uphill battle at work, and I'm starting to feel completely overwhelmed by the pressure</p>
+                        </div>
+                        <div className="ledger-column emotion-column">
+                            <p>Target Emotion(s): Overwhelmed (60%), Pressure (40%)</p>
+                            <p>Emotional Intensity: High</p>
+                            <p>Overall Sentiment: Negative</p>
+                        </div>
+                    </div>
+                    <div className="ledger-row">
+                        <div className="ledger-column date-column">
+                            <p>9/2/24</p>
+                        </div>
+                        <div className="ledger-column diary-column">
+                            <p>Today, I received the news that I got the job offer I've been dreaming of for years! I'm over the moon with excitement and can't wait to start this new chapter in my life!</p>
+                        </div>
+                        <div className="ledger-column emotion-column">
+                            <p>Target Emotion(s): Excitement (50%), Joy (30%), Anticipation (20%)</p>
+                            <p>Emotional Intensity: High</p>
+                            <p>Overall Sentiment: Positive</p>
+                        </div>
+                    </div>
+                    {/* Add more rows as needed */}
+                </div>
+            );
+        } else if (activeTab === 'MonthlyAnalysis') {
+            return (
+                <div className="ledger-content">
+                    <div className="ledger-row">
+                        <div className="ledger-column">
+                            <h3>Monthly Analysis</h3>
+                            <p>Monthly analysis content goes here...</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    };
+
     return (
         <div className="diary-container">
             <PaidNavbar />
@@ -15,86 +101,27 @@ const Diary = () => {
                 <div className="sidebar">
                     <h1>Dashboard</h1>
                     <ul>
-                        <li>
+                        <li onClick={() => setActiveTab('Dashboard')}>
                             <FontAwesomeIcon icon={faList} className="icon" />
                             Dashboard
                         </li>
                     </ul>
                     <h1>Utilities</h1>
                     <ul>
-                        <li>
+                        <li onClick={() => setActiveTab('MonthlyAnalysis')}>
                             <FontAwesomeIcon icon={faBarChart} className="icon" />
                             Monthly Analysis
                         </li>
-                        <li>
+                        <li onClick={() => setActiveTab('DiaryLedger')}>
                             <FontAwesomeIcon icon={faBook} className="icon" />
-                            Diary Ledge
+                            Diary Ledger
                         </li>
                     </ul>
                 </div>
                 <div className="diary-content">
                     <div className="ledger-box">
-                        <h2>Diary Ledger</h2>
-                        <div className="ledger-content">
-                            <div className="ledger-row">
-                                <div className="ledger-column date-column">
-                                    <h3>Date</h3>
-                                    <p>2024-05-01</p>
-                                </div>
-                                <div className="ledger-column diary-column">
-                                    <h3>Diary</h3>
-                                    <p>Today I started a new projectJKNASF NKJANFNIWAONIFOWANIOFNWAINFIAWNFIWANLFNjksanfawnfiuawnifwSAKJNFIPUAWFKSA FIAUWBFUIW</p>
-                                </div>
-                                <div className="ledger-column emotion-column">
-                                    <h3>Emotion Analysis</h3>
-                                    <p>HaJKBS FLKSBFIUAWBIFLNSLKAJLBFIWUBFKSAAOISFJNOIWABNIUFAWppy</p>
-                                </div>
-                            </div>
-                            <div className="ledger-row">
-                                <div className="ledger-column date-column">
-                                    <p>2024-05-02</p>
-                                </div>
-                                <div className="ledger-column diary-column">
-                                    <p>Work was challenging but rewarding...</p>
-                                </div>
-                                <div className="ledger-column emotion-column">
-                                    <p>Stressed</p>
-                                </div>
-                            </div>
-                            <div className="ledger-row">
-                                <div className="ledger-column date-column">
-                                    <p>2024-05-03</p>
-                                </div>
-                                <div className="ledger-column diary-column">
-                                    <p>Had a productive meeting with the team...</p>
-                                </div>
-                                <div className="ledger-column emotion-column">
-                                    <p>Motivated</p>
-                                </div>
-                            </div>
-                            <div className="ledger-row">
-                                <div className="ledger-column date-column">
-                                    <p>2024-05-04</p>
-                                </div>
-                                <div className="ledger-column diary-column">
-                                    <p>Completed the task ahead of schedule...</p>
-                                </div>
-                                <div className="ledger-column emotion-column">
-                                    <p>Accomplished</p>
-                                </div>
-                            </div>
-                            <div className="ledger-row">
-                                <div className="ledger-column date-column">
-                                    <p>2024-05-05</p>
-                                </div>
-                                <div className="ledger-column diary-column">
-                                    <p>Reflecting on the week's achievements...</p>
-                                </div>
-                                <div className="ledger-column emotion-column">
-                                    <p>Satisfied</p>
-                                </div>
-                            </div>
-                        </div>
+                        <h2>{activeTab === 'DiaryLedger' ? 'Diary Ledger' : 'Monthly Analysis'}</h2>
+                        {renderContent()}
                     </div>
                 </div>
             </div>
