@@ -19,8 +19,8 @@ const PaidNavbar = () => {
                 <Link to="/transcribe-audio">Transcribe Audio</Link>
                 <Link to="/diary">Diary</Link>
                 <Link to="/userprofile">
-                    <img src={userIcon} alt="User Icon" className="user-icon" />
-                    UserProfile
+                    <img src={userIcon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
+                    User Profile
                 </Link>
             </div>
         </nav>

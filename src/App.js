@@ -10,6 +10,8 @@ import Pricing from './Pricing';
 import Contact from './Contact';
 import TranscribeText from './TranscribeText'; // Import the TranscribeText component
 import Diary from './Diary'; // Import the Diary component
+import UserProfile from './UserProfile'; // Import the UserProfile component
+
 // import Login from './Login'; // Future feature for user authentication
 
 // The App component handles routing and layout for the entire application
@@ -23,6 +25,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} /> 
                 <Route path="/transcribe" element={<TranscribeText />} /> {/* Add route for TranscribeText */}
                 <Route path="/diary" element={<Diary />} /> {/* Add route for Diary */}
+                <Route path="/userprofile" element={<UserProfile />} /> {/* Add the UserProfile route */}
                 {/* <Route path="/login" element={<Login />} />  */}
             </Routes>
             <Footer /> 
