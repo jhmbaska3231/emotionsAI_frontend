@@ -1,44 +1,37 @@
-/* Styling for the navbar with a dark theme */
 .navbar {
     background-color: #202123;
     color: white;
-    padding: 0 20px; /* Horizontal padding only */
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Vertically centers content */
-    height: 50px; /* Fixed navbar height */
+    align-items: center; 
+    height: 50px; 
 }
 
-/* Common flex styling for navbar sections */
 .navbar div {
     display: flex;
     align-items: center;
 }
 
-/* Styling for both left and right sections of the navbar */
 .navbar-left, .navbar-right {
     flex-grow: 1;
     display: flex;
 }
 
-/* Right section is justified to the end */
 .navbar-right {
     justify-content: flex-end;
 }
 
-/* Style adjustments for navbar links */
 .navbar a {
     color: white;
     text-decoration: none;
     margin: 0 10px;
 }
 
-/* Pointer cursor on hover for better user feedback */
 .navbar a:hover {
     cursor: pointer;
 }
 
-/* Specific styling for the navbar logo and accompanying text */
 .navbar-logo {
     display: flex;
     align-items: center;
@@ -46,12 +39,10 @@
     text-decoration: none;
 }
 
-/* Margin between logo image and text */
 .navbar-logo img {
     margin-right: 10px;
 }
 
-/* Font styling for logo text */
 .navbar-logo span {
     font-size: 24px;
     font-weight: bold;

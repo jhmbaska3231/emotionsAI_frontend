@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom'; 
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,7 +19,7 @@ const Homepage = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             nextSlide();
-        }, 3000); // Change slides every 3 seconds
+        }, 3000); 
         return () => clearInterval(intervalId);
     }, [currentSlide]);
 

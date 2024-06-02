@@ -1,12 +1,9 @@
-// Importing React and Link component from react-router-dom
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Importing CSS for styling the navbar and logo image
 import './Navbar.css';
-import logo from './pictures/Emotions_AI_Logo.png'; // Ensure the logo path is correct
+import logo from './pictures/Emotions_AI_Logo.png'; 
 
-// Functional component for navigation bar
 const Navbar = () => {
     return (
         <nav className="navbar">
@@ -26,5 +23,4 @@ const Navbar = () => {
     );
 }
 
-// Exporting Navbar component for use elsewhere in the application
 export default Navbar;

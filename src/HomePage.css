@@ -13,7 +13,7 @@
 }
 
 .slide {
-    min-width: 100%;  /* Ensures each slide is the full width of the slideshow */
+    min-width: 100%; 
     height: 100%;
     position: relative;
     display: flex;
@@ -77,46 +77,46 @@
 
 .content-wrapper {
     display: flex;
-    align-items: center; /* Keeps items aligned vertically in the center */
-    justify-content: center; /* Centers items horizontally */
-    margin: 0 auto; /* Centers the wrapper in the parent container */
-    max-width: 1200px; /* Adjust based on your design needs */
-    width: 100%; /* Ensures the wrapper uses the full width */
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto; 
+    max-width: 1200px;
+    width: 100%;
 }
 
 .text-box {
-    max-width: 350px; /* Maximum width of the textbox */
-    padding: 20px; /* Padding inside the textbox */
-    margin-right: 20px; /* Adds space between the text box and the image */
-    border-radius: 10px; /* Optional: Rounds the corners of the textbox */
-    flex-shrink: 0; /* Prevents the text box from shrinking */
+    max-width: 350px; 
+    padding: 20px; 
+    margin-right: 20px; 
+    border-radius: 10px; 
+    flex-shrink: 0;
 }
 
 .about-image {
-    width: 30%; /* Adjust based on your design preference */
+    width: 30%;
     height: auto;
-    flex-shrink: 0; /* Prevents the image from shrinking */
+    flex-shrink: 0;
 }
 
 .product-introduction h1 {
-    margin-bottom: -20px; /* Space below the heading */
+    margin-bottom: -20px;
 }
 
 .get-started-button {
-    background-color: black; /* Button background color */
-    color: white; /* Text color */
-    font-size: 16px; /* Text size */
-    padding: 10px 20px; /* Padding around the text */
-    border: none; /* No border */
-    border-radius: 25px; /* Fully rounded corners for a pill shape, adjust for less curvature */
-    cursor: pointer; /* Cursor indicates button */
-    display: block; /* Makes the button a block element */
-    width: fit-content; /* Width according to content */
-    margin: -10px auto; /* Centers the button horizontally */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    background-color: black;
+    color: white;
+    font-size: 16px; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    display: block;
+    width: fit-content; 
+    margin: -10px auto;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .get-started-button:hover {
-    background-color: #333; /* Darker shade on hover */
-    color: #ddd; /* Lighter text on hover */
+    background-color: #333; 
+    color: #ddd;
 }

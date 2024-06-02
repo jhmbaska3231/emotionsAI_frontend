@@ -77,7 +77,6 @@ const Diary = () => {
                             <p>Overall Sentiment: Positive</p>
                         </div>
                     </div>
-                    {/* Add more rows as needed */}
                 </div>
             );
         } else if (activeTab === 'MonthlyAnalysis') {

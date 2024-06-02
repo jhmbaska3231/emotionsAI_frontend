@@ -10,13 +10,13 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #f9f9f9; /* Light background color for content area */
+    background-color: #f9f9f9; 
 }
 
 .user-profile-section {
     text-align: center;
     padding: 20px;
-    width: 80%; /* Adjust the width as needed */
+    width: 80%; 
     max-width: 1000px;
 }
 
@@ -34,31 +34,31 @@
 }
 
 .subscription-item {
-    margin: 0 20px; /* Add some spacing between items */
+    margin: 0 20px;
     display: flex;
     align-items: center;
 }
 
 .subscription-item span {
-    margin-right: 10px; /* Add some spacing between label and date */
+    margin-right: 10px; 
 }
 
 .date {
-    color: #74AA9C; /* Green color for the date */
+    color: #74AA9C; 
 }
 
 .unsubscribe-button {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
+    background-color: #333; 
+    color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 20px; /* Add some spacing to the left */
+    margin-left: 20px; 
 }
 
 .unsubscribe-button:hover {
-    background-color: #555; /* Slightly lighter background on hover */
+    background-color: #555; 
 }
 
 .change-plan-section {
@@ -72,8 +72,8 @@
 }
 
 .plan-button {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
+    background-color: #333;
+    color: #fff; 
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -82,5 +82,5 @@
 }
 
 .plan-button:hover {
-    background-color: #555; /* Slightly lighter background on hover */
+    background-color: #555; 
 }
