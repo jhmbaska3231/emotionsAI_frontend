@@ -7,8 +7,9 @@ import Footer from './Footer';
 import Home from './HomePage';
 import Product from './Product';
 import Pricing from './Pricing';
-import Contact from './Contact';
+import Contact from './ContactForm';
 import TranscribeText from './TranscribeText'; 
+import TranscribeVoice from './TranscribeVoice';
 import Diary from './Diary'; 
 import UserProfile from './UserProfile'; 
 
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/contact" element={<Contact />} /> 
                 <Route path="/transcribe" element={<TranscribeText />} /> 
+                <Route path="/transcribevoice" element={<TranscribeVoice />} /> 
                 <Route path="/diary" element={<Diary />} />
                 <Route path="/userprofile" element={<UserProfile />} />
                 {/* <Route path="/login" element={<Login />} />  */}

@@ -1,7 +1,80 @@
-/* Basic styling for the TranscribeText page */
-.transcribe-text-content {
+.transcribeTextPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.transcribeTextContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    background: #f0f0f0;
+}
+
+.transcribeTextUsageLimit {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.transcribeTextInputOutputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transcribeTextInputContainer, .transcribeTextOutputContainer {
+    background: #74AA9C;
     padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    margin: 10px;
+    position: relative;
+}
+
+.transcribeTextInputContainer label, .transcribeTextOutputContainer label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
     text-align: center;
 }
 
-/* Add more specific styles as needed for your TranscribeText page */
+.transcribeTextInputContainer textarea, .transcribeTextOutputContainer textarea {
+    width: calc(100% - 20px);
+    height: 400px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    margin-top: 40px;
+}
+
+.transcribeTextWordCount {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+.transcribeTextButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    align-self: center;
+}
+
+.transcribeTextButton:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

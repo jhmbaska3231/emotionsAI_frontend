@@ -1,19 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './TranscribeText.css';
 import PaidNavbar from './PaidNavbar';
-import Footer from './Footer'; // Assuming you want to keep the footer on this page as well
-import './TranscribeText.css'; // Create and style this CSS file as needed
 
 const TranscribeText = () => {
+    const [inputText, setInputText] = useState('');
+    const [outputText, setOutputText] = useState('');
+    const [usageCount, setUsageCount] = useState(0);
+    const usageLimit = 3;
+
+    const handleTranscribe = () => {
+        if (usageCount < usageLimit) {
+            // Add your transcription logic here
+            setOutputText(inputText); // This is a placeholder, replace with actual transcription logic
+            setUsageCount(usageCount + 1);
+        } else {
+            alert('Usage limit reached');
+        }
+    };
+
     return (
-        <div>
+        <div className="transcribeTextPage">
             <PaidNavbar />
-            <div className="transcribe-text-content">
-                <h1>Transcribe Text</h1>
-                {/* Add the content and functionality for the TranscribeText page here */}
+            <div className="transcribeTextContent">
+                <div className="transcribeTextUsageLimit">Usage Limit {usageCount}/{usageLimit}</div>
+                <div className="transcribeTextInputOutputContainer">
+                    <div className="transcribeTextInputContainer">
+                        <label>Input</label>
+                        <textarea 
+                            value={inputText}
+                            onChange={(e) => setInputText(e.target.value)}
+                            placeholder="Enter text"
+                        />
+                        <div className="transcribeTextWordCount">Words {inputText.split(' ').filter(Boolean).length}/280</div>
+                    </div>
+                    <button 
+                        onClick={handleTranscribe}
+                        className="transcribeTextButton"
+                        disabled={usageCount >= usageLimit}
+                    >
+                        Transcribe ➔
+                    </button>
+                    <div className="transcribeTextOutputContainer">
+                        <label>Output</label>
+                        <textarea 
+                            value={outputText}
+                            readOnly
+                        />
+                    </div>
+                </div>
             </div>
-            <Footer />
         </div>
     );
-}
+};
 
 export default TranscribeText;

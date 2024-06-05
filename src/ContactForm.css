@@ -1,0 +1,85 @@
+.contactFormPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: white;
+}
+
+.contactFormContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  background: white;
+}
+
+.contactFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: white;
+}
+
+.contactForm {
+  background: #74AA9C;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 600px;
+  margin-bottom: 5%;
+}
+
+.contactForm h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contactFormGroup {
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+
+.contactLabel {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.contactInput, .contactTextarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contactTextarea {
+  resize: vertical;
+  height: 120px;
+}
+
+.contactButton {
+  width: 20%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 5%;
+}
+
+.contactButton:hover {
+  background-color: #333;
+}
+
+.contactHalfWidthContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contactHalfWidth {
+  width: 48%;
+}

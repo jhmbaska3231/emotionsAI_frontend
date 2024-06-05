@@ -16,7 +16,7 @@ const PaidNavbar = () => {
             </div>
             <div className="paid-navbar-right">
                 <Link to="/transcribe">Transcribe Text</Link>
-                <Link to="/transcribe-audio">Transcribe Audio</Link>
+                <Link to="/transcribevoice">Transcribe Voice</Link>
                 <Link to="/diary">Diary</Link>
                 <Link to="/userprofile">
                     <img src={userIcon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />

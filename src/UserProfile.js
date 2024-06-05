@@ -1,6 +1,5 @@
 import React from 'react';
 import PaidNavbar from './PaidNavbar';
-import Footer from './Footer';
 import './UserProfile.css';
 
 const UserProfile = () => {
@@ -28,7 +27,6 @@ const UserProfile = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }
