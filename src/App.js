@@ -1,8 +1,10 @@
 // Importing React and router components for navigation
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {useState, useEffect} from 'react';
 
 // Importing local components
+import api from './api/axiosConfig';
 import Footer from './Footer';
 import Home from './HomePage';
 import Product from './Product';
@@ -15,6 +17,42 @@ import UserProfile from './UserProfile';
 
 // The App component handles routing and layout for the entire application
 function App() {
+
+    // api.get('/api/diaries/with-emotions/user/5')
+    //     .then(response => {
+    //         console.log(response.data);
+    //     })
+    //     .catch(error => {
+    //         console.error('There was an error making the request!', error);
+    //     });
+
+
+    
+    // const [diaries, setDiaries] = useState();
+
+    // const getDiaries = async () =>{
+
+    //     try
+    //     {
+    //         // can include checks for http status code here too
+
+    //         const response = await api.get("/api/diaries/with-emotions/user/5")
+
+    //         console.log(response.data);
+
+    //         setDiaries(response.data);
+
+    //     } catch(err)
+    //     {
+    //         console.log(err);
+    //     }
+
+    // }
+
+    // useEffect(() => {
+    //     getDiaries();
+    // },[])
+
     return (
         <BrowserRouter>
             <Routes>
@@ -31,6 +69,7 @@ function App() {
             <Footer /> 
         </BrowserRouter>
     );
+
 }
 
 export default App;

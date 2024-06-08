@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PaidNavbar from './PaidNavbar';
 import Footer from './Footer';
 import './Diary.css';
+import api from './api/axiosConfig';
 
 // Import FontAwesome components and icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +10,20 @@ import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Diary = () => {
     const [activeTab, setActiveTab] = useState('DiaryLedger');
+    const [diaryEntries, setDiaryEntries] = useState([]);
 
+    useEffect(() => {
+        // Fetch the diary entries when the component mounts
+        api.get('/api/diaries/with-emotions/user/5')
+            .then(response => {
+                setDiaryEntries(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error making the request!', error);
+            });
+    }, []);
+
+    // Dynamically render the fetched diary entries
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (
@@ -25,61 +39,25 @@ const Diary = () => {
                             <h3>Emotion Analysis</h3>
                         </div>
                     </div>
-                    <div className="ledger-row">
-                        <div className="ledger-column date-column">
-                            <p>27/3/24</p>
+                    {diaryEntries.map(entry => (
+                        <div className="ledger-row" key={entry.diaryId}>
+                            <div className="ledger-column date-column">
+                                <p>{entry.date}</p>
+                            </div>
+                            <div className="ledger-column diary-column">
+                                <p>{entry.inputText}</p>
+                            </div>
+                            <div className="ledger-column emotion-column">
+                                <p>Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
+                                <p>Emotional Intensity: {entry.emotionalIntensity}</p>
+                                <p>Overall Sentiment: {entry.overallSentiment}</p>
+                            </div>
                         </div>
-                        <div className="ledger-column diary-column">
-                            <p>No more empty promises. We demand justice, we demand respect. We won't back down until we get what's rightfully ours!</p>
-                        </div>
-                        <div className="ledger-column emotion-column">
-                            <p>Target Emotion(s): Demand (40%), Justice (30%), Determination (30%)</p>
-                            <p>Emotional Intensity: High</p>
-                            <p>Overall Sentiment: Positive</p>
-                        </div>
-                    </div>
-                    <div className="ledger-row">
-                        <div className="ledger-column date-column">
-                            <p>20/3/24</p>
-                        </div>
-                        <div className="ledger-column diary-column">
-                            <p>She just missed the bus so now she has to wait 10 minutes extra!</p>
-                        </div>
-                        <div className="ledger-column emotion-column">
-                            <p>Target Emotion(s): Frustration (60%), Disappointment (40%)</p>
-                            <p>Emotional Intensity: Medium</p>
-                            <p>Overall Sentiment: Negative</p>
-                        </div>
-                    </div>
-                    <div className="ledger-row">
-                        <div className="ledger-column date-column">
-                            <p>3/3/24</p>
-                        </div>
-                        <div className="ledger-column diary-column">
-                            <p>Every day feels like an uphill battle at work, and I'm starting to feel completely overwhelmed by the pressure</p>
-                        </div>
-                        <div className="ledger-column emotion-column">
-                            <p>Target Emotion(s): Overwhelmed (60%), Pressure (40%)</p>
-                            <p>Emotional Intensity: High</p>
-                            <p>Overall Sentiment: Negative</p>
-                        </div>
-                    </div>
-                    <div className="ledger-row">
-                        <div className="ledger-column date-column">
-                            <p>9/2/24</p>
-                        </div>
-                        <div className="ledger-column diary-column">
-                            <p>Today, I received the news that I got the job offer I've been dreaming of for years! I'm over the moon with excitement and can't wait to start this new chapter in my life!</p>
-                        </div>
-                        <div className="ledger-column emotion-column">
-                            <p>Target Emotion(s): Excitement (50%), Joy (30%), Anticipation (20%)</p>
-                            <p>Emotional Intensity: High</p>
-                            <p>Overall Sentiment: Positive</p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             );
         } else if (activeTab === 'MonthlyAnalysis') {
+            // Example content for Monthly Analysis tab
             return (
                 <div className="monthly-analysis-content">
                     <div className="header">
