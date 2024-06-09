@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Navbar.css';
-import brain_icon from './pictures/brain_icon.png'; 
+import brain_icon from './pictures/brain_icon.png';
 
 const Navbar = () => {
     return (
@@ -12,7 +12,7 @@ const Navbar = () => {
                     <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
                     <span>EmotionsAI</span>
                 </Link>
-            </div> 
+            </div>
             <div className="navbar-right">
                 <Link to="/product">Product</Link>
                 <Link to="/pricing">Pricing</Link>
@@ -21,6 +21,6 @@ const Navbar = () => {
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

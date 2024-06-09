@@ -4,7 +4,6 @@ import Footer from './Footer';
 import './Diary.css';
 import api from './api/axiosConfig';
 
-// Import FontAwesome components and icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +13,7 @@ const Diary = () => {
 
     useEffect(() => {
         // Fetch the diary entries when the component mounts
-        api.get('/api/diaries/with-emotions/user/5')
+        api.get('/api/diaries/with-emotions/user/5') // need to code this dynamically to get user's id and append to the back
             .then(response => {
                 setDiaryEntries(response.data);
             })

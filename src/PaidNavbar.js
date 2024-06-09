@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Authenticator } from '@aws-amplify/ui-react';
-
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -49,7 +47,7 @@ const PaidNavbar = (props) => {
                         style={{ color: 'white' }}
                     >
                         <img src={user_icon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
-                        Sally
+                        Sally {/* {user.attributes.email} */}
                     </Button>
                     <Menu
                         id="user-profile-menu"
