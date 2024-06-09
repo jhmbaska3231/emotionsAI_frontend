@@ -3,6 +3,13 @@ import './TranscribeText.css';
 import PaidNavbar from './PaidNavbar';
 
 const TranscribeText = () => {
+
+    const handleLogout = () => {
+        console.log('logging out now...');
+        props.logOut();
+        alert('logout...');
+    }
+
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
     const [usageCount, setUsageCount] = useState(0);
