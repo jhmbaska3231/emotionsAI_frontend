@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
@@ -22,12 +22,6 @@ Amplify.configure(awsExports);
 
 function App() {
 
-    const location = useLocation();
-
-    const isLoginPage = () => {
-        return location.pathname === '/login';
-    };
-
     return (
         <div>
             <Routes>
@@ -41,7 +35,7 @@ function App() {
                 <Route path="/diary" element={<ProtectedRoute><Diary /></ProtectedRoute>} />
                 <Route path="/userprofile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
             </Routes>
-            {!isLoginPage() && <Footer />}
+            <Footer />
         </div>
     );
 

@@ -75,7 +75,7 @@ const Login = () => {
             return (
                 <View textAlign="center" padding={tokens.space.large}>
                     <Text color={tokens.colors.neutral[80]}>
-                        &copy; 2024 EmotionsAI. All rights reserved.
+                        &copy; 2024 EmotionsAI.
                     </Text>
                 </View>
             );

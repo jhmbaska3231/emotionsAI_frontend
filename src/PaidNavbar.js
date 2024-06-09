@@ -22,6 +22,7 @@ const PaidNavbar = (props) => {
     };
 
     const handleLogout = () => {
+        console.log('logging out now...');
         props.logOut();
     }
 
