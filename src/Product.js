@@ -2,12 +2,14 @@ import React from 'react';
 import Navbar from './Navbar';
 import FaqButton from './FaqButton';
 import './Product.css';
-import backgroundImage from './pictures/Product_Background.png';
-
+import product_background from './pictures/product_background.png';
 
 const Product = () => {
     return (
-        <div className="product-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div 
+            className="product-page" 
+            style={{ backgroundImage: `url(${product_background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+        >            
             <Navbar />
             <div className="product-content">
                 <div className="row">

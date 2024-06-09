@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Navbar.css';
-import logo from './pictures/Emotions_AI_Logo.png'; 
+import brain_icon from './pictures/brain_icon.png'; 
 
 const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
                 <Link to="/" className="navbar-logo">
-                    <img src={logo} alt="EmotionsAI Logo" style={{ height: '40px' }} />
+                    <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
                     <span>EmotionsAI</span>
                 </Link>
             </div> 

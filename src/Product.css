@@ -1,7 +1,8 @@
-
 .product-page {
-    background-size: 1200px 800px;
-    background-position: 200px 55px;; 
+    /* background-size: 1200px 800px;
+    background-position: 200px 55px; */
+    background-image: url('./pictures/product_background.png');
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -29,7 +30,6 @@
     line-height: 1.6;
 }
 
-
 #service4 { 
     margin-top: 0px; 
 }
@@ -45,4 +45,3 @@
 #service3 { 
     margin-top: 35px; 
 }
-

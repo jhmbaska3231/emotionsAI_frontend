@@ -8,8 +8,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import './PaidNavbar.css';
-import logo from './pictures/Emotions_AI_Logo.png';
-import userIcon from './pictures/usericon.png';
+import brain_icon from './pictures/brain_icon.png';
+import user_icon from './pictures/user_icon.png';
 
 const PaidNavbar = (props) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -31,7 +31,7 @@ const PaidNavbar = (props) => {
         <nav className="paid-navbar">
             <div className="paid-navbar-left">
                 <Link to="/" className="paid-navbar-logo">
-                    <img src={logo} alt="EmotionsAI Logo" style={{ height: '40px' }} />
+                    <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
                     <span>EmotionsAI</span>
                 </Link>
             </div>
@@ -48,7 +48,7 @@ const PaidNavbar = (props) => {
                         onClick={handleClick}
                         style={{ color: 'white' }}
                     >
-                        <img src={userIcon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
+                        <img src={user_icon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
                         Sally
                     </Button>
                     <Menu

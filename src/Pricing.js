@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import './Pricing.css';
-import checkpng from './pictures/checkpng.png'; //this is added by anan
+import tick_icon from './pictures/tick_icon.png';
 
 const Pricing = () => {
   return (
@@ -13,15 +13,15 @@ const Pricing = () => {
           <p className="text-bold">Free</p>
         <button className="black-button">Try now</button>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Transcribe Text input to Target Emotion
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             3 Transcribes daily
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Capped Word Count
           </p>
         </div>
@@ -31,27 +31,27 @@ const Pricing = () => {
           <p className="text-bold">$24</p>
           <button className="black-button">Subscribe</button>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Transcribe Text input to Target Emotion
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Transcribe Audio Input to Target Emotion
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Emotion Analysis
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Diary Recording
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Unlimited Transcribes
           </p>
           <p className="text-normal">
-            <img src={checkpng} alt="Price Logo" style={{ height: '20px' }} />
+            <img src={tick_icon} alt="Price Logo" style={{ height: '20px' }} />
             Full Word Count
           </p>
         </div>

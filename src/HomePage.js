@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import FAQ from './FaqButton';
-import slide1 from './pictures/Slide_1.png';
-import slide2 from './pictures/Slide_2.png';
-import slide3 from './pictures/Slide_3.png';
-import intro1 from './pictures/Home_Intro.png';
+import slide1 from './pictures/slide1.png';
+import slide2 from './pictures/slide2.png';
+import slide3 from './pictures/slide3.png';
+import home_intro_pic from './pictures/home_intro_pic.png';
 
 const Homepage = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -60,7 +60,7 @@ const Homepage = () => {
                     <div className="text-box">
                         <p>At EmotionsAI, we specialize in leveraging cutting-edge technology to help you master the emotional nuances of your writing. Our web application, inspired by Grammarly, empowers authors, students, speechwriters, and professionals across diverse fields to craft compelling content that resonates with audiences on a deeper level.</p>
                     </div>
-                    <img src={intro1} alt="Emotions AI Logo" className="about-image" />
+                    <img src={home_intro_pic} alt="Emotions AI Logo" className="about-image" />
                 </div>
                 <Link to="/transcribe">
                     <button className="get-started-button">Get Started</button>
