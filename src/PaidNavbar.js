@@ -28,13 +28,13 @@ const PaidNavbar = (props) => {
     return (
         <nav className="paid-navbar">
             <div className="paid-navbar-left">
-                <Link to="/" className="paid-navbar-logo">
+                <Link to="/transcribetext" className="paid-navbar-logo">
                     <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
                     <span>EmotionsAI</span>
                 </Link>
             </div>
             <div className="paid-navbar-right">
-                <Link to="/transcribe">Transcribe Text</Link>
+                <Link to="/transcribetext">Transcribe Text</Link>
                 <Link to="/transcribevoice">Transcribe Voice</Link>
                 <Link to="/diary">Diary</Link>
                 <div>
