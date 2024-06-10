@@ -9,8 +9,8 @@ import './PaidNavbar.css';
 import brain_icon from './pictures/brain_icon.png';
 import user_icon from './pictures/user_icon.png';
 
-// const PaidNavbar = (props) => {
 function PaidNavbar(props) {
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -23,9 +23,7 @@ function PaidNavbar(props) {
     };
 
     const handleLogout = () => {
-        console.log('logging out now...');
         props.logOut();
-        alert('logout...');
     }
 
     return (
@@ -72,6 +70,7 @@ function PaidNavbar(props) {
             </div>
         </nav>
     );
+
 }
 
 export default PaidNavbar;

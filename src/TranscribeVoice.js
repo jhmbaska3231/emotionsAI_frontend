@@ -30,7 +30,6 @@ const TranscribeVoice = () => {
 
     return (
         <div className="transcribeVoicePage">
-            <PaidNavbar />
             <div className="transcribeVoiceContent">
                 <div className="transcribeVoiceUsageLimit">Unlimited Transcribes</div>
                 <div className="transcribeVoiceInputOutputContainer">

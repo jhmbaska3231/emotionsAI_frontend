@@ -5,7 +5,6 @@ import './UserProfile.css';
 const UserProfile = () => {
     return (
         <div className="user-profile-container">
-            <PaidNavbar />
             <div className="user-profile-main-content">
                 <div className="user-profile-section">
                     <h1>Account Manager</h1>

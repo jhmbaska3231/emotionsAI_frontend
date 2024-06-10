@@ -89,7 +89,6 @@ const Diary = () => {
 
     return (
         <div className="diary-container">
-            <PaidNavbar />
             <div className="main-content">
                 <div className="sidebar">
                     <h1>Dashboard</h1>

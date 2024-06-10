@@ -1,11 +1,11 @@
 import React from 'react';
 import { Amplify } from 'aws-amplify';
-import { Authenticator, View, Image, useTheme, Text, ThemeProvider, Theme } from '@aws-amplify/ui-react';
+import { Authenticator, View, Image, useTheme, Text, ThemeProvider } from '@aws-amplify/ui-react';
+import { useNavigate } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 
 import emotionsAI_logo from './pictures/emotionsAI_logo.png';
-import TranscribeText from './TranscribeText';
 
 Amplify.configure(awsExports);
 
@@ -82,14 +82,17 @@ const Login = () => {
         },
     };
 
+    const navigate = useNavigate();
+
     return (
         <ThemeProvider theme={theme}>
             <Authenticator loginMechanism={['email']} components={components}>
-                {({ signOut, user }) => (
-                    <div>
-                        <TranscribeText />
-                    </div>
-                )}
+                {({ signOut, user }) => {
+                    if (user) {
+                        navigate('/transcribetext');
+                    }
+                    return <div></div>; // Return empty div or other content if needed
+                }}
             </Authenticator>
         </ThemeProvider>
     );

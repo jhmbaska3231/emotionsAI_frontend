@@ -27,7 +27,6 @@ const TranscribeText = () => {
 
     return (
         <div className="transcribeTextPage">
-            <PaidNavbar />
             <div className="transcribeTextContent">
                 <div className="transcribeTextUsageLimit">Usage Limit {usageCount}/{usageLimit}</div>
                 <div className="transcribeTextInputOutputContainer">

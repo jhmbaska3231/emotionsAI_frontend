@@ -13,6 +13,7 @@ import Pricing from './Pricing';
 import Contact from './ContactForm';
 import Footer from './Footer';
 import Login from './Login';
+import PaidNavbar from './PaidNavbar';
 import TranscribeText from './TranscribeText'; 
 import TranscribeVoice from './TranscribeVoice';
 import Diary from './Diary';
@@ -43,11 +44,18 @@ function App() {
 
 const ProtectedRoute = ({ children }) => {
     return (
-        <Authenticator>
-            {({ user }) => {
-                return user ? children : <Home />;
-            }}
-        </Authenticator>
+      <Authenticator>
+        {({ user, signOut }) => {
+            return user ? (
+                <div>
+                    <PaidNavbar logOut={signOut} />
+                    {children}
+                </div>
+            ) : (
+                <Home />
+            );
+        }}
+      </Authenticator>
     );
 };
 
