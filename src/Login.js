@@ -14,13 +14,13 @@ const theme = {
     tokens: {
         colors: {
         turquoise: {
-            60: "#74AA9C", // Custom emotionsai color
+            60: "#74AA9C",
         },
         },
         components: {
         authenticator: {
             router: {
-            boxShadow: '0 0 16px #74AA9C', // Custom emotionsai color
+            boxShadow: '0 0 16px #74AA9C',
             borderWidth: "0",
             },
             form: {
@@ -30,23 +30,23 @@ const theme = {
         },
         button: {
             primary: {
-            backgroundColor: "#74AA9C", // Custom emotionsai color
+            backgroundColor: "#74AA9C",
             },
             link: {
-            color: "#74AA9C", // Custom emotionsai color
+            color: "#74AA9C",
             },
         },
         fieldcontrol: {
             _focus: {
-            boxShadow: '0 0 0 2px #74AA9C', // Custom emotionsai color
+            boxShadow: '0 0 0 2px #74AA9C',
             },
         },
         tabs: {
             item: {
             color: "var(--amplify-colors-neutral-80)",
             _active: {
-                borderColor: "#74AA9C", // Custom emotionsai color
-                color: "#74AA9C", // Custom emotionsai color
+                borderColor: "#74AA9C",
+                color: "#74AA9C",
             },
             },
         },
