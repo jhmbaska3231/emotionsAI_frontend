@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -11,8 +12,23 @@ import user_icon from './pictures/user_icon.png';
 
 function PaidNavbar(props) {
 
+    const [userAttributes, setUserAttributes] = useState({});
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    useEffect(() => {
+        async function fetchAttributes() {
+            try {
+                const attributes = await fetchUserAttributes();
+                setUserAttributes(attributes);
+            } catch (error) {
+                console.error('Error fetching user attributes:', error);
+            }
+        }
+
+        fetchAttributes();
+    }, []); // fetch user attributes once on component mount
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -48,7 +64,7 @@ function PaidNavbar(props) {
                         style={{ color: 'white' }}
                     >
                         <img src={user_icon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
-                        Sally
+                        {userAttributes.name}
                     </Button>
                     <Menu
                         id="user-profile-menu"

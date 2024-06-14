@@ -11,3 +11,10 @@ root.render(
     <App />
   </BrowserRouter>
 );
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
