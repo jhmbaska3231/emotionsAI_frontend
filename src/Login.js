@@ -1,6 +1,6 @@
 import React from 'react';
 import { Amplify } from 'aws-amplify';
-import { Authenticator, View, Image, useTheme, Text, ThemeProvider } from '@aws-amplify/ui-react';
+import { Authenticator, View, Image, useTheme, Text, ThemeProvider, TextField, useAuthenticator } from '@aws-amplify/ui-react';
 import { useNavigate } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
@@ -80,18 +80,58 @@ const Login = () => {
                 </View>
             );
         },
+        SignUp: {
+            FormFields() {
+                const { validationErrors } = useAuthenticator();
+
+                return (
+                    <>
+                        {/* re use default Authenticator.SignUp.FormFields */}
+                        <Authenticator.SignUp.FormFields />
+
+                        {/* add custom name field */}
+                        <TextField
+                            label="Name"
+                            placeholder="Enter your name"
+                            name="name"
+                            errorMessage={validationErrors.name}
+                            hasError={!!validationErrors.name}
+                            required
+                        />
+                    </>
+                );
+            },
+        },
     };
 
     const navigate = useNavigate();
 
     return (
         <ThemeProvider theme={theme}>
-            <Authenticator loginMechanism={['email']} components={components}>
+            <Authenticator
+                loginMechanism={['email']}
+                components={components}
+                services={{
+                    async validateCustomSignUp(formData) {
+                        // validation for custom field
+                        if (!formData.name) {
+                            return {
+                                name: 'Name is required',
+                            };
+                        }
+                    },
+                    async handleCustomSignUp(formData) {
+                        // custom logic to include 'name' in Lambda trigger
+                        formData.userAttributes.name = formData.name;
+                        return formData;
+                    },
+                }}
+            >
                 {({ signOut, user }) => {
                     if (user) {
                         navigate('/transcribetext');
                     }
-                    return <div></div>; // Return empty div or other content if needed
+                    return <div></div>; // return empty div or other content if needed
                 }}
             </Authenticator>
         </ThemeProvider>

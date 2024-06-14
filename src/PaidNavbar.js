@@ -48,7 +48,7 @@ function PaidNavbar(props) {
                         style={{ color: 'white' }}
                     >
                         <img src={user_icon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
-                        Sally {/* {user.attributes.email} */}
+                        Sally
                     </Button>
                     <Menu
                         id="user-profile-menu"
