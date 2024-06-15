@@ -1,33 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import Footer from './Footer';
 import './Diary.css';
-import api from './api/axiosConfig';
-import { useUser } from './UserContext'; // new
+import Footer from './Footer';
+
+import api, { setBearerToken } from './api/axiosConfig'; // Import setBearerToken function
+import { fetchAuthSession } from 'aws-amplify/auth'; // Import fetchAuthSession from AWS Amplify
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Diary = () => {
 
-    const { user } = useUser(); // Access the user from context
-
     const [activeTab, setActiveTab] = useState('DiaryLedger');
     const [diaryEntries, setDiaryEntries] = useState([]);
     
     useEffect(() => {
-        if (user) {
-            const userId = user.userId;
-            const currentMonth = new Date().getMonth() + 1;
+        fetchAuthSession()
+            .then(session => {
+                console.log('Session:', session); // Log the session object to check its structure
+                const { accessToken, idToken } = session.tokens ?? {};
+                if (accessToken && idToken) {
+                    console.log('Access Token:', accessToken);
+                    console.log('ID Token:', idToken);
+                    
+                    // Ensure accessToken.jwtToken exists and is not undefined
+                    const jwtToken = accessToken && accessToken.jwtToken ? accessToken.jwtToken : undefined; 
+                    console.log('JWT Token:', jwtToken);
 
-            api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
-                .then(response => {
-                    setDiaryEntries(response.data);
-                })
-                .catch(error => {
-                    console.error('There was an error making the request!', error);
-                });
-        }
-    }, [user]);
+                    if (jwtToken) {
+                        setBearerToken(jwtToken); // Set the bearer token for Axios requests
+                        const userId = idToken.payload.sub; // Assuming sub is the user ID
+                        console.log('User ID:', userId);
+                        const currentMonth = new Date().getMonth() + 1;
+                        console.log('Current Month:', currentMonth);
+
+                        api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
+                            .then(response => {
+                                setDiaryEntries(response.data);
+                            })
+                            .catch(error => {
+                                console.error('There was an error making the request!', error);
+                            });
+                    } else {
+                        console.error('JWT token is undefined');
+                    }
+                } else {
+                    console.error('Access token or idToken not found in session');
+                }
+            })
+            .catch(error => {
+                console.error('Error getting user session:', error);
+            });
+    }, []);
 
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
