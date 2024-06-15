@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TranscribeText.css';
-import PaidNavbar from './PaidNavbar';
 
 const TranscribeText = () => {
 

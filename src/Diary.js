@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import PaidNavbar from './PaidNavbar';
 import Footer from './Footer';
 import './Diary.css';
 import api from './api/axiosConfig';
+import { useUser } from './UserContext'; // new
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Diary = () => {
+
+    const { user } = useUser(); // Use useUser to get user context
+
     const [activeTab, setActiveTab] = useState('DiaryLedger');
     const [diaryEntries, setDiaryEntries] = useState([]);
-
+    
     useEffect(() => {
-        // Fetch the diary entries when the component mounts
-        api.get('/api/diaries/with-emotions/user/5') // need to code this dynamically to get user's id and append to the back
-            .then(response => {
-                setDiaryEntries(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error making the request!', error);
-            });
-    }, []);
+        if (user) {
+            const userId = user.userId;
+            const currentMonth = new Date().getMonth() + 1;
+
+            // Fetch the diary entries for the logged-in user and current month
+            api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
+                .then(response => {
+                    setDiaryEntries(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error making the request!', error);
+                });
+        }
+    }, [user]);
 
     // Dynamically render the fetched diary entries
     const renderContent = () => {
@@ -120,6 +128,7 @@ const Diary = () => {
             <Footer />
         </div>
     );
+
 }
 
 export default Diary;

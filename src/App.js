@@ -17,7 +17,8 @@ import PaidNavbar from './PaidNavbar';
 import TranscribeText from './TranscribeText'; 
 import TranscribeVoice from './TranscribeVoice';
 import Diary from './Diary';
-import UserProfile from './UserProfile'; 
+import UserProfile from './UserProfile';
+import { useUser } from './UserContext'; // new
 
 Amplify.configure(awsExports);
 
@@ -42,21 +43,55 @@ function App() {
 
 }
 
+// new
 const ProtectedRoute = ({ children }) => {
+
+    const { user, setUser } = useUser();
+
     return (
-      <Authenticator>
-        {({ user, signOut }) => {
-            return user ? (
-                <div>
-                    <PaidNavbar logOut={signOut} />
-                    {children}
-                </div>
-            ) : (
-                <Home />
-            );
-        }}
-      </Authenticator>
+        <Authenticator>
+            {({ user: authUser, signOut }) => {
+
+                if (authUser && !user) {
+                    // Extract necessary properties from authUser
+                    const userId = authUser.userId || authUser.username || 'unknown';
+                    const email = authUser.signInDetails?.loginId || 'unknown';
+
+                    setUser({
+                        userId,
+                        email,
+                    });
+                }
+
+                return user ? (
+                    <div>
+                        <PaidNavbar logOut={signOut} />
+                        {children}
+                    </div>
+                ) : (
+                    <Home />
+                );
+            }}
+        </Authenticator>
     );
+    
 };
+
+// const ProtectedRoute = ({ children }) => {
+//     return (
+//       <Authenticator>
+//         {({ user, signOut }) => {
+//             return user ? (
+//                 <div>
+//                     <PaidNavbar logOut={signOut} />
+//                     {children}
+//                 </div>
+//             ) : (
+//                 <Home />
+//             );
+//         }}
+//       </Authenticator>
+//     );
+// };
 
 export default App;
