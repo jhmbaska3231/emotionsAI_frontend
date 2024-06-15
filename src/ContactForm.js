@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './ContactForm.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
+
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -96,6 +98,7 @@ const ContactForm = () => {
                     </form>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

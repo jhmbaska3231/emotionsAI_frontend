@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from './Navbar';
 import './Pricing.css';
+import Navbar from './Navbar';
+import Footer from './Footer';
 import tick_icon from './pictures/tick_icon.png';
 
 const Pricing = () => {
@@ -55,6 +56,7 @@ const Pricing = () => {
             Full Word Count
           </p>
         </div>
+        <Footer />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TranscribeText.css';
+import Footer from './Footer';
 
 const TranscribeText = () => {
 
@@ -54,6 +55,7 @@ const TranscribeText = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

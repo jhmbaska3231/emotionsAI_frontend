@@ -1,7 +1,8 @@
 import React from 'react';
+import './Product.css';
 import Navbar from './Navbar';
 import FaqButton from './FaqButton';
-import './Product.css';
+import Footer from './Footer';
 import product_background from './pictures/product_background.png';
 
 const Product = () => {
@@ -34,6 +35,7 @@ const Product = () => {
                 </div>
             </div>
             <FaqButton />
+            <Footer />
         </div>
     );
 };

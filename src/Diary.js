@@ -9,7 +9,7 @@ import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 const Diary = () => {
 
-    const { user } = useUser(); // Use useUser to get user context
+    const { user } = useUser(); // Access the user from context
 
     const [activeTab, setActiveTab] = useState('DiaryLedger');
     const [diaryEntries, setDiaryEntries] = useState([]);
@@ -19,7 +19,6 @@ const Diary = () => {
             const userId = user.userId;
             const currentMonth = new Date().getMonth() + 1;
 
-            // Fetch the diary entries for the logged-in user and current month
             api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
                 .then(response => {
                     setDiaryEntries(response.data);
@@ -30,7 +29,6 @@ const Diary = () => {
         }
     }, [user]);
 
-    // Dynamically render the fetched diary entries
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (

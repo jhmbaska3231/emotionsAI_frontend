@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
-import Navbar from './Navbar';
-import Footer from './Footer';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 import './HomePage.css';
+import Navbar from './Navbar';
 import FAQ from './FaqButton';
+import Footer from './Footer';
 import slide1 from './pictures/slide1.png';
 import slide2 from './pictures/slide2.png';
 import slide3 from './pictures/slide3.png';
@@ -66,8 +68,8 @@ const Homepage = () => {
                     <button className="get-started-button">Get Started</button>
                 </Link>
             </div>
-            <Footer />
             <FAQ />
+            <Footer />
         </div>
     );
 }

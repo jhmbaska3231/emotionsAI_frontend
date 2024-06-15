@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './TranscribeVoice.css';
-import PaidNavbar from './PaidNavbar';
+import Footer from './Footer';
 
 const TranscribeVoice = () => {
     const [inputText, setInputText] = useState('');
@@ -75,6 +75,7 @@ const TranscribeVoice = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
