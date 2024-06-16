@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Diary.css';
 import Footer from './Footer';
 
-import api, { setBearerToken } from './api/axiosConfig'; // Import setBearerToken function
-import { fetchAuthSession } from 'aws-amplify/auth'; // Import fetchAuthSession from AWS Amplify
+import api, { setBearerToken } from './api/axiosConfig';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
@@ -16,20 +16,13 @@ const Diary = () => {
     useEffect(() => {
         fetchAuthSession()
             .then(session => {
-                console.log('Session:', session); // Log the session object to check its structure
                 const { accessToken, idToken } = session.tokens ?? {};
                 if (accessToken && idToken) {
-                    console.log('Access Token:', accessToken);
-                    console.log('Access Token toString:', accessToken.toString());
-                    console.log('ID Token:', idToken);
-                    console.log('ID Token toString:', idToken.toString());
                     // Extract JWT token string from ID Token and use it as the bearer token
                     setBearerToken(accessToken.toString());
                     
-                    const userId = idToken.payload.sub; // Assuming sub is the user ID
-                    console.log('User ID:', userId);
+                    const userId = idToken.payload.sub;
                     const currentMonth = new Date().getMonth() + 1;
-                    console.log('Current Month:', currentMonth);
 
                     api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
                         .then(response => {
@@ -46,41 +39,6 @@ const Diary = () => {
                 console.error('Error getting user session:', error);
             });
     }, []);
-
-    // closest to working
-    // useEffect(() => {
-    //     fetchAuthSession()
-    //         .then(session => {
-    //             console.log('Session:', session); // Log the session object to check its structure
-    //             const { accessToken, idToken } = session.tokens ?? {};
-    //             if (accessToken && idToken) {
-    //                 console.log('Access Token:', accessToken);
-    //                 console.log('ID Token:', idToken);
-    //                 const jwtToken = accessToken.jwtToken; // Get the JWT token directly from accessToken
-    //                 console.log('JWT Token:', jwtToken);
-
-    //                 setBearerToken(jwtToken); // Set the bearer token for Axios requests
-
-    //                 const userId = idToken.payload.sub;
-    //                 console.log('User ID:', userId);
-    //                 const currentMonth = new Date().getMonth() + 1;
-    //                 console.log('Current Month:', currentMonth);
-
-    //                 api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
-    //                     .then(response => {
-    //                         setDiaryEntries(response.data);
-    //                     })
-    //                     .catch(error => {
-    //                         console.error('There was an error making the request!', error);
-    //                     });
-    //             } else {
-    //                 console.error('Access token or idToken not found in session');
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Error getting user session:', error);
-    //         });
-    // }, []);
 
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
