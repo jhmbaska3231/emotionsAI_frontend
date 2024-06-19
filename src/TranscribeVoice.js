@@ -24,8 +24,6 @@ const TranscribeVoice = () => {
     };
 
     const handleSaveToDiary = () => {
-        // Add your save to diary logic here
-        alert('Saved to diary!');
     };
 
     return (

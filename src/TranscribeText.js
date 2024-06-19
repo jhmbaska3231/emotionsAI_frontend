@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TranscribeText.css';
 import Footer from './Footer';
 
-import axios from './axiosConfig';
+import axios from './api/axiosConfig';
 
 const TranscribeText = () => {
 
@@ -19,8 +19,59 @@ const TranscribeText = () => {
 
         try {
             const response = await axios.post('/api/transcribe', inputText);
-
             setOutputText(response.data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const parseTranscriptionOutput = (output) => {
+        const emotionRegex = /Target Emotion\(s\): (.*)/;
+        const intensityRegex = /Emotional Intensity: (\w+)/;
+        const sentimentRegex = /Overall Sentiment: (\w+)/;
+
+        const emotionsMatch = output.match(emotionRegex);
+        const intensityMatch = output.match(intensityRegex);
+        const sentimentMatch = output.match(sentimentRegex);
+
+        let targetEmotions = [];
+        if (emotionsMatch && emotionsMatch[1]) {
+            const emotionsString = emotionsMatch[1];
+            const emotionsArray = emotionsString.split(', ');
+
+            targetEmotions = emotionsArray.map(emotionString => {
+                const [emotion, percentage] = emotionString.split(' (');
+                return {
+                    emotion: emotion.trim(),
+                    emotionPercentage: parseFloat(percentage.replace('%)', '').trim())
+                };
+            });
+        }
+
+        const emotionalIntensity = intensityMatch ? intensityMatch[1] : '';
+        const overallSentiment = sentimentMatch ? sentimentMatch[1] : '';
+
+        return { emotionalIntensity, overallSentiment, targetEmotions };
+    };
+
+    const handleSaveToDiary = async () => {
+        setIsLoading(true);
+        setError('');
+
+        try {
+            const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
+            const diaryEntry = {
+                inputText,
+                emotionalIntensity,
+                overallSentiment,
+                targetEmotionsList: targetEmotions,
+                userId: 99999999 // get the id dynamically
+            };
+
+            await axios.post('/api/diaries/with-emotions', diaryEntry);
+            alert('Diary entry saved successfully');
         } catch (error) {
             setError(error.message);
         } finally {
@@ -56,6 +107,12 @@ const TranscribeText = () => {
                             value={outputText}
                             readOnly
                         />
+                        <button 
+                            onClick={handleSaveToDiary}
+                            className="transcribeTextSaveDiaryButton"
+                        >
+                            Save to Diary
+                        </button>
                     </div>
                 </div>
             </div>

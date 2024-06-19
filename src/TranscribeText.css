@@ -78,3 +78,20 @@
     background-color: grey;
     cursor: not-allowed;
 }
+
+.transcribeTextSaveDiaryButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 35px;
+    margin-left: 70%;
+    width: 130px;
+}
+
+.transcribeTextSaveDiaryButton:hover {
+    background-color: #333;
+}
