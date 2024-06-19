@@ -2,50 +2,54 @@ import React, { useState } from 'react';
 import './TranscribeText.css';
 import Footer from './Footer';
 
-const TranscribeText = () => {
+import axios from './axiosConfig';
 
-    const handleLogout = () => {
-        console.log('logging out now...');
-        props.logOut();
-        alert('logout...');
-    }
+const TranscribeText = () => {
 
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [usageCount, setUsageCount] = useState(0);
-    const usageLimit = 3;
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleTranscribe = () => {
-        if (usageCount < usageLimit) {
-            // Add your transcription logic here
-            setOutputText(inputText); // This is a placeholder, replace with actual transcription logic
-            setUsageCount(usageCount + 1);
-        } else {
-            alert('Usage limit reached');
+    const wordCount = inputText.split(' ').filter(Boolean).length;
+
+    const handleTranscribe = async () => {
+        setIsLoading(true);
+        setError('');
+
+        try {
+            const response = await axios.post('/api/transcribe', inputText);
+
+            setOutputText(response.data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="transcribeTextPage">
             <div className="transcribeTextContent">
-                <div className="transcribeTextUsageLimit">Usage Limit {usageCount}/{usageLimit}</div>
+                <div className="transcribeTextUsageLimit">Unlimited Transcribes</div>
                 <div className="transcribeTextInputOutputContainer">
                     <div className="transcribeTextInputContainer">
                         <label>Input</label>
                         <textarea 
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
-                            placeholder="Enter text"
+                            placeholder="Enter text..."
                         />
-                        <div className="transcribeTextWordCount">Words {inputText.split(' ').filter(Boolean).length}/280</div>
+                        <div className="transcribeTextWordCount">Words {wordCount}/400</div>
                     </div>
                     <button 
                         onClick={handleTranscribe}
                         className="transcribeTextButton"
-                        disabled={usageCount >= usageLimit}
+                        disabled={wordCount > 400 || isLoading}
                     >
-                        Transcribe ➔
+                        {isLoading ? 'Transcribing...' : 'Transcribe ➔'}
                     </button>
+                    {error && <div className="error">{error}</div>}
                     <div className="transcribeTextOutputContainer">
                         <label>Output</label>
                         <textarea 
@@ -58,6 +62,7 @@ const TranscribeText = () => {
             <Footer />
         </div>
     );
+
 };
 
 export default TranscribeText;

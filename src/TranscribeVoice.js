@@ -38,7 +38,7 @@ const TranscribeVoice = () => {
                         <textarea 
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
-                            placeholder="Enter text"
+                            placeholder="Enter text..."
                         />
                         <div className="transcribeVoiceWordCount">Words {inputText.split(' ').filter(Boolean).length}/400</div>
                         <div className="transcribeVoiceFileInfo">MP3/WAV files</div>

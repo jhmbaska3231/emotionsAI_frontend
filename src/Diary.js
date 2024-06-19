@@ -18,7 +18,7 @@ const Diary = () => {
             .then(session => {
                 const { accessToken, idToken } = session.tokens ?? {};
                 if (accessToken && idToken) {
-                    // Extract JWT token string from ID Token and use it as the bearer token
+                    // Extract JWT token string from access token and use it as the bearer token
                     setBearerToken(accessToken.toString());
                     
                     const userId = idToken.payload.sub;
