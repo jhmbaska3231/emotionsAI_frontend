@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TranscribeText.css';
 import Footer from './Footer';
 
 import axios from './api/axiosConfig';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 const TranscribeText = () => {
 
@@ -10,8 +11,26 @@ const TranscribeText = () => {
     const [outputText, setOutputText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [userId, setUserId] = useState(null);
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            try {
+                const session = await fetchAuthSession();
+                const { idToken } = session.tokens ?? {};
+                if (idToken) {
+                    const userId = idToken.payload.sub;
+                    setUserId(userId);
+                }
+            } catch (error) {
+                console.error('Error fetching auth session:', error);
+            }
+        };
+
+        fetchUserId();
+    }, []);
 
     const handleTranscribe = async () => {
         setIsLoading(true);
@@ -62,12 +81,14 @@ const TranscribeText = () => {
 
         try {
             const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
+            const currentDate = new Date().toISOString().split('T')[0];
             const diaryEntry = {
+                date: currentDate,
                 inputText,
                 emotionalIntensity,
                 overallSentiment,
                 targetEmotionsList: targetEmotions,
-                userId: 99999999 // get the id dynamically
+                userId: userId
             };
 
             await axios.post('/api/diaries/with-emotions', diaryEntry);
