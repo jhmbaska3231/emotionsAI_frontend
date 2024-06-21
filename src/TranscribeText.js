@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './TranscribeText.css';
 import Footer from './Footer';
 
-import axios from './api/axiosConfig';
+import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
 const TranscribeText = () => {
@@ -16,11 +16,13 @@ const TranscribeText = () => {
     const wordCount = inputText.split(' ').filter(Boolean).length;
 
     useEffect(() => {
-        const fetchUserId = async () => {
+        const fetchUserIdAndToken = async () => {
             try {
                 const session = await fetchAuthSession();
-                const { idToken } = session.tokens ?? {};
-                if (idToken) {
+                const { accessToken, idToken } = session.tokens ?? {};
+                if (accessToken && idToken) {
+                    setBearerToken(accessToken.toString());
+                    
                     const userId = idToken.payload.sub;
                     setUserId(userId);
                 }
@@ -29,7 +31,7 @@ const TranscribeText = () => {
             }
         };
 
-        fetchUserId();
+        fetchUserIdAndToken();
     }, []);
 
     const handleTranscribe = async () => {
