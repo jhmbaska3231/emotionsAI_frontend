@@ -41,7 +41,6 @@ const Diary = () => {
     }, []);
 
     const formatDate = (dateString) => {
-        // const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date(dateString);
         const day = date.getDate();
         const month = date.toLocaleString('en-US', { month: 'long' });

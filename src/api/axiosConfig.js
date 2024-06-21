@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://emotionsai.us-east-1.elasticbeanstalk.com',
+    // baseURL: 'http://emotionsai.us-east-1.elasticbeanstalk.com',
+    baseURL: 'https://emotionsai.us-east-1.elasticbeanstalk.com',
     headers: {
         'Content-Type': 'application/json',
     },

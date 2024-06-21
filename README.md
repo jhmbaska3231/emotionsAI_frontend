@@ -15,3 +15,6 @@ git branch
 
 Switch to another branch:
 git checkout branchName
+
+npm run build
+zip -r build.zip .
