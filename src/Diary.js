@@ -40,6 +40,15 @@ const Diary = () => {
             });
     }, []);
 
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' });
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+    };
+
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (
@@ -58,7 +67,7 @@ const Diary = () => {
                     {diaryEntries.map(entry => (
                         <div className="ledger-row" key={entry.diaryId}>
                             <div className="ledger-column date-column">
-                                <p>{entry.date}</p>
+                                <p>{formatDate(entry.date)}</p>
                             </div>
                             <div className="ledger-column diary-column">
                                 <p>{entry.inputText}</p>
