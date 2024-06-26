@@ -9,9 +9,11 @@ const TranscribeText = () => {
 
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isTranscribing, setIsTranscribing] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState('');
     const [userId, setUserId] = useState(null);
+    const [isInputChanged, setIsInputChanged] = useState(false);
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
 
@@ -35,16 +37,17 @@ const TranscribeText = () => {
     }, []);
 
     const handleTranscribe = async () => {
-        setIsLoading(true);
+        setIsTranscribing(true);
         setError('');
 
         try {
             const response = await axios.post('/api/transcribe', inputText);
             setOutputText(response.data);
+            setIsInputChanged(false);
         } catch (error) {
             setError(error.message);
         } finally {
-            setIsLoading(false);
+            setIsTranscribing(false);
         }
     };
 
@@ -59,16 +62,18 @@ const TranscribeText = () => {
 
         let targetEmotions = [];
         if (emotionsMatch && emotionsMatch[1]) {
-            const emotionsString = emotionsMatch[1];
-            const emotionsArray = emotionsString.split(', ');
+            const emotionsString = emotionsMatch[1].trim();
+            if (emotionsString && emotionsString !== 'None') {
+                const emotionsArray = emotionsString.split(', ');
 
-            targetEmotions = emotionsArray.map(emotionString => {
-                const [emotion, percentage] = emotionString.split(' (');
-                return {
-                    emotion: emotion.trim(),
-                    emotionPercentage: parseFloat(percentage.replace('%)', '').trim())
-                };
-            });
+                targetEmotions = emotionsArray.map(emotionString => {
+                    const [emotion, percentage] = emotionString.split(' (');
+                    return {
+                        emotion: emotion.trim(),
+                        emotionPercentage: percentage ? parseFloat(percentage.replace('%)', '').trim()) : 0
+                    };
+                });
+            }
         }
 
         const emotionalIntensity = intensityMatch ? intensityMatch[1] : '';
@@ -78,11 +83,18 @@ const TranscribeText = () => {
     };
 
     const handleSaveToDiary = async () => {
-        setIsLoading(true);
+        setIsSaving(true);
         setError('');
 
         try {
             const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
+
+            if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
+                alert('Cannot save this entry - target emotion is None. Please try another input.');
+                setIsSaving(false);
+                return;
+            }
+
             const currentDate = new Date().toISOString().split('T')[0];
             const diaryEntry = {
                 date: currentDate,
@@ -98,9 +110,16 @@ const TranscribeText = () => {
         } catch (error) {
             setError(error.message);
         } finally {
-            setIsLoading(false);
+            setIsSaving(false);
         }
     };
+
+    const handleClearInput = () => {
+        setInputText('');
+        setIsInputChanged(false);
+    };
+
+    const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     return (
         <div className="transcribeTextPage">
@@ -111,17 +130,21 @@ const TranscribeText = () => {
                         <label>Input</label>
                         <textarea 
                             value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
+                            onChange={(e) => {
+                                setInputText(e.target.value);
+                                setIsInputChanged(true);
+                            }}
                             placeholder="Enter text..."
                         />
+                        <button className="clearInputButton" onClick={handleClearInput}>✕</button>
                         <div className="transcribeTextWordCount">Words {wordCount}/400</div>
                     </div>
                     <button 
                         onClick={handleTranscribe}
                         className="transcribeTextButton"
-                        disabled={wordCount > 400 || isLoading}
+                        disabled={wordCount > 400 || isTranscribing || isSaving || isInputEmptyOrWhitespace}
                     >
-                        {isLoading ? 'Transcribing...' : 'Transcribe ➔'}
+                        {isTranscribing ? 'Transcribing...' : 'Transcribe ➔'}
                     </button>
                     {error && <div className="error">{error}</div>}
                     <div className="transcribeTextOutputContainer">
@@ -133,8 +156,9 @@ const TranscribeText = () => {
                         <button 
                             onClick={handleSaveToDiary}
                             className="transcribeTextSaveDiaryButton"
+                            disabled={isSaving || isTranscribing || isInputChanged}
                         >
-                            Save to Diary
+                            {isSaving ? 'Saving...' : 'Save to Diary'}
                         </button>
                     </div>
                 </div>
