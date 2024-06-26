@@ -16,6 +16,8 @@ const TranscribeText = () => {
     const [isInputChanged, setIsInputChanged] = useState(false);
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
+    
+    const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     useEffect(() => {
         const fetchUserIdAndToken = async () => {
@@ -119,8 +121,6 @@ const TranscribeText = () => {
         setOutputText('');
         setIsInputChanged(true);
     };
-
-    const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     return (
         <div className="transcribeTextPage">
