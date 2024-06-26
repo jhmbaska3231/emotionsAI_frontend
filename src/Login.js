@@ -1,7 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Amplify } from 'aws-amplify';
 import { Authenticator, View, Image, useTheme, Text, ThemeProvider, TextField, useAuthenticator } from '@aws-amplify/ui-react';
-import { useNavigate } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 
@@ -56,6 +57,8 @@ const theme = {
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const components = {
         Header() {
             const { tokens } = useTheme();
@@ -104,8 +107,6 @@ const Login = () => {
         },
     };
 
-    const navigate = useNavigate();
-
     return (
         <ThemeProvider theme={theme}>
             <Authenticator
@@ -127,11 +128,11 @@ const Login = () => {
                     },
                 }}
             >
-                {({ signOut, user }) => {
+                {({ user }) => {
                     if (user) {
                         navigate('/transcribetext');
                     }
-                    return <div></div>; // return empty div or other content if needed
+                    return null;
                 }}
             </Authenticator>
         </ThemeProvider>

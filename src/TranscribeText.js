@@ -90,7 +90,7 @@ const TranscribeText = () => {
             const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
 
             if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
-                alert('Cannot save this entry - target emotion is None. Please try another input.');
+                alert('Cannot save this entry as target emotion is none. Please try another input.');
                 setIsSaving(false);
                 return;
             }
@@ -114,9 +114,10 @@ const TranscribeText = () => {
         }
     };
 
-    const handleClearInput = () => {
+    const handleClearInputAndOuput = () => {
         setInputText('');
-        setIsInputChanged(false);
+        setOutputText('');
+        setIsInputChanged(true);
     };
 
     const isInputEmptyOrWhitespace = inputText.trim().length === 0;
@@ -136,7 +137,7 @@ const TranscribeText = () => {
                             }}
                             placeholder="Enter text..."
                         />
-                        <button className="clearInputButton" onClick={handleClearInput}>✕</button>
+                        <button className="clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
                         <div className="transcribeTextWordCount">Words {wordCount}/400</div>
                     </div>
                     <button 
