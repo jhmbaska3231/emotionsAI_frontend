@@ -63,7 +63,7 @@ const TranscribeVoice = () => {
         } catch (error) {
             setError(error.message);
         }
-    };
+    };    
 
     const handleTranscribe = async () => {
         setIsTranscribing(true);
@@ -168,7 +168,7 @@ const TranscribeVoice = () => {
                             placeholder="Enter text or upload audio..."
                         />
                         <div className="transcribeVoiceWordCount">Words {wordCount}/400</div>
-                        <div className="transcribeVoiceFileInfo">MP3/WAV files</div>
+                        <div className="transcribeVoiceFileInfo">MP3/MP4/WAV files - 25MB max</div>
                         <input
                             key={fileInputKey}
                             type="file"
