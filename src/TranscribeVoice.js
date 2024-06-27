@@ -51,13 +51,12 @@ const TranscribeVoice = () => {
 
         try {
             const formData = new FormData();
-            formData.append('inputAudio', selectedFile); // Assuming inputAudio matches backend's request body key
+            formData.append('inputAudio', selectedFile);
 
             const response = await axios.post('/api/audiototext', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                withCredentials: true // This is important to include credentials in the request
             });
 
             setInputText(response.data);
