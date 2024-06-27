@@ -15,6 +15,8 @@ const TranscribeVoice = () => {
     const [userId, setUserId] = useState(null);
     const [isInputChanged, setIsInputChanged] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [fileName, setFileName] = useState('');
+    const [fileInputKey, setFileInputKey] = useState(Date.now());
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
 
@@ -39,6 +41,31 @@ const TranscribeVoice = () => {
         fetchUserIdAndToken();
     }, []);
 
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+    };
+
+    const handleAudioToText = async () => {
+        setError('');
+
+        try {
+            const formData = new FormData();
+            formData.append('inputAudio', selectedFile); // Assuming inputAudio matches backend's request body key
+
+            const response = await axios.post('/api/audiototext', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                withCredentials: true // This is important to include credentials in the request
+            });
+
+            setInputText(response.data);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     const handleTranscribe = async () => {
         setIsTranscribing(true);
         setError('');
@@ -52,10 +79,6 @@ const TranscribeVoice = () => {
         } finally {
             setIsTranscribing(false);
         }
-    };
-
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
     };
 
     const parseTranscriptionOutput = (output) => {
@@ -97,7 +120,7 @@ const TranscribeVoice = () => {
             const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
 
             if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
-                alert('Cannot save this entry as target emotion is none. Please try another input.');
+                alert('The target emotion is none. Please try another input.');
                 setIsSaving(false);
                 return;
             }
@@ -125,6 +148,9 @@ const TranscribeVoice = () => {
         setInputText('');
         setOutputText('');
         setIsInputChanged(true);
+        setSelectedFile(null);
+        setFileName('');
+        setFileInputKey(Date.now());
     };
 
     return (
@@ -140,13 +166,14 @@ const TranscribeVoice = () => {
                                 setInputText(e.target.value);
                                 setIsInputChanged(true);
                             }}
-                            placeholder="Enter text..."
+                            placeholder="Enter text or upload audio..."
                         />
                         <div className="transcribeVoiceWordCount">Words {wordCount}/400</div>
                         <div className="transcribeVoiceFileInfo">MP3/WAV files</div>
                         <input
+                            key={fileInputKey}
                             type="file"
-                            accept=".mp3,.wav"
+                            accept=".mp3,.mp4,.wav"
                             onChange={handleFileChange}
                             id="file-upload"
                             style={{ display: 'none' }}
@@ -154,8 +181,16 @@ const TranscribeVoice = () => {
                         <label htmlFor="file-upload" className="transcribeVoiceUploadButton">
                             Upload
                         </label>
+                        {fileName && <div className="transcribeVoiceFileName">Uploaded file: {fileName}</div>}
                         <button className="clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
                     </div>
+                    <button 
+                        onClick={handleAudioToText}
+                        className="transcribeVoiceTranscribeButton"
+                        disabled={!selectedFile || isTranscribing || isSaving}
+                    >
+                        {isTranscribing ? 'Converting...' : 'Convert Audio to Text'}
+                    </button>
                     <button 
                         onClick={handleTranscribe}
                         className="transcribeVoiceTranscribeButton"
