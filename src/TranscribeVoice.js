@@ -5,12 +5,16 @@ import Footer from './Footer';
 import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 const TranscribeVoice = () => {
 
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
     const [isTranscribing, setIsTranscribing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [isConverting, setIsConverting] = useState(false);
     const [error, setError] = useState('');
     const [userId, setUserId] = useState(null);
     const [isInputChanged, setIsInputChanged] = useState(false);
@@ -48,6 +52,7 @@ const TranscribeVoice = () => {
 
     const handleAudioToText = async () => {
         setError('');
+        setIsConverting(true);
 
         try {
             const formData = new FormData();
@@ -62,6 +67,8 @@ const TranscribeVoice = () => {
             setInputText(response.data);
         } catch (error) {
             setError(error.message);
+        } finally {
+            setIsConverting(false);
         }
     };    
 
@@ -168,7 +175,7 @@ const TranscribeVoice = () => {
                             placeholder="Enter text or upload audio..."
                         />
                         <div className="transcribeVoiceWordCount">Words {wordCount}/400</div>
-                        <div className="transcribeVoiceFileInfo">MP3/MP4/WAV files - 25MB max</div>
+                        <div className="transcribeVoiceFileInfo">MP3/MP4/WAV files - max 25MB</div>
                         <input
                             key={fileInputKey}
                             type="file"
@@ -186,14 +193,19 @@ const TranscribeVoice = () => {
                     <button 
                         onClick={handleAudioToText}
                         className="transcribeVoiceTranscribeButton"
-                        disabled={!selectedFile || isTranscribing || isSaving}
+                        disabled={!selectedFile || isTranscribing || isSaving || isConverting}
                     >
-                        {isTranscribing ? 'Converting...' : 'Convert Audio to Text'}
+                        {isConverting ? (
+                            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress size={24} />
+                                Converting...
+                            </Box>
+                        ) : 'Convert Audio to Text'}
                     </button>
-                    <button 
+                    <button
                         onClick={handleTranscribe}
                         className="transcribeVoiceTranscribeButton"
-                        disabled={wordCount > 400 || isTranscribing || isSaving || isInputEmptyOrWhitespace}
+                        disabled={wordCount > 400 || isTranscribing || isSaving || isInputEmptyOrWhitespace || isConverting}
                     >
                         {isTranscribing ? 'Transcribing...' : 'Transcribe ➔'}
                     </button>
@@ -208,7 +220,7 @@ const TranscribeVoice = () => {
                         <button 
                             onClick={handleSaveToDiary}
                             className="transcribeVoiceSaveDiaryButton"
-                            disabled={isSaving || isTranscribing || isInputChanged}
+                            disabled={isSaving || isTranscribing || isInputChanged || isConverting}
                         >
                             {isSaving ? 'Saving...' : 'Save to Diary'}
                         </button>
