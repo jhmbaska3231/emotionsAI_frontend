@@ -23,7 +23,6 @@ const TranscribeVoice = () => {
     const [fileInputKey, setFileInputKey] = useState(Date.now());
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
-
     const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     useEffect(() => {

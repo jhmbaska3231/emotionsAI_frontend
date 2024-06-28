@@ -16,7 +16,6 @@ const TranscribeText = () => {
     const [isInputChanged, setIsInputChanged] = useState(false);
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
-    
     const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     useEffect(() => {

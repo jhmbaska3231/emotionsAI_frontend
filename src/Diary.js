@@ -8,36 +8,40 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList } from 'recharts';
+
 const Diary = () => {
 
     const [activeTab, setActiveTab] = useState('DiaryLedger');
     const [diaryEntries, setDiaryEntries] = useState([]);
-    
+    const [monthlyData, setMonthlyData] = useState([]);
+    const [currentMonth, setCurrentMonth] = useState('');
+
     useEffect(() => {
-        fetchAuthSession()
-            .then(session => {
+        const fetchDiaryData = async () => {
+            try {
+                const session = await fetchAuthSession();
                 const { accessToken, idToken } = session.tokens ?? {};
                 if (accessToken && idToken) {
-                    // Extract JWT token string from access token and use it as the bearer token
                     setBearerToken(accessToken.toString());
-                    
-                    const userId = idToken.payload.sub;
-                    const currentMonth = new Date().getMonth() + 1;
 
-                    api.get(`/api/diaries/user/${userId}/month/${currentMonth}`)
-                        .then(response => {
-                            setDiaryEntries(response.data);
-                        })
-                        .catch(error => {
-                            console.error('There was an error making the request!', error);
-                        });
+                    const userId = idToken.payload.sub;
+                    const currentMonthIndex = new Date().getMonth() + 1;
+                    setCurrentMonth(currentMonthIndex);
+
+                    const response = await api.get(`/api/diaries/user/${userId}/month/${currentMonthIndex}`);
+                    setDiaryEntries(response.data);
+                    const data = processData(response.data);
+                    setMonthlyData(data);
                 } else {
                     console.error('ID token not found in session');
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error getting user session:', error);
-            });
+            }
+        };
+
+        fetchDiaryData();
     }, []);
 
     const formatDate = (dateString) => {
@@ -46,6 +50,38 @@ const Diary = () => {
         const month = date.toLocaleString('en-US', { month: 'long' });
         const year = date.getFullYear();
         return `${day} ${month} ${year}`;
+    };
+
+    const getMonthName = (monthIndex) => {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        return monthNames[monthIndex - 1];
+    };
+
+    const processData = (entries) => {
+        const emotionMap = {};
+    
+        // Aggregate the similar emotions across all diary entries
+        entries.forEach(entry => {
+            entry.targetEmotionsList.forEach(emotion => {
+                if (emotionMap[emotion.emotion]) {
+                    emotionMap[emotion.emotion] += emotion.emotionPercentage;
+                } else {
+                    emotionMap[emotion.emotion] = emotion.emotionPercentage;
+                }
+            });
+        });
+    
+        // Calculate the total sum of aggregated percentages
+        const totalPercentage = Object.values(emotionMap).reduce((sum, percentage) => sum + percentage, 0);
+    
+        // Normalize the aggregated values to ensure the total sum equals 100%
+        return Object.keys(emotionMap).map(emotion => ({
+            emotion,
+            percentage: (emotionMap[emotion] / totalPercentage) * 100
+        }));
     };
 
     const renderContent = () => {
@@ -81,32 +117,26 @@ const Diary = () => {
                 </div>
             );
         } else if (activeTab === 'MonthlyAnalysis') {
-            // Example content for Monthly Analysis tab
+            const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
+            const monthName = getMonthName(currentMonth);
             return (
                 <div className="monthly-analysis-content">
-                    <div className="header">
-                    </div>
-                    <div className="emotion-bar">
-                        <span>Anger</span>
-                        <div className="bar" style={{ width: '45%' }}>45%</div>
-                    </div>
-                    <div className="emotion-bar">
-                        <span>Guilt</span>
-                        <div className="bar" style={{ width: '8%' }}>8%</div>
-                    </div>
-                    <div className="emotion-bar">
-                        <span>Joy</span>
-                        <div className="bar" style={{ width: '30%' }}>30%</div>
-                    </div>
-                    <div className="emotion-bar">
-                        <span>Excitement</span>
-                        <div className="bar" style={{ width: '12%' }}>12%</div>
-                    </div>
-                    <div className="emotion-bar">
-                        <span>Loneliness</span>
-                        <div className="bar" style={{ width: '5%' }}>5%</div>
-                    </div>
-                    <p className="summary">Your most felt emotion in the month of April is "Anger" at 45%</p>
+                    <BarChart
+                        width={1000}
+                        height={600}
+                        data={monthlyData}
+                        layout="vertical"
+                        margin={{ top: 20, right: 10, left: 80, bottom: 20 }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis type="number" />
+                        <YAxis type="category" dataKey="emotion" />
+                        <Tooltip />
+                        <Bar dataKey="percentage" fill="#4F81BD">
+                            <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
+                        </Bar>
+                    </BarChart>
+                    <p className="summary">Your most felt emotion in the month of {monthName} is "{maxEmotion.emotion}" at {maxEmotion.percentage.toFixed(2)}%</p>
                 </div>
             );
         }
