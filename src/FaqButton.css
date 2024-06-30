@@ -1,4 +1,17 @@
 .faq-button {
-    display: flex;
-    justify-content: flex-end; /* Align the icon to the extreme right */
+    position: fixed;
+    bottom: 5vh;
+    right: 0.5vw;
+}
+
+.faq-button-icon {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.faq-button-icon img {
+    width: 4vw ;
+    height: 4vw ;
 }

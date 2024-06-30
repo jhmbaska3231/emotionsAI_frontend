@@ -64,9 +64,11 @@ const Homepage = () => {
                     </div>
                     <img src={home_intro_pic} alt="Emotions AI Logo" className="about-image" />
                 </div>
-                <Link to="/login">
-                    <button className="get-started-button">Get Started</button>
-                </Link>
+                <div className="get-started-button-container">
+                    <Link to="/login">
+                        <button className="get-started-button">Get Started</button>
+                    </Link>
+                </div>
             </div>
             <FAQ />
             <Footer />

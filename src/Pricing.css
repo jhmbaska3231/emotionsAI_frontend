@@ -1,106 +1,106 @@
-.box1 {
-    position: fixed;
-    top: 25%; /* Adjusted top position */
-    left: 22%; /* Adjusted left position */
-    width: 40%; /* Set width */
-    max-width: 400px; /* Maximum width */
-    height: 500px; /* Auto height */
-    padding: 20px; /* Add padding */
-    background-image: linear-gradient(to bottom, #52C2A5, #344C46); /* Gradient background */
-    border: 1px solid #ccc; /* Add border */
-    box-sizing: border-box; /* Include padding and border in the box's total width and height */
-    border-radius: 10px; /* Make the edges of the box curved */
-    margin-top: 100px auto;
+.pricing-page {
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 4rem);
+    box-sizing: border-box;
+    background-color: #e0f2f1;
 }
 
-.box2 {
-    position: fixed;
-    top: 25%; /* Adjusted top position */
-    right: 22%; /* Adjusted right position */
-    width: 40%; /* Set width */
-    max-width: 400px; /* Maximum width */
-    height: 500px; /* Auto height */
-    padding: 20px; /* Add padding */
-    background-image: linear-gradient(to bottom, #52C2A5, #344C46); /* Gradient background */
-    border: 1px solid #ccc; /* Add border */
-    box-sizing: border-box; /* Include padding and border in the box's total width and height */
-    border-radius: 10px; /* Make the edges of the box curved */
+.header {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.subheader {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #555;
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .text-bold {
-    font-size: 20px; /* Adjust font size */
-    font-weight: bold; /* Make the text bold */
-    color: #fff; /* Set text color */
-    text-align: center; /* Center align text */
-    margin-bottom: 5px; /* Add space between text and button */
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.price-container {
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.period {
+    font-size: 1rem;
+    color: #333;
+}
+
+.divider {
+    width: 75%;
+    margin: 0.5rem auto;
+    border: 0.5px solid #ccc;
+}
+
+.features {
+    flex: 1;
+    margin: 1rem 0;
+    height: 20vh; 
+
 }
 
 .text-normal {
-    font-size: 18px; /* Adjust font size */
-    color: #fff; /* Set text color */
-    text-align: left; /* Center align text */
-    margin-bottom: 5px; /* Add space between text and button */
+    font-size: 1rem;
+    color: #555;
+    text-align: left;
+    margin: 0.3rem 0;
 }
 
-.text-normal img {
-    margin-right: 5px; /* Add margin-right for spacing */
-}
-
-.black-button {
-    background-color: #000; /* Black background */
-    color: #fff; /* White text color */
-    border: none;
-    padding: 15px 32px;
+.box {
+    flex: 1;
+    max-width: 30%;
+    width: 100%;
+    padding: 1.25rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
     text-align: center;
-    text-decoration: none;
-    display: block; /* Change to block */
-    width: 40%; /* Set width to 100% */
-    font-size: 16px;
-    margin-top: 10px auto; /* Adjust margin */
-    margin-left: 30%;
+    margin: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 450px;
+    box-shadow: 0 0 16px #74AA9C; /* Added shadow */
+}
+
+.pricing-button {
+    background-color: #74AA9C;
+    color: #fff;
+    border: none;
+    text-align: center;
     cursor: pointer;
     border-radius: 10px;
+    transition: background-color 0.3s;
+    padding: 0.5rem 1rem; /* Shorter button height */
+    margin-top: 1rem;
 }
 
-.black-button:hover {
-    background-color: #444444; /* Maintain black color on hover */
-}
-
-.button-time {
-    background-color: #000; /* Black background */
-    color: #6c6c6c; /* White text color */
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block; /* Set display to inline-block */
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    width: 20%; /* Set width as a percentage of viewport width */
-    max-width: 200px; /* Maximum width */
-    height: auto; /* Auto height */
-    position: absolute; /* Set position to absolute */
-    top: 14%; /* Adjusted top position */
-    left: 33%; /* Adjusted left position */
-}
-
-.button-time2 {
-    background-color: #000; /* Black background */
-    color: #fff; /* White text color */
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block; /* Set display to inline-block */
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    width: 20%; /* Set width as a percentage of viewport width */
-    max-width: 200px; /* Maximum width */
-    height: auto; /* Auto height */
-    position: absolute; /* Set position to absolute */
-    top: 14%; /* Adjusted top position */
-    right: 27%; /* Adjusted right position */
-    transform: translateX(-50%); /* Center align horizontally */
+.pricing-button:hover {
+    background-color: #444;
 }

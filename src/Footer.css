@@ -1,15 +1,14 @@
 .footer {
-    background-color: #202123;  
-    color: white; 
-    text-align: center;  
-    padding: 10px 0; 
-    position: absolute; 
-    width: 100%; 
+    background-color: #202123;
+    color: white;
+    text-align: center;
+    padding: 1vh 0; /* Use viewport height for padding */
+    position: fixed; /* Fixed positioning */
+    width: 100%;
     bottom: 0;
 }
 
 .footer p {
-    margin: 0; 
-    font-size: 12px;  
-} 
- 
+    margin: 0;
+    font-size: 1rem; /* Use rem for font size */
+}
