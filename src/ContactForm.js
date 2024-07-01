@@ -3,7 +3,6 @@ import './ContactForm.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-
 const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -21,19 +20,19 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data submitted:', formData);
-        // Add your form submission logic here
+        // Add logic here
     };
 
     return (
-        <div className="contactFormPage">
+        <div>
             <Navbar />
-            <div className="contactFormContent">
-                <div className="contactFormContainer">
-                    <form onSubmit={handleSubmit} className="contactForm">
-                        <h2>Contact Us</h2>
-                        <div className="contactFormGroup">
-                            <div className="contactHalfWidth">
-                                <div className="contactLabel" htmlFor="name">Name</div>
+            <div className="cf-contactFormPage">
+                <div className="cf-contactFormContent">
+                    <div className="cf-contactFormContainer">
+                        <form onSubmit={handleSubmit} className="cf-contactForm">
+                            <h2>Contact Us</h2>
+                            <div className="cf-contactFormGroup">
+                                <div className="cf-contactLabel" htmlFor="name">Name</div>
                                 <input 
                                     type="text" 
                                     id="name" 
@@ -41,61 +40,61 @@ const ContactForm = () => {
                                     value={formData.name} 
                                     onChange={handleChange} 
                                     placeholder="Enter text" 
-                                    className="contactInput"
+                                    className="cf-contactInput"
                                 />
                             </div>
-                        </div>
-                        <div className="contactFormGroup contactHalfWidthContainer">
-                            <div className="contactHalfWidth">
-                                <div className="contactLabel" htmlFor="email">Email</div>
+                            <div className="cf-contactFormGroup cf-contactHalfWidthContainer">
+                                <div className="cf-contactHalfWidth">
+                                    <div className="cf-contactLabel" htmlFor="email">Email</div>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        value={formData.email} 
+                                        onChange={handleChange} 
+                                        placeholder="Enter text" 
+                                        className="cf-contactInput"
+                                    />
+                                </div>
+                                <div className="cf-contactHalfWidth">
+                                    <div className="cf-contactLabel" htmlFor="phone">Phone</div>
+                                    <input 
+                                        type="tel" 
+                                        id="phone" 
+                                        name="phone" 
+                                        value={formData.phone} 
+                                        onChange={handleChange} 
+                                        placeholder="Enter text" 
+                                        className="cf-contactInput"
+                                    />
+                                </div>
+                            </div>
+                            <div className="cf-contactFormGroup">
+                                <div className="cf-contactLabel" htmlFor="subject">Subject</div>
                                 <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    value={formData.email} 
+                                    type="text" 
+                                    id="subject" 
+                                    name="subject" 
+                                    value={formData.subject} 
                                     onChange={handleChange} 
                                     placeholder="Enter text" 
-                                    className="contactInput"
+                                    className="cf-contactInput"
                                 />
                             </div>
-                            <div className="contactHalfWidth">
-                                <div className="contactLabel" htmlFor="phone">Phone</div>
-                                <input 
-                                    type="tel" 
-                                    id="phone" 
-                                    name="phone" 
-                                    value={formData.phone} 
+                            <div className="cf-contactFormGroup">
+                                <div className="cf-contactLabel" htmlFor="message">Message</div>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    value={formData.message} 
                                     onChange={handleChange} 
                                     placeholder="Enter text" 
-                                    className="contactInput"
+                                    className="cf-contactTextarea"
                                 />
                             </div>
-                        </div>
-                        <div className="contactFormGroup">
-                            <div className="contactLabel" htmlFor="subject">Subject</div>
-                            <input 
-                                type="text" 
-                                id="subject" 
-                                name="subject" 
-                                value={formData.subject} 
-                                onChange={handleChange} 
-                                placeholder="Enter text" 
-                                className="contactInput"
-                            />
-                        </div>
-                        <div className="contactFormGroup">
-                            <div className="contactLabel" htmlFor="message">Message</div>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                value={formData.message} 
-                                onChange={handleChange} 
-                                placeholder="Enter text" 
-                                className="contactTextarea"
-                            />
-                            <button type="submit" className="contactButton">Submit</button>
-                        </div>
-                    </form>
+                            <button type="submit" className="cf-contactButton">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <Footer />

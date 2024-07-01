@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
-
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
 import './HomePage.css';
 import Navbar from './Navbar';
 import FAQ from './FaqButton';
@@ -21,7 +19,7 @@ const Homepage = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             nextSlide();
-        }, 3000); 
+        }, 3000);
         return () => clearInterval(intervalId);
     }, [currentSlide]);
 
@@ -38,35 +36,35 @@ const Homepage = () => {
     };
 
     return (
-        <div>
+        <div className="hp-container">
             <Navbar />
-            <div className="slideshow">
-                <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="slide-arrow left-arrow" />
-                <div className="slide-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+            <div className="hp-slideshow">
+                <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="hp-slide-arrow hp-left-arrow" />
+                <div className="hp-slide-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {images.map((image, index) => (
-                        <div className="slide" key={index}>
+                        <div className="hp-slide" key={index}>
                             <img src={image} alt={`Slide ${index + 1}`} />
                         </div>
                     ))}
                 </div>
-                <FontAwesomeIcon icon={faChevronRight} onClick={nextSlide} className="slide-arrow right-arrow" />
-                <div className="slide-dots">
+                <FontAwesomeIcon icon={faChevronRight} onClick={nextSlide} className="hp-slide-arrow hp-right-arrow" />
+                <div className="hp-slide-dots">
                     {images.map((_, index) => (
-                        <span key={index} className={`dot ${index === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(index)}></span>
+                        <span key={index} className={`hp-dot ${index === currentSlide ? 'hp-active' : ''}`} onClick={() => goToSlide(index)}></span>
                     ))}
                 </div>
             </div>
-            <div className="product-introduction">
+            <div className="hp-product-introduction">
                 <h1>ABOUT US</h1>
-                <div className="content-wrapper">
-                    <div className="text-box">
+                <div className="hp-content-wrapper">
+                    <div className="hp-text-box">
                         <p>At EmotionsAI, we specialize in leveraging cutting-edge technology to help you master the emotional nuances of your writing. Our web application, inspired by Grammarly, empowers authors, students, speechwriters, and professionals across diverse fields to craft compelling content that resonates with audiences on a deeper level.</p>
                     </div>
-                    <img src={home_intro_pic} alt="Emotions AI Logo" className="about-image" />
+                    <img src={home_intro_pic} alt="Emotions AI Logo" className="hp-about-image" />
                 </div>
-                <div className="get-started-button-container">
+                <div className="hp-get-started-button-container">
                     <Link to="/login">
-                        <button className="get-started-button">Get Started</button>
+                        <button className="hp-get-started-button">Get Started</button>
                     </Link>
                 </div>
             </div>

@@ -1,39 +1,70 @@
-.product-page {
+.prod-page {
     background-color: #e0f2f1;
-    padding: 1vw;
-    box-sizing: border-box;
+    padding: 2vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: calc(100vh - 50px); /* Adjust based on your footer height */
+    min-height: calc(100vh - 10vh);
+    box-sizing: border-box;
 }
 
-.product-content {
+.prod-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2vw;
-    max-width: 80vw;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 2vw;
 }
 
-.service {
+.prod-service {
+    background-color: white;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 1.5vw;
+    border-radius: 10px;
+    padding: 1.25rem;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 20vw;
-    width: 35vw;
+    box-shadow: 0 0 16px #74AA9C;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    box-sizing: border-box;
+    margin-bottom: 2vw; /* Add space between the boxes */
+    min-height: 17vw;
 }
 
-.service h2 {
+.prod-service:nth-child(1) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.prod-service:nth-child(2) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.prod-service:nth-child(3) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.prod-service:nth-child(4) {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.prod-service h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
     color: #333;
-    margin-bottom: 1vw;
 }
 
-.service p {
+.prod-service p {
+    font-size: 1rem;
     color: #666;
     line-height: 1.6;
+    text-align: left;
+    margin: 0.5rem 0;
+    padding: 0 1vw;
 }

@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    height: 50px; 
+    height: 6vh; /* 6% of the viewport height */
 }
 
 .navbar div {
@@ -41,6 +41,7 @@
 
 .navbar-logo img {
     margin-right: 10px;
+    height: 4vh; /* Adjust the height of the logo to fit within the navbar */
 }
 
 .navbar-logo span {

@@ -9,7 +9,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="navbar-left">
                 <Link to="/" className="navbar-logo">
-                    <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
+                    <img src={brain_icon} alt="brain_icon" />
                     <span>EmotionsAI</span>
                 </Link>
             </div>

@@ -3,24 +3,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: calc(100vh - 4rem);
+    min-height: calc(100vh - 10vh); /* Adjusted for navbar and footer height */
     box-sizing: border-box;
     background-color: #e0f2f1;
 }
 
-.header {
+.pricing-header {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-.subheader {
+.pricing-subheader {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     text-align: center;
     color: #555;
 }
 
-.box-container {
+.pricing-box-container {
     display: flex;
     justify-content: center;
     gap: 2vw;
@@ -29,49 +29,48 @@
     max-width: 1200px;
 }
 
-.text-bold {
+.pricing-text-bold {
     font-size: 1.25rem;
     font-weight: bold;
     color: #333;
     margin-bottom: 0.5rem;
 }
 
-.price-container {
+.pricing-price-container {
     margin-bottom: 0.5rem;
 }
 
-.price {
+.pricing-price {
     font-size: 1.75rem;
     font-weight: bold;
     color: #333;
 }
 
-.period {
+.pricing-period {
     font-size: 1rem;
     color: #333;
 }
 
-.divider {
+.pricing-divider {
     width: 75%;
     margin: 0.5rem auto;
     border: 0.5px solid #ccc;
 }
 
-.features {
+.pricing-features {
     flex: 1;
     margin: 1rem 0;
     height: 20vh; 
-
 }
 
-.text-normal {
+.pricing-text-normal {
     font-size: 1rem;
     color: #555;
     text-align: left;
     margin: 0.3rem 0;
 }
 
-.box {
+.pricing-box {
     flex: 1;
     max-width: 30%;
     width: 100%;

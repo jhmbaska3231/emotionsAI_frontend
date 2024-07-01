@@ -11,93 +11,93 @@ const Pricing = () => {
     <>
       <Navbar />
       <div className="pricing-page">
-        <h1 className="header">Choose Your Subscription</h1>
-        <p className="subheader">Unlock full access to EmotionsAI features without any limitations.</p>
-        <div className="box-container">
-          <div className="box">
-            <p className="text-bold">FREE</p>
-            <div className="price-container">
-                <span className="price">$0</span><span className="period">/month</span>
+        <h1 className="pricing-header">Choose Your Subscription</h1>
+        <p className="pricing-subheader">Unlock full access to EmotionsAI features without any limitations.</p>
+        <div className="pricing-box-container">
+          <div className="pricing-box">
+            <p className="pricing-text-bold">FREE</p>
+            <div className="pricing-price-container">
+                <span className="pricing-price">$0</span><span className="pricing-period">/month</span>
             </div>
-            <hr className="divider" />
-            <div className="features">
-              <p className="text-normal">
+            <hr className="pricing-divider" />
+            <div className="pricing-features">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Transcribe Text input to Target Emotion
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 3 Transcribes daily
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Capped Word Count
               </p>
             </div>
             <button className="pricing-button">Choose this plan</button>
           </div>
-          <div className="box">
-            <p className="text-bold">MONTHLY</p>
-            <div className="price-container">
-              <span className="price">$12</span><span className="period">/month</span>
+          <div className="pricing-box">
+            <p className="pricing-text-bold">MONTHLY</p>
+            <div className="pricing-price-container">
+              <span className="pricing-price">$12</span><span className="pricing-period">/month</span>
             </div>
-            <hr className="divider" />
-            <div className="features">
-              <p className="text-normal">
+            <hr className="pricing-divider" />
+            <div className="pricing-features">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Transcribe Text input to Target Emotion
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Transcribe Audio Input to Target Emotion
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Emotion Analysis
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Diary Recording
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Unlimited Transcribes
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Full Word Count
               </p>
             </div>
             <button className="pricing-button">Choose this plan</button>
           </div>
-          <div className="box">
-            <p className="text-bold">YEARLY</p>
-            <div className="price-container">
-              <span className="price">$100</span><span className="period">/year</span>
+          <div className="pricing-box">
+            <p className="pricing-text-bold">YEARLY</p>
+            <div className="pricing-price-container">
+              <span className="pricing-price">$100</span><span className="pricing-period">/year</span>
             </div>
-            <hr className="divider" />
-            <div className="features">
-              <p className="text-normal">
+            <hr className="pricing-divider" />
+            <div className="pricing-features">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Transcribe Text input to Target Emotion
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Transcribe Audio Input to Target Emotion
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Emotion Analysis
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Diary Recording
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Unlimited Transcribes
               </p>
-              <p className="text-normal">
+              <p className="pricing-text-normal">
                 <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '5px' }} />
                 Full Word Count
               </p>

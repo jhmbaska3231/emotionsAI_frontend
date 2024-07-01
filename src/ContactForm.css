@@ -1,87 +1,97 @@
-.contactFormPage {
+.cf-contactFormPage {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  min-height: calc(100vh - 10vh); /* Adjust for navbar and footer height */
   background: #e0f2f1;
+  padding: 2vw;
 }
 
-.contactFormContent {
+.cf-contactFormContent {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
   width: 100%;
-  padding: 20px;
 }
 
-.contactFormContainer {
+.cf-contactFormContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 50vw; /* Adjusted for smaller width */
 }
 
-.contactForm {
+.cf-contactForm {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 16px #74AA9C;
+  padding: 2vw;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw #74AA9C;
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 5%;
+  max-width: 40vw; /* Adjusted for smaller width */
+  margin-bottom: 2vh; /* Adjusted for responsiveness */
 }
 
-.contactForm h2 {
+.cf-contactForm h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
   color: #333;
+  font-size: 2vw; /* Adjusted for responsiveness */
 }
 
-.contactFormGroup {
-  margin-bottom: 15px;
+.cf-contactFormGroup {
+  margin-bottom: 1.5vh; /* Adjusted for responsiveness */
 }
 
-.contactLabel {
+.cf-contactLabel {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5vh;
   font-weight: bold;
   color: #333;
+  font-size: 1vw; /* Adjusted for responsiveness */
 }
 
-.contactInput, .contactTextarea {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.contactTextarea {
-  resize: vertical;
-  height: 120px;
-}
-
-.contactButton {
+.cf-contactInput {
   width: 100%;
-  padding: 10px;
+  padding: 0.5vw; /* Adjusted for smaller input */
+  border: 1px solid #ccc;
+  border-radius: 0.5vw;
+  font-size: 1vw; /* Adjusted for responsiveness */
+}
+
+.cf-contactTextarea {
+  width: 100%;
+  padding: 0.5vw; /* Adjusted for smaller input */
+  border: 1px solid #ccc;
+  border-radius: 0.5vw;
+  font-size: 1vw; /* Adjusted for responsiveness */
+  resize: vertical;
+  height: 20vh; /* Increased height for message box */
+}
+
+.cf-contactButton {
+  width: 100%;
+  padding: 1vw;
   background-color: #74AA9C;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5vw;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+  font-size: 1.5vw; /* Adjusted for responsiveness */
+  margin-top: 1vh;
 }
 
-.contactButton:hover {
+.cf-contactButton:hover {
   background-color: #333;
 }
 
-.contactHalfWidthContainer {
+.cf-contactHalfWidthContainer {
   display: flex;
   justify-content: space-between;
+  gap: 1vw;
 }
 
-.contactHalfWidth {
+.cf-contactHalfWidth {
   width: 48%;
 }
