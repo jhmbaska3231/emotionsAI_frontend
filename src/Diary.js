@@ -8,13 +8,14 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, LineChart, Line } from 'recharts';
 
 const Diary = () => {
 
     const [activeTab, setActiveTab] = useState('DiaryLedger');
     const [diaryEntries, setDiaryEntries] = useState([]);
     const [monthlyData, setMonthlyData] = useState([]);
+    const [last6MonthsData, setLast6MonthsData] = useState([]);
     const [currentMonth, setCurrentMonth] = useState('');
 
     useEffect(() => {
@@ -31,8 +32,12 @@ const Diary = () => {
 
                     const response = await api.get(`/api/diaries/user/${userId}/month/${currentMonthIndex}`);
                     setDiaryEntries(response.data);
-                    const data = processData(response.data);
+                    const data = processMonthlyData(response.data);
                     setMonthlyData(data);
+
+                    const last6MonthsResponse = await api.get(`/api/diaries/user/${userId}/last6months/${currentMonthIndex}`);
+                    const last6MonthsData = processLast6MonthsData(last6MonthsResponse.data);
+                    setLast6MonthsData(last6MonthsData);
                 } else {
                     console.error('ID token not found in session');
                 }
@@ -60,7 +65,7 @@ const Diary = () => {
         return monthNames[monthIndex - 1];
     };
 
-    const processData = (entries) => {
+    const processMonthlyData = (entries) => {
         const emotionMap = {};
     
         // Aggregate the similar emotions across all diary entries
@@ -83,6 +88,62 @@ const Diary = () => {
             percentage: (emotionMap[emotion] / totalPercentage) * 100
         }));
     };
+
+    const processLast6MonthsData = (entries) => {
+        const monthlyEmotionData = {};
+        
+        entries.forEach(entry => {
+            const month = new Date(entry.date).getMonth() + 1;
+            if (!monthlyEmotionData[month]) {
+                monthlyEmotionData[month] = {};
+            }
+            entry.targetEmotionsList.forEach(emotion => {
+                if (monthlyEmotionData[month][emotion.emotion]) {
+                    monthlyEmotionData[month][emotion.emotion] += emotion.emotionPercentage;
+                } else {
+                    monthlyEmotionData[month][emotion.emotion] = emotion.emotionPercentage;
+                }
+            });
+        });
+    
+        const aggregatedData = Object.keys(monthlyEmotionData).map(month => {
+            const emotions = monthlyEmotionData[month];
+            const totalPercentage = Object.values(emotions).reduce((sum, percentage) => sum + percentage, 0);
+            const normalizedEmotions = Object.keys(emotions).reduce((acc, emotion) => {
+                acc[emotion] = (emotions[emotion] / totalPercentage) * 100;
+                return acc;
+            }, {});
+            return { month: getMonthName(month), ...normalizedEmotions };
+        });
+    
+        const emotionTotals = {};
+        aggregatedData.forEach(monthData => {
+            Object.keys(monthData).forEach(key => {
+                if (key !== 'month') {
+                    if (emotionTotals[key]) {
+                        emotionTotals[key] += monthData[key];
+                    } else {
+                        emotionTotals[key] = monthData[key];
+                    }
+                }
+            });
+        });
+    
+        const topEmotions = Object.keys(emotionTotals)
+            .sort((a, b) => emotionTotals[b] - emotionTotals[a])
+            .slice(0, 10);
+    
+        const filteredMonthlyData = aggregatedData.map(monthData => {
+            const filteredEmotions = topEmotions.reduce((acc, emotion) => {
+                acc[emotion] = monthData[emotion] !== undefined ? monthData[emotion] : 0;
+                return acc;
+            }, {});
+            return { month: monthData.month, ...filteredEmotions };
+        });
+    
+        return filteredMonthlyData;
+    };
+    
 
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
@@ -139,6 +200,27 @@ const Diary = () => {
                     <p className="summary">Your most felt emotion in the month of {monthName} is "{maxEmotion.emotion}" at {maxEmotion.percentage.toFixed(2)}%</p>
                 </div>
             );
+        } else if (activeTab === 'Last6MonthsAnalysis') {
+            const emotionLines = last6MonthsData.length > 0 ? Object.keys(last6MonthsData[0]).filter(key => key !== 'month').map((emotion, index) => (
+                <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} />
+            )) : [];
+            return (
+                <div className="last6MonthsAnalysis-analysis-content">
+                    <LineChart
+                        width={1000}
+                        height={600}
+                        data={last6MonthsData}
+                        margin={{ top: 60, right: 20, left: 20, bottom: 20 }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        {emotionLines}
+                    </LineChart>
+                    <p className="summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
+                </div>
+            );
         }
     };
 
@@ -146,11 +228,11 @@ const Diary = () => {
         <div className="diary-container">
             <div className="main-content">
                 <div className="sidebar">
-                    <h1>Dashboard</h1>
+                    <h1>Diary Ledger</h1>
                     <ul>
-                        <li onClick={() => setActiveTab('Dashboard')}>
-                            <FontAwesomeIcon icon={faList} className="icon" />
-                            Dashboard
+                        <li onClick={() => setActiveTab('DiaryLedger')}>
+                            <FontAwesomeIcon icon={faBook} className="icon" />
+                            Diary Ledger
                         </li>
                     </ul>
                     <h1>Utilities</h1>
@@ -159,9 +241,9 @@ const Diary = () => {
                             <FontAwesomeIcon icon={faBarChart} className="icon" />
                             Monthly Analysis
                         </li>
-                        <li onClick={() => setActiveTab('DiaryLedger')}>
-                            <FontAwesomeIcon icon={faBook} className="icon" />
-                            Diary Ledger
+                        <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
+                            <FontAwesomeIcon icon={faList} className="icon" />
+                            Last 6 Months Analysis
                         </li>
                     </ul>
                 </div>
