@@ -156,3 +156,7 @@
 .tv-transcribeVoiceUploadButton:hover {
     background-color: #333;
 }
+
+.tv-wordCountExceeded {
+    color: red;
+}

@@ -3,7 +3,9 @@ import './TranscribeText.css';
 import Footer from './Footer';
 import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
+
 const TranscribeText = () => {
+
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
     const [isTranscribing, setIsTranscribing] = useState(false);
@@ -13,7 +15,6 @@ const TranscribeText = () => {
     const [isInputChanged, setIsInputChanged] = useState(false);
 
     const wordCount = inputText.split(' ').filter(Boolean).length;
-
     const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     useEffect(() => {
@@ -33,6 +34,7 @@ const TranscribeText = () => {
         };
         fetchUserIdAndToken();
     }, []);
+
     const handleTranscribe = async () => {
         setIsTranscribing(true);
         setError('');
@@ -46,18 +48,22 @@ const TranscribeText = () => {
             setIsTranscribing(false);
         }
     };
+
     const parseTranscriptionOutput = (output) => {
         const emotionRegex = /Target Emotion\(s\): (.*)/;
         const intensityRegex = /Emotional Intensity: (\w+)/;
         const sentimentRegex = /Overall Sentiment: (\w+)/;
+
         const emotionsMatch = output.match(emotionRegex);
         const intensityMatch = output.match(intensityRegex);
         const sentimentMatch = output.match(sentimentRegex);
+        
         let targetEmotions = [];
         if (emotionsMatch && emotionsMatch[1]) {
             const emotionsString = emotionsMatch[1].trim();
             if (emotionsString && emotionsString !== 'None') {
                 const emotionsArray = emotionsString.split(', ');
+
                 targetEmotions = emotionsArray.map(emotionString => {
                     const [emotion, percentage] = emotionString.split(' (');
                     return {
@@ -67,20 +73,26 @@ const TranscribeText = () => {
                 });
             }
         }
+
         const emotionalIntensity = intensityMatch ? intensityMatch[1] : '';
         const overallSentiment = sentimentMatch ? sentimentMatch[1] : '';
+
         return { emotionalIntensity, overallSentiment, targetEmotions };
     };
+
     const handleSaveToDiary = async () => {
         setIsSaving(true);
         setError('');
+
         try {
             const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
+
             if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
                 alert('Cannot save this entry as target emotion is none. Please try another input.');
                 setIsSaving(false);
                 return;
             }
+
             const currentDate = new Date().toISOString().split('T')[0];
             const diaryEntry = {
                 date: currentDate,
@@ -90,6 +102,7 @@ const TranscribeText = () => {
                 targetEmotionsList: targetEmotions,
                 userId: userId
             };
+
             await axios.post('/api/diaries/with-emotions', diaryEntry);
             alert('Diary entry saved successfully');
         } catch (error) {
@@ -98,11 +111,13 @@ const TranscribeText = () => {
             setIsSaving(false);
         }
     };
+
     const handleClearInputAndOuput = () => {
         setInputText('');
         setOutputText('');
         setIsInputChanged(true);
     };
+
     return (
         <div className="tt-transcribeTextPage">
             <div className="tt-transcribeTextContent">
@@ -120,7 +135,9 @@ const TranscribeText = () => {
                             className="tt-textarea"
                         />
                         <div className="tt-button-container">
-                            <div className="tt-transcribeTextWordCount">Words {wordCount}/400</div>
+                            <div className={`tt-transcribeTextWordCount ${wordCount > 400 ? 'tt-wordCountExceeded' : ''}`}>
+                                Words {wordCount}/400
+                            </div>
                             <button className="tt-clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
                         </div>
                     </div>
@@ -152,5 +169,7 @@ const TranscribeText = () => {
             <Footer />
         </div>
     );
+
 };
+
 export default TranscribeText;

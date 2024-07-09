@@ -176,7 +176,9 @@ const TranscribeVoice = () => {
                                 placeholder="Enter text..."
                             />
                             <div className="tv-button-container">
-                                <div className="tv-transcribeVoiceWordCount">Words {wordCount}/400</div>
+                                <div className={`tv-transcribeVoiceWordCount ${wordCount > 400 ? 'tv-wordCountExceeded' : ''}`}>
+                                    Words {wordCount}/400
+                                </div>
                                 <button 
                                     onClick={handleAudioToText}
                                     className="tv-convertButton"

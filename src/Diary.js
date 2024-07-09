@@ -192,7 +192,7 @@ const Diary = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" />
                         <YAxis type="category" dataKey="emotion" />
-                        <Tooltip />
+                        <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         <Bar dataKey="percentage" fill="#4F81BD">
                             <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
                         </Bar>
@@ -202,7 +202,7 @@ const Diary = () => {
             );
         } else if (activeTab === 'Last6MonthsAnalysis') {
             const emotionLines = last6MonthsData.length > 0 ? Object.keys(last6MonthsData[0]).filter(key => key !== 'month').map((emotion, index) => (
-                <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} />
+                <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} strokeWidth={2} />
             )) : [];
             return (
                 <div className="last6MonthsAnalysis-analysis-content">
@@ -215,7 +215,7 @@ const Diary = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <Tooltip />
+                        <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         {emotionLines}
                     </LineChart>
                     <p className="summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
@@ -230,9 +230,9 @@ const Diary = () => {
                 <div className="diary-sidebar">
                     <h1>Dashboard</h1>
                     <ul>
-                        <li onClick={() => setActiveTab('Dashboard')}>
-                            <FontAwesomeIcon icon={faList} className="diary-icon" />
-                            Dashboard
+                        <li onClick={() => setActiveTab('DiaryLedger')}>
+                            <FontAwesomeIcon icon={faBook} className="diary-icon" />
+                            Diary Ledger
                         </li>
                     </ul>
                     <h1>Utilities</h1>
@@ -241,15 +241,19 @@ const Diary = () => {
                             <FontAwesomeIcon icon={faBarChart} className="diary-icon" />
                             Monthly Analysis
                         </li>
-                        <li onClick={() => setActiveTab('DiaryLedger')}>
-                            <FontAwesomeIcon icon={faBook} className="diary-icon" />
-                            Diary Ledger
+                        <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
+                            <FontAwesomeIcon icon={faList} className="diary-icon" />
+                            Last 6 Months Analysis
                         </li>
                     </ul>
                 </div>
                 <div className="diary-diary-content">
                     <div className="diary-ledger-box">
-                        <h2>{activeTab === 'DiaryLedger' ? 'Diary Ledger' : 'Monthly Analysis'}</h2>
+                        <h2>
+                            {activeTab === 'DiaryLedger' ? 'Diary Ledger' : 
+                            activeTab === 'MonthlyAnalysis' ? 'Monthly Analysis' : 
+                            'Last 6 Months Analysis'}
+                        </h2>
                         {renderContent()}
                     </div>
                 </div>

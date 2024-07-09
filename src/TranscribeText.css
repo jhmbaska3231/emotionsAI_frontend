@@ -107,3 +107,7 @@
 .tt-transcribeTextSaveDiaryButton:hover {
     background-color: #333;
 }
+
+.tt-wordCountExceeded {
+    color: red;
+}
