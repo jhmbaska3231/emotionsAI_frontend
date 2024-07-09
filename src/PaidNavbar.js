@@ -46,7 +46,7 @@ function PaidNavbar(props) {
         <nav className="paid-navbar">
             <div className="paid-navbar-left">
                 <Link to="/transcribetext" className="paid-navbar-logo">
-                    <img src={brain_icon} alt="brain_icon" style={{ height: '40px' }} />
+                    <img src={brain_icon} alt="brain_icon" />
                     <span>EmotionsAI</span>
                 </Link>
             </div>
@@ -63,7 +63,7 @@ function PaidNavbar(props) {
                         onClick={handleClick}
                         style={{ color: 'white' }}
                     >
-                        <img src={user_icon} alt="User Icon" style={{ height: '20px', marginRight: '5px' }} />
+                        <img src={user_icon} alt="User Icon" className="user-icon" />
                         {userAttributes.name}
                     </Button>
                     <Menu

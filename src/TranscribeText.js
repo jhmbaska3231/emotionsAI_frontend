@@ -104,12 +104,12 @@ const TranscribeText = () => {
         setIsInputChanged(true);
     };
     return (
-        <div className="transcribeTextPage">
-            <div className="transcribeTextContent">
-                <div className="transcribeTextUsageLimit">Unlimited Transcribes</div>
-                <div className="transcribeTextInputOutputContainer">
-                    <div className="transcribeTextInputContainer">
-                        <label>Input</label>
+        <div className="tt-transcribeTextPage">
+            <div className="tt-transcribeTextContent">
+                <div className="tt-transcribeTextUsageLimit">Unlimited Transcribes</div>
+                <div className="tt-transcribeTextInputOutputContainer">
+                    <div className="tt-transcribeTextInputContainer">
+                        <label className="tt-label">Input</label>
                         <textarea 
                             value={inputText}
                             onChange={(e) => {
@@ -117,27 +117,31 @@ const TranscribeText = () => {
                                 setIsInputChanged(true);
                             }}
                             placeholder="Enter text..."
+                            className="tt-textarea"
                         />
-                        <button className="clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
-                        <div className="transcribeTextWordCount">Words {wordCount}/400</div>
+                        <div className="tt-button-container">
+                            <div className="tt-transcribeTextWordCount">Words {wordCount}/400</div>
+                            <button className="tt-clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
+                        </div>
                     </div>
                     <button 
                         onClick={handleTranscribe}
-                        className="transcribeTextButton"
+                        className="tt-transcribeTextButton"
                         disabled={wordCount > 400 || isTranscribing || isSaving || isInputEmptyOrWhitespace}
                     >
                         {isTranscribing ? 'Transcribing...' : 'Transcribe ➔'}
                     </button>
-                    {error && <div className="error">{error}</div>}
-                    <div className="transcribeTextOutputContainer">
-                        <label>Output</label>
+                    {error && <div className="tt-error">{error}</div>}
+                    <div className="tt-transcribeTextOutputContainer">
+                        <label className="tt-label">Output</label>
                         <textarea 
                             value={outputText}
                             readOnly
+                            className="tt-textarea"
                         />
                         <button 
                             onClick={handleSaveToDiary}
-                            className="transcribeTextSaveDiaryButton"
+                            className="tt-transcribeTextSaveDiaryButton"
                             disabled={isSaving || isTranscribing || isInputChanged}
                         >
                             {isSaving ? 'Saving...' : 'Save to Diary'}

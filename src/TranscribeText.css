@@ -1,32 +1,32 @@
-.transcribeTextPage {
+.tt-transcribeTextPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 10vh);
     background: #e0f2f1;
     padding: 2vw;
 }
 
-.transcribeTextInputOutputContainer {
+.tt-transcribeTextInputOutputContainer {
     display: flex;
     gap: 2vw;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.transcribeTextInputContainer, .transcribeTextOutputContainer {
+.tt-transcribeTextInputContainer, .tt-transcribeTextOutputContainer {
     background: #74AA9C;
     padding: 2vw;
     border-radius: 10px;
     width: 30vw;
     height: 60vh; /* Increased height */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-textarea {
+.tt-textarea {
     width: 100%;
     height: 45vh; /* Adjusted height to match the increased container height */
     padding: 1vw;
@@ -37,28 +37,35 @@ textarea {
     color: black;
 }
 
-.button-container {
+.tt-button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1vw;
 }
 
-.transcribeTextWordCount {
+.tt-transcribeTextWordCount {
     font-size: 12px;
     color: white;
+    margin-right: auto; /* Align to the left */
 }
 
-.clearInputButton {
+.tt-clearInputButton {
     background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 0.5vw 1vw;
     cursor: pointer;
+    font-size: 1rem;
+    margin-left: auto; /* Align to the right */
 }
 
-.transcribeTextButton {
+.tt-clearInputButton:hover {
+    background-color: #333;
+}
+
+.tt-transcribeTextButton {
     background-color: black;
     color: white;
     border: none;
@@ -67,9 +74,14 @@ textarea {
     cursor: pointer;
     font-size: 1rem;
     margin: 0 2vw;
+    transition: transform 0.2s ease-in-out; /* Add transition for enlarging effect */
 }
 
-header {
+.tt-transcribeTextButton:hover {
+    transform: scale(1.1); /* Enlarge button on hover */
+}
+
+.tt-header {
     font-size: 2rem;
     font-weight: bold;
     margin: 2vw 0;
@@ -77,11 +89,11 @@ header {
     color: #333;
 }
 
-label {
+.tt-label {
     color: white; /* Set label text color to white */
 }
 
-.transcribeTextSaveDiaryButton {
+.tt-transcribeTextSaveDiaryButton {
     background-color: black;
     color: white;
     border: none;
@@ -92,6 +104,6 @@ label {
     margin-top: 1vw;
 }
 
-.transcribeTextSaveDiaryButton:hover {
+.tt-transcribeTextSaveDiaryButton:hover {
     background-color: #333;
 }

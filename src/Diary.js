@@ -226,29 +226,29 @@ const Diary = () => {
 
     return (
         <div className="diary-container">
-            <div className="main-content">
-                <div className="sidebar">
-                    <h1>Diary Ledger</h1>
+            <div className="diary-main-content">
+                <div className="diary-sidebar">
+                    <h1>Dashboard</h1>
                     <ul>
-                        <li onClick={() => setActiveTab('DiaryLedger')}>
-                            <FontAwesomeIcon icon={faBook} className="icon" />
-                            Diary Ledger
+                        <li onClick={() => setActiveTab('Dashboard')}>
+                            <FontAwesomeIcon icon={faList} className="diary-icon" />
+                            Dashboard
                         </li>
                     </ul>
                     <h1>Utilities</h1>
                     <ul>
                         <li onClick={() => setActiveTab('MonthlyAnalysis')}>
-                            <FontAwesomeIcon icon={faBarChart} className="icon" />
+                            <FontAwesomeIcon icon={faBarChart} className="diary-icon" />
                             Monthly Analysis
                         </li>
-                        <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
-                            <FontAwesomeIcon icon={faList} className="icon" />
-                            Last 6 Months Analysis
+                        <li onClick={() => setActiveTab('DiaryLedger')}>
+                            <FontAwesomeIcon icon={faBook} className="diary-icon" />
+                            Diary Ledger
                         </li>
                     </ul>
                 </div>
-                <div className="diary-content">
-                    <div className="ledger-box">
+                <div className="diary-diary-content">
+                    <div className="diary-ledger-box">
                         <h2>{activeTab === 'DiaryLedger' ? 'Diary Ledger' : 'Monthly Analysis'}</h2>
                         {renderContent()}
                     </div>

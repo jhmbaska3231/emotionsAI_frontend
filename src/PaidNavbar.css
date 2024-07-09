@@ -1,11 +1,11 @@
 .paid-navbar {
-    background-color: #202123; 
+    background-color: #202123;
     color: white;
-    padding: 0 20px; 
+    padding: 0 2vw; /* Adjusted for responsiveness */
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    height: 50px; 
+    height: 6vh; /* Same as the navbar height */
 }
 
 .paid-navbar div {
@@ -25,9 +25,7 @@
 .paid-navbar a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
-    display: flex;
-    align-items: center;
+    margin: 0 1vw; /* Adjusted for responsiveness */
 }
 
 .paid-navbar a:hover {
@@ -42,15 +40,16 @@
 }
 
 .paid-navbar-logo img {
-    margin-right: 10px;
+    margin-right: 1vw; /* Adjusted for responsiveness */
+    height: 4vh; /* Same height as the logo in the navbar */
 }
 
 .paid-navbar-logo span {
-    font-size: 24px;
+    font-size: 2vw; /* Adjusted for responsiveness */
     font-weight: bold;
 }
 
 .user-icon {
-    height: 20px;
-    margin-right: 5px;
+    height: 2vh; /* Adjusted for responsiveness */
+    margin-right: 0.5vw; /* Adjusted for responsiveness */
 }

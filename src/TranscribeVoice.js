@@ -159,66 +159,72 @@ const TranscribeVoice = () => {
     };
 
     return (
-        <div className="transcribeVoicePage">
-            <div className="transcribeVoiceContent">
-                <div className="transcribeVoiceUsageLimit">Unlimited Transcribes</div>
-                <div className="transcribeVoiceInputOutputContainer">
-                    <div className="transcribeVoiceInputContainer">
-                        <label>Input</label>
-                        <textarea 
-                            value={inputText}
-                            onChange={(e) => {
-                                setInputText(e.target.value);
-                                setIsInputChanged(true);
-                            }}
-                            placeholder="Enter text or upload audio..."
-                        />
-                        <div className="transcribeVoiceWordCount">Words {wordCount}/400</div>
-                        <div className="transcribeVoiceFileInfo">MP3/MP4/WAV files - max 25MB</div>
-                        <input
-                            key={fileInputKey}
-                            type="file"
-                            accept=".mp3,.mp4,.wav"
-                            onChange={handleFileChange}
-                            id="file-upload"
-                            style={{ display: 'none' }}
-                        />
-                        <label htmlFor="file-upload" className="transcribeVoiceUploadButton">
-                            Upload
-                        </label>
-                        {fileName && <div className="transcribeVoiceFileName">Uploaded file: {fileName}</div>}
-                        <button className="clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
+        <div className="tv-transcribeVoicePage">
+            <div className="tv-transcribeVoiceContent">
+                <div className="tv-transcribeVoiceUsageLimit">Unlimited Transcribes</div>
+                <div className="tv-transcribeVoiceInputOutputContainer">
+                    <div className="tv-inputWrapper">
+                        <div className="tv-transcribeVoiceInputContainer">
+                            <label className="tv-label">Input</label>
+                            <textarea 
+                                className="tv-textarea"
+                                value={inputText}
+                                onChange={(e) => {
+                                    setInputText(e.target.value);
+                                    setIsInputChanged(true);
+                                }}
+                                placeholder="Enter text..."
+                            />
+                            <div className="tv-button-container">
+                                <div className="tv-transcribeVoiceWordCount">Words {wordCount}/400</div>
+                                <button 
+                                    onClick={handleAudioToText}
+                                    className="tv-convertButton"
+                                    disabled={!selectedFile || isTranscribing || isSaving || isConverting}
+                                >
+                                    {isConverting ? (
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <CircularProgress size={24} />
+                                            Converting...
+                                        </Box>
+                                    ) : 'Convert Audio to Text'}
+                                </button>
+                                <button className="tv-clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
+                            </div>
+                        </div>
+                        <div className="tv-uploadContainer">
+                            <span className="tv-uploadText">{fileName || 'MP3/MP4/WAV files - max 25MB'}</span>
+                            <input
+                                key={fileInputKey}
+                                type="file"
+                                accept=".mp3,.mp4,.wav"
+                                onChange={handleFileChange}
+                                id="file-upload"
+                                style={{ display: 'none' }}
+                            />
+                            <label htmlFor="file-upload" className="tv-transcribeVoiceUploadButton">
+                                Upload
+                            </label>
+                        </div>
                     </div>
                     <button 
-                        onClick={handleAudioToText}
-                        className="transcribeVoiceTranscribeButton"
-                        disabled={!selectedFile || isTranscribing || isSaving || isConverting}
-                    >
-                        {isConverting ? (
-                            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <CircularProgress size={24} />
-                                Converting...
-                            </Box>
-                        ) : 'Convert Audio to Text'}
-                    </button>
-                    <button
                         onClick={handleTranscribe}
-                        className="transcribeVoiceTranscribeButton"
+                        className="tv-transcribeVoiceTranscribeButton"
                         disabled={wordCount > 400 || isTranscribing || isSaving || isInputEmptyOrWhitespace || isConverting}
                     >
                         {isTranscribing ? 'Transcribing...' : 'Transcribe ➔'}
                     </button>
-                    {error && <div className="error">{error}</div>}
-                    <div className="transcribeVoiceOutputContainer">
-                        <label>Output</label>
+                    {error && <div className="tv-error">{error}</div>}
+                    <div className="tv-transcribeVoiceOutputContainer">
+                        <label className="tv-label">Output</label>
                         <textarea 
-                            className="transcribeVoiceOutputTextarea"
+                            className="tv-textarea"
                             value={outputText}
                             readOnly
                         />
                         <button 
                             onClick={handleSaveToDiary}
-                            className="transcribeVoiceSaveDiaryButton"
+                            className="tv-transcribeVoiceSaveDiaryButton"
                             disabled={isSaving || isTranscribing || isInputChanged || isConverting}
                         >
                             {isSaving ? 'Saving...' : 'Save to Diary'}

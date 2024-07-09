@@ -92,7 +92,9 @@ const ContactForm = () => {
                                     className="cf-contactTextarea"
                                 />
                             </div>
+                            <div className="cf-buttonWrapper">
                             <button type="submit" className="cf-contactButton">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>

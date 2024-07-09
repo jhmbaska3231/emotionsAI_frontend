@@ -70,15 +70,20 @@
   height: 20vh; /* Increased height for message box */
 }
 
+.cf-buttonWrapper {
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+}
+
 .cf-contactButton {
-  width: 100%;
-  padding: 1vw;
+  width: 20%;
+  padding: 0.5vw;
   background-color: #74AA9C;
   color: white;
   border: none;
   border-radius: 0.5vw;
   cursor: pointer;
-  font-size: 1.5vw; /* Adjusted for responsiveness */
+  font-size: 1vw; /* Adjusted for responsiveness */
   margin-top: 1vh;
 }
 

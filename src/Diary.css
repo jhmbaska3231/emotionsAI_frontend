@@ -1,18 +1,18 @@
 .diary-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: calc(100vh - 10vh);
 }
 
-.main-content {
+.diary-main-content {
     display: flex;
     flex-grow: 1;
 }
 
-.sidebar {
-    width: 200px;
+.diary-sidebar {
+    width: 15vw;
     background-color: #202123; 
-    padding: 20px;
+    padding: 2vh 1vw;
     box-shadow: none; 
     color: white;
     display: flex;
@@ -20,147 +20,152 @@
     justify-content: flex-start;
 }
 
-.sidebar h1 {
-    font-size: 18px;
+.diary-sidebar h1 {
+    font-size: 1.5vw;
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
     border-bottom: 1px solid #444;
-    padding-bottom: 5px;
+    padding-bottom: 0.5vh;
 }
 
-.sidebar ul {
+.diary-sidebar ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sidebar ul li {
-    padding: 10px 0;
+.diary-sidebar ul li {
+    padding: 1vh 0;
     cursor: pointer;
     color: #fff; 
     display: flex;
     align-items: center; 
     text-align: left;
-    padding-left: 20px; 
+    padding-left: 1vw; 
 }
 
-.sidebar ul li .icon {
-    margin-right: 10px; 
+.diary-sidebar ul li .diary-icon {
+    margin-right: 0.5vw; 
 }
 
-.sidebar ul li:hover {
+.diary-sidebar ul li:hover {
     background-color: #3a3a3a; 
 }
 
-.diary-content {
+.diary-diary-content {
     flex-grow: 1;
-    padding: 20px;
-    background-color: #f0f0f0; 
+    padding: 2vh 2vw;
+    background-color: #e0f2f1;
     color: #202123;
 }
 
-.ledger-box {
+.diary-ledger-box {
     background-color: #74AA9C;
     color: #ffffff; 
-    padding: 30px;
-    border-radius: 15px;
+    padding: 2vh 2vw;
+    border-radius: 1vw;
     display: flex;
     flex-direction: column; 
     justify-content: flex-start; 
     align-items: flex-start; 
-    height: 630px;
-    width: 1150px;
+    max-height: 80vh; /* Adjust the height for responsiveness */
+    width: 90%;
     margin: auto; 
     text-align: left; 
     position: relative; 
     overflow-y: auto; 
     overflow-x: hidden; 
+    margin-top: 3vh; /* Adjusted to move the box lower */
 }
 
-.ledger-box h2 {
+.diary-ledger-box h2 {
     margin: 0;
-    font-size: 24px;
-    padding-bottom: 10px; 
+    font-size: 2vw;
+    padding-bottom: 1vh; 
     width: 100%; 
     border-bottom: 2px solid #ffffff;
 }
 
-.ledger-content {
+.diary-ledger-content {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 2vh;
 }
 
-.ledger-row {
+.diary-ledger-row {
     display: flex;
     width: 100%;
-    margin-bottom: 10px; 
+    margin-bottom: 1vh; 
 }
 
-.header-row {
+.diary-header-row {
     font-weight: bold;
-    margin-bottom: -30px; 
+    margin-bottom: 1vh; 
 }
 
-.ledger-column {
-    padding: 10px;
+.diary-ledger-column {
+    padding: 1vh 1vw;
     word-break: break-word;
     white-space: normal; 
     overflow-wrap: break-word;
     text-overflow: clip; 
 }
 
-.date-column {
+.diary-date-column {
     flex: 1; 
 }
 
-.diary-column, .emotion-column {
+.diary-diary-column, .diary-emotion-column {
     flex: 2;
 }
 
-.ledger-column h3 {
-    margin: 0 0 10px 0;
+.diary-ledger-column h3 {
+    margin: 0 0 1vh 0;
 }
 
-.emotion-column p {
-    margin-bottom: -10px; 
+.diary-emotion-column p {
+    margin-bottom: 1vh; 
     line-height: 1.2; 
 }
 
-.monthly-analysis-content {
+.diary-monthly-analysis-content {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 2vh;
 }
 
-.monthly-analysis-content .header h3 {
+.diary-monthly-analysis-content .diary-header h3 {
     margin: 0;
-    font-size: 24px;
-    padding-bottom: 10px;
+    font-size: 2vw;
+    padding-bottom: 1vh;
     width: 100%;
     border-bottom: 2px solid #ffffff; 
 }
 
-.emotion-bar {
+.diary-emotion-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
     text-align: right;
 }
 
-.emotion-bar span {
-    width: 100px; 
+.diary-emotion-bar span {
+    width: 10vw; 
 }
 
-.bar {
+.diary-bar {
     background-color: #ffffff; 
     color: #202123; 
     text-align: right; 
-    padding-right: 5px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 5px; 
-    margin-left: 10px; 
+    padding-right: 0.5vw;
+    height: 2.5vh;
+    line-height: 2.5vh;
+    border-radius: 0.5vw; 
+    margin-left: 1vw; 
 }
 
-.summary {
-    margin-top: 20px;
-    font-size: 16px;
+.diary-summary {
+    margin-top: 2vh;
+    font-size: 1.5vw;
+}
+
+.diary-emotion-column p {
+    margin-bottom: 1vh; /* Adjust the space as needed */
 }
