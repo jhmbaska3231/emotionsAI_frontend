@@ -148,30 +148,30 @@ const Diary = () => {
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (
-                <div className="ledger-content">
-                    <div className="ledger-row header-row">
-                        <div className="ledger-column date-column">
+                <div className="diary-ledger-content">
+                    <div className="diary-ledger-row diary-header-row">
+                        <div className="diary-ledger-column diary-date-column">
                             <h3>Date</h3>
                         </div>
-                        <div className="ledger-column diary-column">
+                        <div className="diary-ledger-column diary-diary-column">
                             <h3>Diary</h3>
                         </div>
-                        <div className="ledger-column emotion-column">
+                        <div className="diary-ledger-column diary-emotion-column">
                             <h3>Emotion Analysis</h3>
                         </div>
                     </div>
                     {diaryEntries.map(entry => (
-                        <div className="ledger-row" key={entry.diaryId}>
-                            <div className="ledger-column date-column">
+                        <div className="diary-ledger-row" key={entry.diaryId}>
+                            <div className="diary-ledger-column diary-date-column">
                                 <p>{formatDate(entry.date)}</p>
                             </div>
-                            <div className="ledger-column diary-column">
+                            <div className="diary-ledger-column diary-diary-column">
                                 <p>{entry.inputText}</p>
                             </div>
-                            <div className="ledger-column emotion-column">
-                                <p>Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
-                                <p>Emotional Intensity: {entry.emotionalIntensity}</p>
-                                <p>Overall Sentiment: {entry.overallSentiment}</p>
+                            <div className="diary-ledger-column diary-emotion-column">
+                                <p className="diary-emotion-line">Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
+                                <p className="diary-emotion-line">Emotional Intensity: {entry.emotionalIntensity}</p>
+                                <p className="diary-emotion-line">Overall Sentiment: {entry.overallSentiment}</p>
                             </div>
                         </div>
                     ))}
@@ -181,7 +181,7 @@ const Diary = () => {
             const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
             const monthName = getMonthName(currentMonth);
             return (
-                <div className="monthly-analysis-content">
+                <div className="diary-monthly-analysis-content">
                     <BarChart
                         width={1000}
                         height={600}
@@ -197,7 +197,7 @@ const Diary = () => {
                             <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
                         </Bar>
                     </BarChart>
-                    <p className="summary">Your most felt emotion in the month of {monthName} is "{maxEmotion.emotion}" at {maxEmotion.percentage.toFixed(2)}%</p>
+                    <p className="diary-summary">Your most felt emotion in the month of {monthName} is "{maxEmotion.emotion}" at {maxEmotion.percentage.toFixed(2)}%</p>
                 </div>
             );
         } else if (activeTab === 'Last6MonthsAnalysis') {
