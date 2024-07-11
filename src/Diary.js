@@ -66,19 +66,8 @@ const Diary = () => {
     };
 
     const processMonthlyData = (entries) => {
-        // const emotionMap = {};
         const emotionMap = new Map();
-    
-        // Aggregate the similar emotions across all diary entries
-        // entries.forEach(entry => {
-        //     entry.targetEmotionsList.forEach(emotion => {
-        //         if (emotionMap[emotion.emotion]) {
-        //             emotionMap[emotion.emotion] += emotion.emotionPercentage;
-        //         } else {
-        //             emotionMap[emotion.emotion] = emotion.emotionPercentage;
-        //         }
-        //     });
-        // });
+
         entries.forEach(entry => {
             entry.targetEmotionsList.forEach(emotion => {
                 if (emotionMap.has(emotion.emotion)) {
@@ -89,21 +78,14 @@ const Diary = () => {
             });
         });
     
-        // Calculate the total sum of aggregated percentages
-        // const totalPercentage = Object.values(emotionMap).reduce((sum, percentage) => sum + percentage, 0);
         const totalPercentage = Array.from(emotionMap.values()).reduce((sum, percentage) => sum + percentage, 0);
 
-        // Normalize the aggregated values to ensure the total sum equals 100%
-        // return Object.keys(emotionMap).map(emotion => ({
-        //     emotion,
-        //     percentage: (emotionMap[emotion] / totalPercentage) * 100
-        // })).sort((a, b) => b.percentage - a.percentage);  // Sort by percentage
-
-        return Array.from(emotionMap.entries()).map(([emotion, percentage]) => ({
+        const processedData = Array.from(emotionMap.entries()).map(([emotion, percentage]) => ({
             emotion,
             percentage: (percentage / totalPercentage) * 100
-        })).sort((a, b) => b.percentage - a.percentage);  // Sort by percentage for better visualization
-        
+        })).sort((a, b) => b.percentage - a.percentage);
+
+        return processedData;
     };
 
     const processLast6MonthsData = (entries) => {
@@ -160,7 +142,6 @@ const Diary = () => {
     
         return filteredMonthlyData;
     };
-    
 
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
@@ -197,18 +178,19 @@ const Diary = () => {
         } else if (activeTab === 'MonthlyAnalysis') {
             const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
             const monthName = getMonthName(currentMonth);
+
             return (
                 <div className="diary-monthly-analysis-content">
                     <BarChart
-                        width={1000}
-                        height={600}
+                        width={1200}
+                        height={1000}
                         data={monthlyData}
                         layout="vertical"
                         margin={{ top: 40, right: 10, left: 100, bottom: 20 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" />
-                        <YAxis type="category" dataKey="emotion" width={50} />
+                        <YAxis type="category" dataKey="emotion" />
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         <Bar dataKey="percentage" fill="#4F81BD">
                             <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
@@ -224,10 +206,10 @@ const Diary = () => {
             return (
                 <div className="last6MonthsAnalysis-analysis-content">
                     <LineChart
-                        width={1000}
-                        height={600}
+                        width={1200}
+                        height={800}
                         data={last6MonthsData}
-                        margin={{ top: 60, right: 20, left: 20, bottom: 20 }}
+                        margin={{ top: 60, right: 10, left: 10, bottom: 40 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
