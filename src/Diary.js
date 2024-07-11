@@ -66,27 +66,44 @@ const Diary = () => {
     };
 
     const processMonthlyData = (entries) => {
-        const emotionMap = {};
+        // const emotionMap = {};
+        const emotionMap = new Map();
     
         // Aggregate the similar emotions across all diary entries
+        // entries.forEach(entry => {
+        //     entry.targetEmotionsList.forEach(emotion => {
+        //         if (emotionMap[emotion.emotion]) {
+        //             emotionMap[emotion.emotion] += emotion.emotionPercentage;
+        //         } else {
+        //             emotionMap[emotion.emotion] = emotion.emotionPercentage;
+        //         }
+        //     });
+        // });
         entries.forEach(entry => {
             entry.targetEmotionsList.forEach(emotion => {
-                if (emotionMap[emotion.emotion]) {
-                    emotionMap[emotion.emotion] += emotion.emotionPercentage;
+                if (emotionMap.has(emotion.emotion)) {
+                    emotionMap.set(emotion.emotion, emotionMap.get(emotion.emotion) + emotion.emotionPercentage);
                 } else {
-                    emotionMap[emotion.emotion] = emotion.emotionPercentage;
+                    emotionMap.set(emotion.emotion, emotion.emotionPercentage);
                 }
             });
         });
     
         // Calculate the total sum of aggregated percentages
-        const totalPercentage = Object.values(emotionMap).reduce((sum, percentage) => sum + percentage, 0);
-    
+        // const totalPercentage = Object.values(emotionMap).reduce((sum, percentage) => sum + percentage, 0);
+        const totalPercentage = Array.from(emotionMap.values()).reduce((sum, percentage) => sum + percentage, 0);
+
         // Normalize the aggregated values to ensure the total sum equals 100%
-        return Object.keys(emotionMap).map(emotion => ({
+        // return Object.keys(emotionMap).map(emotion => ({
+        //     emotion,
+        //     percentage: (emotionMap[emotion] / totalPercentage) * 100
+        // })).sort((a, b) => b.percentage - a.percentage);  // Sort by percentage
+
+        return Array.from(emotionMap.entries()).map(([emotion, percentage]) => ({
             emotion,
-            percentage: (emotionMap[emotion] / totalPercentage) * 100
-        }));
+            percentage: (percentage / totalPercentage) * 100
+        })).sort((a, b) => b.percentage - a.percentage);  // Sort by percentage for better visualization
+        
     };
 
     const processLast6MonthsData = (entries) => {
@@ -187,11 +204,11 @@ const Diary = () => {
                         height={600}
                         data={monthlyData}
                         layout="vertical"
-                        margin={{ top: 20, right: 10, left: 80, bottom: 20 }}
+                        margin={{ top: 40, right: 10, left: 100, bottom: 20 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" />
-                        <YAxis type="category" dataKey="emotion" />
+                        <YAxis type="category" dataKey="emotion" width={50} />
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         <Bar dataKey="percentage" fill="#4F81BD">
                             <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
