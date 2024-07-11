@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, LineChart, Line } from 'recharts';
+import { HeatMapGrid } from 'react-grid-heatmap';
 
 const Diary = () => {
 
@@ -16,6 +17,7 @@ const Diary = () => {
     const [diaryEntries, setDiaryEntries] = useState([]);
     const [monthlyData, setMonthlyData] = useState([]);
     const [last6MonthsData, setLast6MonthsData] = useState([]);
+    const [emotionCorrelationData, setEmotionCorrelationData] = useState([]);
     const [currentMonth, setCurrentMonth] = useState('');
 
     useEffect(() => {
@@ -38,6 +40,9 @@ const Diary = () => {
                     const last6MonthsResponse = await api.get(`/api/diaries/user/${userId}/last6months/${currentMonthIndex}`);
                     const last6MonthsData = processLast6MonthsData(last6MonthsResponse.data);
                     setLast6MonthsData(last6MonthsData);
+
+                    const emotionCorrelationData = processEmotionCorrelationData(last6MonthsResponse.data);
+                    setEmotionCorrelationData(emotionCorrelationData);
                 } else {
                     console.error('ID token not found in session');
                 }
@@ -143,6 +148,40 @@ const Diary = () => {
         return filteredMonthlyData;
     };
 
+    const processEmotionCorrelationData = (entries) => {
+        const emotions = {};
+        entries.forEach(entry => {
+            entry.targetEmotionsList.forEach(emotion => {
+                if (!emotions[emotion.emotion]) {
+                    emotions[emotion.emotion] = [];
+                }
+                emotions[emotion.emotion].push(emotion.emotionPercentage);
+            });
+        });
+
+        const emotionKeys = Object.keys(emotions);
+        const correlationMatrix = emotionKeys.map(rowEmotion => {
+            return emotionKeys.map(colEmotion => {
+                const rowEmotionData = emotions[rowEmotion];
+                const colEmotionData = emotions[colEmotion];
+                const correlation = calculateCorrelation(rowEmotionData, colEmotionData);
+                return correlation;
+            });
+        });
+
+        return { emotionKeys, correlationMatrix };
+    };
+
+    const calculateCorrelation = (x, y) => {
+        const n = x.length;
+        const meanX = x.reduce((a, b) => a + b, 0) / n;
+        const meanY = y.reduce((a, b) => a + b, 0) / n;
+        const covariance = x.map((xi, i) => (xi - meanX) * (y[i] - meanY)).reduce((a, b) => a + b, 0) / n;
+        const stdDevX = Math.sqrt(x.map(xi => (xi - meanX) ** 2).reduce((a, b) => a + b, 0) / n);
+        const stdDevY = Math.sqrt(y.map(yi => (yi - meanY) ** 2).reduce((a, b) => a + b, 0) / n);
+        return covariance / (stdDevX * stdDevY);
+    };
+
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (
@@ -178,7 +217,6 @@ const Diary = () => {
         } else if (activeTab === 'MonthlyAnalysis') {
             const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
             const monthName = getMonthName(currentMonth);
-
             return (
                 <div className="diary-monthly-analysis-content">
                     <BarChart
@@ -220,6 +258,46 @@ const Diary = () => {
                     <p className="summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
                 </div>
             );
+        } else if (activeTab === 'EmotionCorrelationAnalysis') {
+            const { emotionKeys, correlationMatrix } = emotionCorrelationData;
+            return (
+                <div className="emotional-correlation-analysis-content">
+                    <HeatMapGrid
+                        data={correlationMatrix}
+                        xLabels={emotionKeys}
+                        yLabels={emotionKeys}
+                        xLabelsPos="top"
+                        yLabelsPos="left"
+                        cellRender={(x, y, value) => <span>{value.toFixed(2)}</span>}
+                        // cellStyle={(x, y, ratio) => ({
+                        //     background: `rgba(75, 192, 192, ${ratio})`,
+                        //     fontSize: "12px",
+                        //     border: "1px solid #ccc"
+                        // })}
+                        cellStyle={(x, y, value) => {
+                            const colorValue = Math.min(Math.max(value, -1), 1); // Clamp value between -1 and 1
+                            const colorIntensity = (colorValue + 1) / 2; // Convert -1 to 1 range to 0 to 1 range
+                            return {
+                                background: `rgba(255, 99, 132, ${colorIntensity})`, // Use color intensity for the gradient
+                                fontSize: "12px",
+                                border: "1px solid #ccc"
+                            };
+                        }}
+                        cellHeight="50px"
+                        cellWidth="50px"
+                        square
+                    />
+                    <p className="heatmap-description">
+                        <strong>How to Interpret the Heatmap:</strong> The heatmap shows the correlation between different emotions based on diary entries over the last 6 months. 
+                        <br />
+                        - Values closer to <strong>1</strong> indicate a high positive correlation, meaning that as one emotion increases, the other tends to increase as well.
+                        <br />
+                        - Values closer to <strong>-1</strong> indicate a high negative correlation, meaning that as one emotion increases, the other tends to decrease.
+                        <br />
+                        - Values around <strong>0</strong> indicate little to no correlation between the emotions.
+                    </p>
+                </div>
+            );
         }
     };
 
@@ -243,6 +321,10 @@ const Diary = () => {
                         <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
                             <FontAwesomeIcon icon={faList} className="diary-icon" />
                             Last 6 Months Analysis
+                        </li>
+                        <li onClick={() => setActiveTab('EmotionCorrelationAnalysis')}>
+                            <FontAwesomeIcon icon={faList} className="diary-icon" />
+                            Emotional Correlation Analysis
                         </li>
                     </ul>
                 </div>
