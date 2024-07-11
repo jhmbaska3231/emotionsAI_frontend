@@ -172,10 +172,6 @@
     margin-bottom: 1vh; /* Adjust the space as needed */
 }
 
-.heatmap-cell {
-    background: linear-gradient(to right, #ffcccc, #ff6666); /* Adjust gradient as needed */
-}
-
 .heatmap-description {
     margin-top: 60px;
     font-size: 16px;

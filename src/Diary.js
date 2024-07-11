@@ -269,20 +269,17 @@ const Diary = () => {
                         xLabelsPos="top"
                         yLabelsPos="left"
                         cellRender={(x, y, value) => <span>{value.toFixed(2)}</span>}
-                        // cellStyle={(x, y, ratio) => ({
-                        //     background: `rgba(75, 192, 192, ${ratio})`,
-                        //     fontSize: "12px",
-                        //     border: "1px solid #ccc"
-                        // })}
-                        cellStyle={(x, y, value) => {
-                            const colorValue = Math.min(Math.max(value, -1), 1); // Clamp value between -1 and 1
-                            const colorIntensity = (colorValue + 1) / 2; // Convert -1 to 1 range to 0 to 1 range
+                        cellStyle={(value) => {
+                            const clampedValue = Math.min(Math.max(value, -1), 1);
+                            const redIntensity = Math.max(0, Math.min(1, (clampedValue + 1) / 2)); // Normalize to [0,1]
+                            const greyIntensity = 1 - redIntensity; // Inverse for grey
                             return {
-                                background: `rgba(255, 99, 132, ${colorIntensity})`, // Use color intensity for the gradient
+                                background: `rgba(${255 * redIntensity}, ${99 * redIntensity}, ${132 * redIntensity}, 0.8)`,
                                 fontSize: "12px",
+                                color: "#000",
                                 border: "1px solid #ccc"
                             };
-                        }}
+                        }}                               
                         cellHeight="50px"
                         cellWidth="50px"
                         square
