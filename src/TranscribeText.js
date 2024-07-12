@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TranscribeText.css';
 import Footer from './Footer';
+
 import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
@@ -88,7 +89,7 @@ const TranscribeText = () => {
         setError('');
 
         try {
-            const { emotionalIntensity, overallSentiment, targetEmotions } = parseTranscriptionOutput(outputText);
+            const { emotionalIntensity, overallSentiment, explanation, targetEmotions } = parseTranscriptionOutput(outputText);
 
             if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
                 alert('Cannot save this entry as target emotion is none. Please try another input.');
@@ -102,6 +103,7 @@ const TranscribeText = () => {
                 inputText,
                 emotionalIntensity,
                 overallSentiment,
+                explanation,
                 targetEmotionsList: targetEmotions,
                 userId: userId
             };

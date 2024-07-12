@@ -244,12 +244,12 @@ const Diary = () => {
                     <p className="diary-summary">Your most felt emotion in the month of {monthName} is "{maxEmotion.emotion}" at {maxEmotion.percentage.toFixed(2)}%</p>
                 </div>
             );
-        } else if (activeTab === 'Last6MonthsAnalysis') {
+        } else if (activeTab === 'BiannualAnalysis') {
             const emotionLines = last6MonthsData.length > 0 ? Object.keys(last6MonthsData[0]).filter(key => key !== 'month').map((emotion, index) => (
                 <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} strokeWidth={2} />
             )) : [];
             return (
-                <div className="last6MonthsAnalysis-analysis-content diary-content-section">
+                <div className="biannualAnalysis-analysis-content diary-content-section">
                     <LineChart
                         width={1200}
                         height={500}
@@ -262,7 +262,7 @@ const Diary = () => {
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         {emotionLines}
                     </LineChart>
-                    <p className="ls-6-month-summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
+                    <p className="biannual-summary">This tracks your top 10 emotions from the last 6 months</p>
                 </div>
             );
         } else if (activeTab === 'EmotionCorrelationAnalysis') {
@@ -323,13 +323,13 @@ const Diary = () => {
                             <FontAwesomeIcon icon={faBarChart} className="diary-icon icon-box" />
                             Monthly Analysis
                         </li>
-                        <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
+                        <li onClick={() => setActiveTab('BiannualAnalysis')}>
                             <FontAwesomeIcon icon={faICursor} className="diary-icon icon-box" />
-                            Last 6 Months Analysis
+                            Biannual Analysis
                         </li>
                         <li onClick={() => setActiveTab('EmotionCorrelationAnalysis')}>
                             <FontAwesomeIcon icon={faTh} className="diary-icon icon-box" />
-                            Emotional Correlation Analysis
+                            Emotion Correlation Analysis
                         </li>
                     </ul>
                 </div>
@@ -338,7 +338,7 @@ const Diary = () => {
                         <h2>
                             {activeTab === 'DiaryLedger' ? 'Diary Ledger' : 
                             activeTab === 'MonthlyAnalysis' ? 'Monthly Analysis' : 
-                            'Last 6 Months Analysis'}
+                            'Biannual Analysis'}
                         </h2>
                         {renderContent()}
                     </div>
