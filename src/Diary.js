@@ -374,7 +374,9 @@ const Diary = () => {
                         <h2>
                             {activeTab === 'DiaryLedger' ? 'Diary Ledger' : 
                             activeTab === 'MonthlyAnalysis' ? 'Monthly Analysis' : 
-                            'Biannual Analysis'}
+                            activeTab === 'BiannualAnalysis' ? 'Biannual Analysis' :
+                            activeTab === 'EmotionCorrelationAnalysis' ? 'Emotion Correlation Analysis' :
+                            null}
                         </h2>
                         {renderContent()}
                     </div>
