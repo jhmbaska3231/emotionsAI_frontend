@@ -150,15 +150,34 @@ const Diary = () => {
 
     const processEmotionCorrelationData = (entries) => {
         const emotions = {};
+        const allEmotionsSet = new Set();
+    
         entries.forEach(entry => {
             entry.targetEmotionsList.forEach(emotion => {
+                allEmotionsSet.add(emotion.emotion);
                 if (!emotions[emotion.emotion]) {
                     emotions[emotion.emotion] = [];
                 }
                 emotions[emotion.emotion].push(emotion.emotionPercentage);
             });
         });
-
+    
+        const allEmotions = Array.from(allEmotionsSet);
+        allEmotions.forEach(emotion => {
+            if (!emotions[emotion]) {
+                emotions[emotion] = [];
+            }
+        });
+    
+        const maxLength = Math.max(...Object.values(emotions).map(arr => arr.length));
+    
+        allEmotions.forEach(emotion => {
+            if (emotions[emotion].length < maxLength) {
+                const missingValuesCount = maxLength - emotions[emotion].length;
+                emotions[emotion] = emotions[emotion].concat(Array(missingValuesCount).fill(0));
+            }
+        });
+    
         const emotionKeys = Object.keys(emotions);
         const correlationMatrix = emotionKeys.map(rowEmotion => {
             return emotionKeys.map(colEmotion => {
@@ -168,18 +187,34 @@ const Diary = () => {
                 return correlation;
             });
         });
-
+    
         return { emotionKeys, correlationMatrix };
     };
 
     const calculateCorrelation = (x, y) => {
         const n = x.length;
+        if (n === 0 || x.length !== y.length) {
+            console.error('Invalid data for correlation calculation:', { x, y });
+            return NaN;
+        }
+    
         const meanX = x.reduce((a, b) => a + b, 0) / n;
         const meanY = y.reduce((a, b) => a + b, 0) / n;
         const covariance = x.map((xi, i) => (xi - meanX) * (y[i] - meanY)).reduce((a, b) => a + b, 0) / n;
         const stdDevX = Math.sqrt(x.map(xi => (xi - meanX) ** 2).reduce((a, b) => a + b, 0) / n);
         const stdDevY = Math.sqrt(y.map(yi => (yi - meanY) ** 2).reduce((a, b) => a + b, 0) / n);
-        return covariance / (stdDevX * stdDevY);
+    
+        if (stdDevX === 0 || stdDevY === 0) {
+            console.warn('Standard deviation is zero, returning 0 for correlation:', { x, y });
+            return 0;
+        }
+    
+        const correlation = covariance / (stdDevX * stdDevY);
+        if (isNaN(correlation)) {
+            console.error('Correlation resulted in NaN:', { x, y, covariance, stdDevX, stdDevY });
+        }
+    
+        return correlation;
     };
 
     const renderContent = () => {
@@ -276,12 +311,13 @@ const Diary = () => {
                         xLabelsPos="top"
                         yLabelsPos="left"
                         cellRender={(x, y, value) => <span>{value.toFixed(2)}</span>}
-                        cellStyle={(value) => {
-                            const clampedValue = Math.min(Math.max(value, -1), 1);
-                            const redIntensity = Math.max(0, Math.min(1, (clampedValue + 1) / 2));
-                            const greyIntensity = 1 - redIntensity;
+                        cellStyle={(_, __, value) => {
+                            const ratio = Math.abs(value); // Use absolute value for gradient intensity
+                            // Gradient from light green (low value) to dark green (high value)
+                            const color = `rgba(0, 128, 0, ${ratio})`;
+                            
                             return {
-                                background: `rgba(${255 * redIntensity}, ${99 * redIntensity}, ${132 * redIntensity}, 0.8)`,
+                                background: color,
                                 fontSize: "12px",
                                 color: "#000",
                                 border: "1px solid #ccc"

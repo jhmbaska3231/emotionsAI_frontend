@@ -39,7 +39,7 @@ const Pricing = () => {
           <div className="pricing-box">
             <p className="pricing-text-bold">MONTHLY</p>
             <div className="pricing-price-container">
-              <span className="pricing-price">$12</span><span className="pricing-period">/month</span>
+              <span className="pricing-price">$100</span><span className="pricing-period">/month</span>
             </div>
             <hr className="pricing-divider" />
             <div className="pricing-features">
@@ -73,7 +73,7 @@ const Pricing = () => {
           <div className="pricing-box">
             <p className="pricing-text-bold">YEARLY</p>
             <div className="pricing-price-container">
-              <span className="pricing-price">$100</span><span className="pricing-period">/year</span>
+              <span className="pricing-price">$1080</span><span className="pricing-period">/year</span>
             </div>
             <hr className="pricing-divider" />
             <div className="pricing-features">
