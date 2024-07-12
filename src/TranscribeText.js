@@ -53,10 +53,12 @@ const TranscribeText = () => {
         const emotionRegex = /Detected Emotion\(s\): (.*)/;
         const intensityRegex = /Overall Emotional Intensity: (\w+)/;
         const sentimentRegex = /Overall Sentiment: (.*)/;
+        const explanationRegex = /Explanation: (.*)/;
 
         const emotionsMatch = output.match(emotionRegex);
         const intensityMatch = output.match(intensityRegex);
         const sentimentMatch = output.match(sentimentRegex);
+        const explanationMatch = output.match(explanationRegex);
         
         let targetEmotions = [];
         if (emotionsMatch && emotionsMatch[1]) {
@@ -76,8 +78,9 @@ const TranscribeText = () => {
 
         const emotionalIntensity = intensityMatch ? intensityMatch[1] : '';
         const overallSentiment = sentimentMatch ? sentimentMatch[1] : '';
+        const explanation = explanationMatch ? explanationMatch[1] : '';
 
-        return { emotionalIntensity, overallSentiment, targetEmotions };
+        return { emotionalIntensity, overallSentiment, explanation, targetEmotions };
     };
 
     const handleSaveToDiary = async () => {

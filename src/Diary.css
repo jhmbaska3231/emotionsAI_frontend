@@ -56,7 +56,7 @@
 
 .diary-diary-content {
     flex-grow: 1;
-    padding: 2vh 2vw;
+    padding: 4vh 1vw;
     background-color: #e0f2f1;
     color: #202123;
     display: flex;
@@ -73,7 +73,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 70vh; /* Fixed height for consistency */
+    height: 75vh; /* Fixed height for consistency */
     width: 90%; /* Adjust width as needed */
     text-align: left;
     position: relative;
@@ -171,14 +171,16 @@
 
 .diary-summary {
     margin-top: 2vh;
+    padding-bottom: 4vh;
     font-size: 1.5vw;
 }
 
 .heatmap-description {
-    margin-top: 5vh;
+    margin-top: 8vh;
     font-size: 1vw;
     color: #ffffff;
-    line-height: 2em;
+    line-height: 1.5em;
+    padding-bottom: 4vh;
 }
 
 .diary-emotion-column p {
@@ -187,6 +189,7 @@
 
 .ls-6-month-summary{
     margin-top: 2vh;
+    padding-bottom: 4vh;
     font-size: 1.5vw;
 }
 
@@ -202,4 +205,8 @@
 .icon-box svg {
     width: 2vw; /* Size of the icon itself */
     height: 2vw; /* Size of the icon itself */
+}
+
+.emotional-correlation-analysis-content {
+    padding-top: 4vh;
 }

@@ -227,10 +227,10 @@ const Diary = () => {
                 <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
                         width={1000}
-                        height={400}
+                        height={1000}
                         data={monthlyData}
                         layout="vertical"
-                        margin={{ top: 40, right: 90, left: 10, bottom: 20 }}
+                        margin={{ top: 60, right: 80, left: 80, bottom: 20 }}
                         className="diary-bar-chart"
                     >
                         <CartesianGrid strokeDasharray="3 3" />
@@ -251,10 +251,10 @@ const Diary = () => {
             return (
                 <div className="last6MonthsAnalysis-analysis-content diary-content-section">
                     <LineChart
-                        width={1000}
-                        height={400}
+                        width={1200}
+                        height={500}
                         data={last6MonthsData}
-                        margin={{ top: 40, right: 90, left: 10, bottom: 20 }}
+                        margin={{ top: 60, right: 80, left: 10, bottom: 20 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
