@@ -11,13 +11,14 @@
 
 .diary-sidebar {
     width: 15vw;
-    background-color: #202123; 
+    background-color: #202123;
     padding: 2vh 1vw;
-    box-shadow: none; 
+    box-shadow: none;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex-shrink: 0; /* Ensure the sidebar does not resize */
 }
 
 .diary-sidebar h1 {
@@ -26,31 +27,31 @@
     margin-bottom: 1vh;
     border-bottom: 1px solid #444;
     padding-bottom: 0.5vh;
-    margin-top: 2vh; /* Add margin-top to add space between sections */
+    margin-top: 2vh;
 }
 
 .diary-sidebar ul {
     list-style-type: none;
     padding: 0;
-    margin-top: 1vh; /* Add margin-top to add space between sections */
+    margin-top: 1vh;
 }
 
 .diary-sidebar ul li {
     padding: 1vh 0;
     cursor: pointer;
-    color: #fff; 
+    color: #fff;
     display: flex;
-    align-items: center; 
+    align-items: center;
     text-align: left;
-    padding-left: 1vw; 
+    padding-left: 1vw;
 }
 
 .diary-sidebar ul li .diary-icon {
-    margin-right: 0.5vw; 
+    margin-right: 0.5vw;
 }
 
 .diary-sidebar ul li:hover {
-    background-color: #3a3a3a; 
+    background-color: #3a3a3a;
 }
 
 .diary-diary-content {
@@ -58,32 +59,34 @@
     padding: 2vh 2vw;
     background-color: #e0f2f1;
     color: #202123;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .diary-ledger-box {
     background-color: #74AA9C;
-    color: #ffffff; 
+    color: #ffffff;
     padding: 2vh 2vw;
     border-radius: 1vw;
     display: flex;
-    flex-direction: column; 
-    justify-content: flex-start; 
-    align-items: flex-start; 
-    max-height: 80vh; /* Adjust the height for responsiveness */
-    width: 90%;
-    margin: auto; 
-    text-align: left; 
-    position: relative; 
-    overflow-y: auto; 
-    overflow-x: hidden; 
-    margin-top: 3vh; /* Adjusted to move the box lower */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 70vh; /* Fixed height for consistency */
+    width: 90%; /* Adjust width as needed */
+    text-align: left;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-top: 3vh;
 }
 
 .diary-ledger-box h2 {
     margin: 0;
     font-size: 2vw;
-    padding-bottom: 1vh; 
-    width: 100%; 
+    padding-bottom: 1vh;
+    width: 100%;
     border-bottom: 2px solid #ffffff;
 }
 
@@ -95,27 +98,27 @@
 .diary-ledger-row {
     display: flex;
     width: 100%;
-    margin-bottom: 1vh; 
+    margin-bottom: 1vh;
 }
 
 .diary-header-row {
     font-weight: bold;
-    margin-bottom: 1vh; 
+    margin-bottom: 1vh;
 }
 
 .diary-ledger-column {
     padding: 1vh 1vw;
     word-break: break-word;
-    white-space: normal; 
+    white-space: normal;
     overflow-wrap: break-word;
-    text-overflow: clip; 
+    text-overflow: clip;
 }
 
 .diary-date-column {
-    flex: 1; 
+    flex: 1;
 }
 
-.diary-diary-column, .diary-emotion-column {
+.diary-diary-column, .diary-emotion-column, .diary-explanation-column {
     flex: 2;
 }
 
@@ -123,14 +126,17 @@
     margin: 0 0 1vh 0;
 }
 
-.diary-emotion-column p {
-    margin-bottom: 1vh; 
-    line-height: 1.2; 
+.diary-emotion-column p, .diary-explanation-line {
+    margin-bottom: 1vh;
+    line-height: 1.2;
 }
 
-.diary-monthly-analysis-content {
+.diary-monthly-analysis-content, .last6MonthsAnalysis-analysis-content, .emotional-correlation-analysis-content {
     width: 100%;
-    margin-top: 2vh;
+    height: 70vh; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .diary-monthly-analysis-content .diary-header h3 {
@@ -138,7 +144,7 @@
     font-size: 2vw;
     padding-bottom: 1vh;
     width: 100%;
-    border-bottom: 2px solid #ffffff; 
+    border-bottom: 2px solid #ffffff;
 }
 
 .diary-emotion-bar {
@@ -149,18 +155,18 @@
 }
 
 .diary-emotion-bar span {
-    width: 10vw; 
+    width: 10vw;
 }
 
 .diary-bar {
-    background-color: #ffffff; 
-    color: #202123; 
-    text-align: right; 
+    background-color: #ffffff;
+    color: #202123;
+    text-align: right;
     padding-right: 0.5vw;
     height: 2.5vh;
     line-height: 2.5vh;
-    border-radius: 0.5vw; 
-    margin-left: 1vw; 
+    border-radius: 0.5vw;
+    margin-left: 1vw;
 }
 
 .diary-summary {
@@ -168,13 +174,32 @@
     font-size: 1.5vw;
 }
 
-.diary-emotion-column p {
-    margin-bottom: 1vh; /* Adjust the space as needed */
+.heatmap-description {
+    margin-top: 5vh;
+    font-size: 1vw;
+    color: #ffffff;
+    line-height: 2em;
 }
 
-.heatmap-description {
-    margin-top: 60px;
-    font-size: 16px;
-    color: #ffffff;
-    line-height: 2.0;
+.diary-emotion-column p {
+    margin-bottom: 1vh;
+}
+
+.ls-6-month-summary{
+    margin-top: 2vh;
+    font-size: 1.5vw;
+}
+
+.icon-box {
+    width: 1vw;
+    height: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5vw; 
+}
+
+.icon-box svg {
+    width: 2vw; /* Size of the icon itself */
+    height: 2vw; /* Size of the icon itself */
 }

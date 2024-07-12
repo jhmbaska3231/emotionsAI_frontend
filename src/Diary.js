@@ -6,7 +6,7 @@ import api, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList, faBarChart, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faBarChart, faBook, faTh, faICursor  } from '@fortawesome/free-solid-svg-icons';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, LineChart, Line } from 'recharts';
 import { HeatMapGrid } from 'react-grid-heatmap';
@@ -224,13 +224,14 @@ const Diary = () => {
             const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
             const monthName = getMonthName(currentMonth);
             return (
-                <div className="diary-monthly-analysis-content">
+                <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
-                        width={1200}
-                        height={1000}
+                        width={1000}
+                        height={400}
                         data={monthlyData}
                         layout="vertical"
-                        margin={{ top: 40, right: 10, left: 100, bottom: 20 }}
+                        margin={{ top: 40, right: 90, left: 10, bottom: 20 }}
+                        className="diary-bar-chart"
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" />
@@ -248,12 +249,12 @@ const Diary = () => {
                 <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} strokeWidth={2} />
             )) : [];
             return (
-                <div className="last6MonthsAnalysis-analysis-content">
+                <div className="last6MonthsAnalysis-analysis-content diary-content-section">
                     <LineChart
-                        width={1200}
-                        height={800}
+                        width={1000}
+                        height={400}
                         data={last6MonthsData}
-                        margin={{ top: 60, right: 10, left: 10, bottom: 40 }}
+                        margin={{ top: 40, right: 90, left: 10, bottom: 20 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
@@ -261,13 +262,13 @@ const Diary = () => {
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         {emotionLines}
                     </LineChart>
-                    <p className="summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
+                    <p className="ls-6-month-summary">Last 6 Months Analysis of Your Top 10 Emotions</p>
                 </div>
             );
         } else if (activeTab === 'EmotionCorrelationAnalysis') {
             const { emotionKeys, correlationMatrix } = emotionCorrelationData;
             return (
-                <div className="emotional-correlation-analysis-content">
+                <div className="emotional-correlation-analysis-content diary-content-section">
                     <HeatMapGrid
                         data={correlationMatrix}
                         xLabels={emotionKeys}
@@ -277,21 +278,21 @@ const Diary = () => {
                         cellRender={(x, y, value) => <span>{value.toFixed(2)}</span>}
                         cellStyle={(value) => {
                             const clampedValue = Math.min(Math.max(value, -1), 1);
-                            const redIntensity = Math.max(0, Math.min(1, (clampedValue + 1) / 2)); // Normalize to [0,1]
-                            const greyIntensity = 1 - redIntensity; // Inverse for grey
+                            const redIntensity = Math.max(0, Math.min(1, (clampedValue + 1) / 2));
+                            const greyIntensity = 1 - redIntensity;
                             return {
                                 background: `rgba(${255 * redIntensity}, ${99 * redIntensity}, ${132 * redIntensity}, 0.8)`,
                                 fontSize: "12px",
                                 color: "#000",
                                 border: "1px solid #ccc"
                             };
-                        }}                               
+                        }}
                         cellHeight="50px"
                         cellWidth="50px"
                         square
                     />
                     <p className="heatmap-description">
-                        <strong>How to Interpret the Heatmap:</strong> The heatmap shows the correlation between different emotions based on diary entries over the last 6 months. 
+                        <strong>How to Interpret the Heatmap:</strong> The heatmap shows the correlation between different emotions based on diary entries over the last 6 months.
                         <br />
                         - Values closer to <strong>1</strong> indicate a high positive correlation, meaning that as one emotion increases, the other tends to increase as well.
                         <br />
@@ -303,6 +304,7 @@ const Diary = () => {
             );
         }
     };
+    
 
     return (
         <div className="diary-container">
@@ -311,22 +313,22 @@ const Diary = () => {
                     <h1>Dashboard</h1>
                     <ul>
                         <li onClick={() => setActiveTab('DiaryLedger')}>
-                            <FontAwesomeIcon icon={faBook} className="diary-icon" />
+                            <FontAwesomeIcon icon={faBook} className="diary-icon icon-box" />
                             Diary Ledger
                         </li>
                     </ul>
                     <h1>Utilities</h1>
                     <ul>
                         <li onClick={() => setActiveTab('MonthlyAnalysis')}>
-                            <FontAwesomeIcon icon={faBarChart} className="diary-icon" />
+                            <FontAwesomeIcon icon={faBarChart} className="diary-icon icon-box" />
                             Monthly Analysis
                         </li>
                         <li onClick={() => setActiveTab('Last6MonthsAnalysis')}>
-                            <FontAwesomeIcon icon={faList} className="diary-icon" />
+                            <FontAwesomeIcon icon={faICursor} className="diary-icon icon-box" />
                             Last 6 Months Analysis
                         </li>
                         <li onClick={() => setActiveTab('EmotionCorrelationAnalysis')}>
-                            <FontAwesomeIcon icon={faList} className="diary-icon" />
+                            <FontAwesomeIcon icon={faTh} className="diary-icon icon-box" />
                             Emotional Correlation Analysis
                         </li>
                     </ul>
