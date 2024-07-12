@@ -196,6 +196,9 @@ const Diary = () => {
                         <div className="diary-ledger-column diary-emotion-column">
                             <h3>Emotion Analysis</h3>
                         </div>
+                        <div className="diary-ledger-column diary-explanation-column">
+                            <h3>Explanation</h3>
+                        </div>
                     </div>
                     {diaryEntries.map(entry => (
                         <div className="diary-ledger-row" key={entry.diaryId}>
@@ -209,6 +212,9 @@ const Diary = () => {
                                 <p className="diary-emotion-line">Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
                                 <p className="diary-emotion-line">Emotional Intensity: {entry.emotionalIntensity}</p>
                                 <p className="diary-emotion-line">Overall Sentiment: {entry.overallSentiment}</p>
+                            </div>
+                            <div className="diary-ledger-column diary-explanation-column">
+                                <p className="diary-explanation-line">Explanation: {entry.explanation}</p>
                             </div>
                         </div>
                     ))}
