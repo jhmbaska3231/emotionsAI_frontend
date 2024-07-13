@@ -74,7 +74,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     height: 75vh; /* Fixed height for consistency */
-    width: 90%; /* Adjust width as needed */
+    width: 80vw; 
     text-align: left;
     position: relative;
     overflow-y: auto;
