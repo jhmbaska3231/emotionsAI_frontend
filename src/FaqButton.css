@@ -1,7 +1,7 @@
 .faq-button {
     position: fixed;
     bottom: 5vh;
-    right: 0.5vw;
+    right: 0.8vw;
 }
 
 .faq-button-icon {
@@ -12,6 +12,6 @@
 }
 
 .faq-button-icon img {
-    width: 4vw ;
-    height: 4vw ;
+    width: 2.5vw ;
+    height: 2.5vw ;
 }
