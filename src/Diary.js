@@ -35,12 +35,6 @@ const Diary = () => {
     const entryRef = useRef(null);
 
     useEffect(() => {
-        if (entryRef.current) {
-            entryRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }, [searchQuery]);
-
-    useEffect(() => {
         const fetchDiaryData = async () => {
             try {
                 const session = await fetchAuthSession();
@@ -73,6 +67,12 @@ const Diary = () => {
 
         fetchDiaryData();
     }, []);
+
+    useEffect(() => {
+        if (entryRef.current) {
+            entryRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, [searchQuery]);
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -253,7 +253,6 @@ const Diary = () => {
         if (activeTab === 'DiaryLedger') {
             return (
                 <div className="diary-ledger-content">
-
                     <div className="tab-content">
                         <input
                             type="text"
@@ -263,7 +262,6 @@ const Diary = () => {
                             className="search-bar"
                         />
                     </div>
-
                     <div className="diary-ledger-row diary-header-row">
                         <div className="diary-ledger-column diary-date-column">
                             <h3>Date</h3>
@@ -278,25 +276,6 @@ const Diary = () => {
                             <h3>Explanation</h3>
                         </div>
                     </div>
-                    {/* {diaryEntries.map(entry => (
-                        <div className="diary-ledger-row" key={entry.diaryId}>
-                            <div className="diary-ledger-column diary-date-column">
-                                <p>{formatDate(entry.date)}</p>
-                            </div>
-                            <div className="diary-ledger-column diary-diary-column">
-                                <p>{entry.inputText}</p>
-                            </div>
-                            <div className="diary-ledger-column diary-emotion-column">
-                                <p className="diary-emotion-line">Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
-                                <p className="diary-emotion-line">Emotional Intensity: {entry.emotionalIntensity}</p>
-                                <p className="diary-emotion-line">Overall Sentiment: {entry.overallSentiment}</p>
-                            </div>
-                            <div className="diary-ledger-column diary-explanation-column">
-                                <p className="diary-explanation-line">{entry.explanation}</p>
-                            </div>
-                        </div>
-                    ))} */}
-
                     {diaryEntries
                         .filter(entry => entry.inputText.toLowerCase().includes(searchQuery.toLowerCase()))
                         .map(entry => (
@@ -317,7 +296,6 @@ const Diary = () => {
                                 </div>
                             </div>
                         ))}
-
                 </div>
             );
         } else if (activeTab === 'MonthlyAnalysis') {
@@ -326,8 +304,8 @@ const Diary = () => {
             return (
                 <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
-                        width={70 * window.innerWidth / 100}  // 70vw equivalent
-                        height={90 * window.innerHeight / 100} // 90vh equivalent
+                        width={70 * window.innerWidth / 100}
+                        height={90 * window.innerHeight / 100}
                         data={monthlyData}
                         layout="vertical"
                         margin={{ top: 60, right: 80, left: 80, bottom: 20 }}
@@ -377,8 +355,8 @@ const Diary = () => {
             return (
                 <div className="biannualAnalysis-analysis-content diary-content-section">
                     <LineChart
-                        width={70 * window.innerWidth / 100}  // 70vw equivalent
-                        height={60 * window.innerHeight / 100} // 60vh equivalent
+                        width={70 * window.innerWidth / 100}
+                        height={60 * window.innerHeight / 100}
                         data={last6MonthsData}
                         margin={{ top: 60, right: 80, left: 40, bottom: 60 }}
                     >
@@ -410,8 +388,7 @@ const Diary = () => {
                         yLabelsPos="left"
                         cellRender={(x, y, value) => <span>{value.toFixed(2)}</span>}
                         cellStyle={(_, __, value) => {
-                            const ratio = Math.abs(value); // Use absolute value for gradient intensity
-                            // Gradient from light green (low value) to dark green (high value)
+                            const ratio = Math.abs(value);
                             const color = `rgba(0, 128, 0, ${ratio})`;
                             
                             return {
@@ -438,7 +415,6 @@ const Diary = () => {
             );
         }
     };
-    
 
     return (
         <div className="diary-container">
