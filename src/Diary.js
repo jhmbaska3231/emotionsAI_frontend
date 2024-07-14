@@ -11,6 +11,18 @@ import { faBarChart, faBook, faTh, faICursor  } from '@fortawesome/free-solid-sv
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, LineChart, Line } from 'recharts';
 import { HeatMapGrid } from 'react-grid-heatmap';
 
+const holidays = {
+    January: ["New Year's Day"],
+    February: ["Chinese New Year"],
+    March: ["Good Friday"],
+    April: ["Hari Raya Puasa"],
+    May: ["Labour Day", "Vesak Day"],
+    June: ["Hari Raya Haji"],
+    August: ["National Day"],
+    October: ["Deepavali"],
+    December: ["Christmas Day"]
+};
+
 const Diary = () => {
 
     const [activeTab, setActiveTab] = useState('DiaryLedger');
@@ -261,16 +273,25 @@ const Diary = () => {
             return (
                 <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
-                        width={70 * window.innerWidth / 100}  // 80vw equivalent
-                        height={90 * window.innerHeight / 100} // 50vh equivalent
+                        width={70 * window.innerWidth / 100}  // 70vw equivalent
+                        height={90 * window.innerHeight / 100} // 90vh equivalent
                         data={monthlyData}
                         layout="vertical"
                         margin={{ top: 60, right: 80, left: 80, bottom: 20 }}
                         className="diary-bar-chart"
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis type="number" />
-                        <YAxis type="category" dataKey="emotion" />
+                        <XAxis
+                            type="number" 
+                            tick={{ fill: '#ffffff', fontSize: 16 }}
+                            tickLine={{ stroke: '#ffffff', strokeWidth: 2 }}
+                        />
+                        <YAxis
+                            type="category"
+                            dataKey="emotion"
+                            tick={{ fill: '#ffffff', fontSize: 14 }}
+                            tickLine={{ stroke: '#ffffff', strokeWidth: 2 }}
+                        />
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         <Bar dataKey="percentage" fill="#4F81BD">
                             <LabelList dataKey="percentage" position="right" formatter={(value) => `${value.toFixed(2)}%`} />
@@ -283,17 +304,41 @@ const Diary = () => {
             const emotionLines = last6MonthsData.length > 0 ? Object.keys(last6MonthsData[0]).filter(key => key !== 'month').map((emotion, index) => (
                 <Line key={index} type="monotone" dataKey={emotion} stroke={`hsl(${index * 36}, 70%, 50%)`} strokeWidth={2} />
             )) : [];
+            const renderCustomTick = (props) => {
+                const { x, y, payload } = props;
+                const month = payload.value;
+                const holidayList = holidays[month] || ['No Holiday'];
+                return (
+                    <g transform={`translate(${x},${y + 10})`}>
+                        <text x={0} y={0} dy={16} textAnchor="middle" fill="#ffffff">
+                            {month}
+                        </text>
+                        {holidayList.map((holiday, index) => (
+                            <text key={index} x={0} y={20 + index * 20} dy={25} textAnchor="middle" fill="#ffffff" fontSize="12">
+                                {holiday}
+                            </text>
+                        ))}
+                    </g>
+                );
+            };
             return (
                 <div className="biannualAnalysis-analysis-content diary-content-section">
                     <LineChart
-                        width={70 * window.innerWidth / 100}  // 80vw equivalent
-                        height={60 * window.innerHeight / 100} // 50vh equivalent
+                        width={70 * window.innerWidth / 100}  // 70vw equivalent
+                        height={60 * window.innerHeight / 100} // 60vh equivalent
                         data={last6MonthsData}
-                        margin={{ top: 60, right: 80, left: 10, bottom: 20 }}
+                        margin={{ top: 60, right: 80, left: 40, bottom: 60 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
+                        <XAxis 
+                            dataKey="month" 
+                            tick={renderCustomTick} 
+                            interval={0}
+                        />
+                        <YAxis 
+                            tick={{ fill: '#ffffff', fontSize: 16 }}
+                            tickLine={{ stroke: '#ffffff', strokeWidth: 2 }}
+                        />
                         <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
                         {emotionLines}
                     </LineChart>
