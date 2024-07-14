@@ -261,8 +261,8 @@ const Diary = () => {
             return (
                 <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
-                        width={80 * window.innerWidth / 100}  // 80vw equivalent
-                        height={50 * window.innerHeight / 100} // 50vh equivalent
+                        width={70 * window.innerWidth / 100}  // 80vw equivalent
+                        height={90 * window.innerHeight / 100} // 50vh equivalent
                         data={monthlyData}
                         layout="vertical"
                         margin={{ top: 60, right: 80, left: 80, bottom: 20 }}
@@ -286,8 +286,8 @@ const Diary = () => {
             return (
                 <div className="biannualAnalysis-analysis-content diary-content-section">
                     <LineChart
-                        width={80 * window.innerWidth / 100}  // 80vw equivalent
-                        height={50 * window.innerHeight / 100} // 50vh equivalent
+                        width={70 * window.innerWidth / 100}  // 80vw equivalent
+                        height={60 * window.innerHeight / 100} // 50vh equivalent
                         data={last6MonthsData}
                         margin={{ top: 60, right: 80, left: 10, bottom: 20 }}
                     >
