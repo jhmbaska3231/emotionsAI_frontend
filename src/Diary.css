@@ -106,6 +106,10 @@
     margin-bottom: 1vh;
 }
 
+.diary-ledger-row.highlight {
+    background-color: #ffff99;
+}
+
 .diary-ledger-column {
     padding: 1vh 1vw;
     word-break: break-word;

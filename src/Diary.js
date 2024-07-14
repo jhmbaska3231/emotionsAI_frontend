@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Diary.css';
 import Footer from './Footer';
 
@@ -31,6 +31,14 @@ const Diary = () => {
     const [last6MonthsData, setLast6MonthsData] = useState([]);
     const [emotionCorrelationData, setEmotionCorrelationData] = useState([]);
     const [currentMonth, setCurrentMonth] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const entryRef = useRef(null);
+
+    useEffect(() => {
+        if (entryRef.current) {
+            entryRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, [searchQuery]);
 
     useEffect(() => {
         const fetchDiaryData = async () => {
@@ -229,10 +237,33 @@ const Diary = () => {
         return correlation;
     };
 
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const highlightSearchQuery = (text) => {
+        if (!searchQuery) return text;
+        const regex = new RegExp(`(${searchQuery})`, 'gi');
+        return text.split(regex).map((part, index) =>
+            part.toLowerCase() === searchQuery.toLowerCase() ? <mark key={index}>{part}</mark> : part
+        );
+    };
+
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
             return (
                 <div className="diary-ledger-content">
+
+                    <div className="tab-content">
+                        <input
+                            type="text"
+                            placeholder="Search diary entries..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            className="search-bar"
+                        />
+                    </div>
+
                     <div className="diary-ledger-row diary-header-row">
                         <div className="diary-ledger-column diary-date-column">
                             <h3>Date</h3>
@@ -247,7 +278,7 @@ const Diary = () => {
                             <h3>Explanation</h3>
                         </div>
                     </div>
-                    {diaryEntries.map(entry => (
+                    {/* {diaryEntries.map(entry => (
                         <div className="diary-ledger-row" key={entry.diaryId}>
                             <div className="diary-ledger-column diary-date-column">
                                 <p>{formatDate(entry.date)}</p>
@@ -264,7 +295,29 @@ const Diary = () => {
                                 <p className="diary-explanation-line">{entry.explanation}</p>
                             </div>
                         </div>
-                    ))}
+                    ))} */}
+
+                    {diaryEntries
+                        .filter(entry => entry.inputText.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .map(entry => (
+                            <div className="diary-ledger-row" key={entry.diaryId}>
+                                <div className="diary-ledger-column diary-date-column">
+                                    <p>{formatDate(entry.date)}</p>
+                                </div>
+                                <div className="diary-ledger-column diary-diary-column">
+                                    <p>{highlightSearchQuery(entry.inputText)}</p>
+                                </div>
+                                <div className="diary-ledger-column diary-emotion-column">
+                                    <p className="diary-emotion-line">Target Emotion(s): {entry.targetEmotionsList.map(emotion => `${emotion.emotion} (${emotion.emotionPercentage}%)`).join(', ')}</p>
+                                    <p className="diary-emotion-line">Emotional Intensity: {entry.emotionalIntensity}</p>
+                                    <p className="diary-emotion-line">Overall Sentiment: {entry.overallSentiment}</p>
+                                </div>
+                                <div className="diary-ledger-column diary-explanation-column">
+                                    <p className="diary-explanation-line">{entry.explanation}</p>
+                                </div>
+                            </div>
+                        ))}
+
                 </div>
             );
         } else if (activeTab === 'MonthlyAnalysis') {

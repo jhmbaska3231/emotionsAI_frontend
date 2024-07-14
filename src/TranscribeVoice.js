@@ -128,7 +128,7 @@ const TranscribeVoice = () => {
             const { emotionalIntensity, overallSentiment, explanation, targetEmotions } = parseTranscriptionOutput(outputText);
 
             if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
-                alert('The target emotion is none. Please try another input.');
+                alert('The detected emotion is none. Please try another input.');
                 setIsSaving(false);
                 return;
             }
