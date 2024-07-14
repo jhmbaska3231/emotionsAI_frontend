@@ -17,10 +17,29 @@ const ContactForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form data submitted:', formData);
-        // Add logic here
+        const response = await fetch('/api/forms', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+    
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Form submitted successfully:', result);
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                subject: '',
+                message: ''
+            });
+        } else {
+            console.error('Failed to submit form');
+        }
     };
 
     return (
@@ -93,7 +112,7 @@ const ContactForm = () => {
                                 />
                             </div>
                             <div className="cf-buttonWrapper">
-                            <button type="submit" className="cf-contactButton">Submit</button>
+                                <button type="submit" className="cf-contactButton">Submit</button>
                             </div>
                         </form>
                     </div>
