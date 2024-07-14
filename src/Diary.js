@@ -249,7 +249,7 @@ const Diary = () => {
                                 <p className="diary-emotion-line">Overall Sentiment: {entry.overallSentiment}</p>
                             </div>
                             <div className="diary-ledger-column diary-explanation-column">
-                                <p className="diary-explanation-line">Explanation: {entry.explanation}</p>
+                                <p className="diary-explanation-line">{entry.explanation}</p>
                             </div>
                         </div>
                     ))}
