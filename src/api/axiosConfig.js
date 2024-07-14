@@ -12,4 +12,8 @@ export const setBearerToken = (token) => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
+export const removeBearerToken = () => {
+    delete instance.defaults.headers.common['Authorization'];
+};
+
 export default instance;

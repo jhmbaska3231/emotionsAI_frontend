@@ -3,6 +3,8 @@ import './ContactForm.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+import api, { removeBearerToken } from './api/axiosConfig';
+
 const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -17,28 +19,40 @@ const ContactForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const validateForm = () => {
+        const { name, email, phone, subject, message } = formData;
+        return name && email && phone && subject && message;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('/api/forms', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-    
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Form submitted successfully:', result);
-            setFormData({
-                name: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: ''
-            });
-        } else {
-            console.error('Failed to submit form');
+        removeBearerToken();
+
+        if (!validateForm()) {
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        const currentDate = new Date().toISOString().split('T')[0];
+        const formDataWithDate = { ...formData, date: currentDate };
+        
+        try {
+            const response = await api.post('/api/forms', formDataWithDate);
+            if (response.status === 200) {
+                alert('Form submitted successfully');
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    subject: '',
+                    message: ''
+                });
+            } else {
+                console.error('Failed to submit form');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('There was an error submitting the form. Please try again later.');
         }
     };
 
@@ -52,63 +66,68 @@ const ContactForm = () => {
                             <h2>Contact Us</h2>
                             <div className="cf-contactFormGroup">
                                 <div className="cf-contactLabel" htmlFor="name">Name</div>
-                                <input 
+                                <input
                                     type="text" 
                                     id="name" 
                                     name="name" 
                                     value={formData.name} 
                                     onChange={handleChange} 
-                                    placeholder="Enter text" 
+                                    placeholder="Enter your name" 
                                     className="cf-contactInput"
+                                    required
                                 />
                             </div>
                             <div className="cf-contactFormGroup cf-contactHalfWidthContainer">
                                 <div className="cf-contactHalfWidth">
                                     <div className="cf-contactLabel" htmlFor="email">Email</div>
-                                    <input 
+                                    <input
                                         type="email" 
                                         id="email" 
                                         name="email" 
                                         value={formData.email} 
                                         onChange={handleChange} 
-                                        placeholder="Enter text" 
+                                        placeholder="Enter your email" 
                                         className="cf-contactInput"
+                                        required
                                     />
                                 </div>
                                 <div className="cf-contactHalfWidth">
                                     <div className="cf-contactLabel" htmlFor="phone">Phone</div>
-                                    <input 
+                                    <input
                                         type="tel" 
                                         id="phone" 
                                         name="phone" 
                                         value={formData.phone} 
                                         onChange={handleChange} 
-                                        placeholder="Enter text" 
+                                        placeholder="Enter your phone number" 
                                         className="cf-contactInput"
+                                        required
                                     />
                                 </div>
                             </div>
                             <div className="cf-contactFormGroup">
                                 <div className="cf-contactLabel" htmlFor="subject">Subject</div>
-                                <input 
+                                <input
                                     type="text" 
                                     id="subject" 
                                     name="subject" 
                                     value={formData.subject} 
                                     onChange={handleChange} 
-                                    placeholder="Enter text" 
+                                    placeholder="Enter the subject" 
                                     className="cf-contactInput"
+                                    required
                                 />
                             </div>
                             <div className="cf-contactFormGroup">
                                 <div className="cf-contactLabel" htmlFor="message">Message</div>
-                                <textarea 
+                                <textarea
                                     id="message" 
                                     name="message" 
                                     value={formData.message} 
                                     onChange={handleChange} 
-                                    placeholder="Enter text" 
+                                    placeholder="Enter your message" 
                                     className="cf-contactTextarea"
+                                    required
                                 />
                             </div>
                             <div className="cf-buttonWrapper">
