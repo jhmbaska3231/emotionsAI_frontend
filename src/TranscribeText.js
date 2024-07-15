@@ -51,12 +51,7 @@ const TranscribeText = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        // const emotionRegex = /Detected Emotion\(s\): (.*)/;
-        // const intensityRegex = /Overall Emotional Intensity: (\w+)/;
-        // const sentimentRegex = /Overall Sentiment: (.*)/;
-        // const explanationRegex = /Explanation: (.*)/;
-
-        const emotionRegex = /Detected Emotions?:\s*([\w\s%,]+)/;
+        const emotionRegex = /Detected Emotion\(s\):\s*([\w\s%,\*\(\)]+(?:,\s*included in [\w\s]+)?)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
@@ -82,11 +77,12 @@ const TranscribeText = () => {
             }
         }
 
-        const emotionalIntensity = intensityMatch ? intensityMatch[1] : '';
+        const emotionalIntensity = intensityMatch ? intensityMatch[1].trim() : '';
         const overallSentiment = sentimentMatch ? sentimentMatch[1].trim() : '';
+        const sentimentDetails = sentimentMatch ? sentimentMatch[2].trim() : '';
         const explanation = explanationMatch ? explanationMatch[1].trim() : '';
 
-        return { emotionalIntensity, overallSentiment, explanation, targetEmotions };
+        return { emotionalIntensity, overallSentiment: `${overallSentiment} (${sentimentDetails})`, explanation, targetEmotions };
     };
 
     const handleSaveToDiary = async () => {
@@ -96,7 +92,7 @@ const TranscribeText = () => {
         try {
             const { emotionalIntensity, overallSentiment, explanation, targetEmotions } = parseTranscriptionOutput(outputText);
 
-            if (targetEmotions.length === 0 || targetEmotions.some(emotion => emotion.emotion === 'None' || !emotion.emotion)) {
+            if (targetEmotions.length === 0 || targetEmotions.some(emotion => !emotion.emotion || emotion.emotion === 'None')) {
                 alert('The detected emotion is none. Please try another input.');
                 setIsSaving(false);
                 return;

@@ -301,11 +301,14 @@ const Diary = () => {
         } else if (activeTab === 'MonthlyAnalysis') {
             const maxEmotion = monthlyData.reduce((max, emotion) => emotion.percentage > max.percentage ? emotion : max, { emotion: '', percentage: 0 });
             const monthName = getMonthName(currentMonth);
+            const baseHeight = 500; // base height in pixels
+            const heightIncrement = 30; // additional height per record in pixels
+            const dynamicHeight = baseHeight + (monthlyData.length * heightIncrement);
             return (
                 <div className="diary-monthly-analysis-content diary-content-section">
                     <BarChart
                         width={70 * window.innerWidth / 100}
-                        height={90 * window.innerHeight / 100}
+                        height={dynamicHeight}
                         data={monthlyData}
                         layout="vertical"
                         margin={{ top: 60, right: 80, left: 80, bottom: 20 }}
