@@ -42,39 +42,34 @@ const AdminPage = () => {
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
             </div>
             <div className="admin-content">
-                <div className="status-and-forms-container">
-                    <div className="status-container">
-                        <div className="status-header">Status</div>
-                        {forms.map((form) => (
-                            <button
-                                key={form.id}
-                                className={`status-button ${form.isRead ? 'read' : 'unread'}`}
-                                onClick={() => toggleReadStatus(form.id)}
-                            >
-                                {form.isRead ? 'Read' : 'Unread'}
-                            </button>
-                        ))}
+                <div className="admin-forms-container">
+                    <div className="form-headers">
+                        <div className="form-header">Status</div>
+                        <div className="form-header">Date</div>
+                        <div className="form-header">Name</div>
+                        <div className="form-header">Email</div>
+                        <div className="form-header">Phone</div>
+                        <div className="form-header">Subject</div>
+                        <div className="form-header">Message</div>
                     </div>
-                    <div className="admin-forms-container">
-                        <div className="form-headers">
-                            <div className="form-header">Date</div>
-                            <div className="form-header">Name</div>
-                            <div className="form-header">Email</div>
-                            <div className="form-header">Phone</div>
-                            <div className="form-header">Subject</div>
-                            <div className="form-header">Message</div>
-                        </div>
-                        {forms.map((form) => (
-                            <div className="form-row" key={form.id}>
-                                <div className="form-item">{form.date}</div>
-                                <div className="form-item">{form.name}</div>
-                                <div className="form-item">{form.email}</div>
-                                <div className="form-item">{form.phone}</div>
-                                <div className="form-item">{form.subject}</div>
-                                <div className="form-item">{form.message}</div>
+                    {forms.map((form) => (
+                        <div className="form-row" key={form.id}>
+                            <div className="form-item">
+                                <button 
+                                    className={`status-button ${form.isRead ? 'read' : 'unread'}`}
+                                    onClick={() => toggleReadStatus(form.id)}
+                                >
+                                    {form.isRead ? 'Read' : 'Unread'}
+                                </button>
                             </div>
-                        ))}
-                    </div>
+                            <div className="form-item">{form.date}</div>
+                            <div className="form-item">{form.name}</div>
+                            <div className="form-item">{form.email}</div>
+                            <div className="form-item">{form.phone}</div>
+                            <div className="form-item">{form.subject}</div>
+                            <div className="form-item">{form.message}</div>
+                        </div>
+                    ))}
                 </div>
             </div>
             <Footer />
