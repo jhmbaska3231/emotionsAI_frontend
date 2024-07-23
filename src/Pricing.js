@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import './Pricing.css';
 import FAQ from './FaqButton';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import PaymentPopup from './PaymentPopup'; // Import the PaymentPopup component
 
 const Pricing = () => {
+  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState(false);
+
+  const openPaymentPopup = () => {
+    setIsPaymentPopupOpen(true);
+  };
+
+  const closePaymentPopup = () => {
+    setIsPaymentPopupOpen(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -68,7 +79,7 @@ const Pricing = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="pricing-button">Choose this plan</button>
+            <button className="pricing-button" onClick={openPaymentPopup}>Choose this plan</button>
           </div>
           <div className="pricing-box">
             <p className="pricing-text-bold">YEARLY</p>
@@ -102,12 +113,13 @@ const Pricing = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="pricing-button">Choose this plan</button>
+            <button className="pricing-button" onClick={openPaymentPopup}>Choose this plan</button>
           </div>
         </div>
       </div>
       <FAQ />
       <Footer />
+      <PaymentPopup isOpen={isPaymentPopupOpen} onClose={closePaymentPopup} />
     </>
   );
 }

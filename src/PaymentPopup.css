@@ -1,0 +1,84 @@
+.pp-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pp-popup-container {
+    background: #ffffff;
+    padding: 2vw;
+    border-radius: 10px;
+    width: 40vw;
+    position: relative;
+}
+
+.pp-popup-close-button {
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    background: none;
+    border: none;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.pp-popup-header {
+    font-size: 2vw;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.pp-payment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.pp-form-group {
+    margin-bottom: 2vh;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5vh;
+    font-size: 1vw;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 1vw;
+    border: 1px solid #74AA9C;
+    border-radius: 5px;
+    font-size: 1vw;
+}
+
+.pp-form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pp-form-row .pp-form-group {
+    width: 48%;
+}
+
+.pp-confirm-button {
+    background: #74AA9C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 1vw;
+    font-size: 1.2vw;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.pp-confirm-button:hover {
+    background: #333333;
+}
