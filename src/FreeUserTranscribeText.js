@@ -5,7 +5,7 @@ import Footer from './Footer';
 import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
-const FreeTranscribeText = () => {
+const FreeUserTranscribeText = () => {
 
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
@@ -110,4 +110,4 @@ const FreeTranscribeText = () => {
 
 };
 
-export default FreeTranscribeText;
+export default FreeUserTranscribeText;

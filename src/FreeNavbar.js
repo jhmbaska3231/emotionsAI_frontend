@@ -45,14 +45,14 @@ function FreeNavbar(props) {
     return (
         <nav className="paid-navbar">
             <div className="paid-navbar-left">
-                <Link to="/freetranscribetext" className="paid-navbar-logo">
+                <Link to="/freeusertranscribetext" className="paid-navbar-logo">
                     <img src={brain_icon} alt="brain_icon" />
                     <span>EmotionsAI</span>
                 </Link>
             </div>
             <div className="paid-navbar-right">
-                <Link to="/freetranscribetext">Transcribe Text</Link>
-                <Link to="/freeupgradepage">Upgrade</Link>
+                <Link to="/freeusertranscribetext">Transcribe Text</Link>
+                <Link to="/freeuserupgradepage">Upgrade</Link>
                 <div>
                     <Button
                         id="user-profile-button"

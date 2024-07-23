@@ -21,7 +21,8 @@ import TranscribeVoice from './TranscribeVoice';
 import Diary from './Diary';
 import UserProfile from './UserProfile';
 import FreeNavbar from './FreeNavbar';
-import FreeTranscribeText from './FreeTranscribeText'; 
+import FreeUserTranscribeText from './FreeUserTranscribeText'; 
+import FreeUserUpgradePage from './FreeUserUpgradePage'; 
 
 Amplify.configure(awsExports);
 
@@ -39,7 +40,8 @@ function App() {
                 <Route path="/transcribevoice" element={<ProtectedRoute><TranscribeVoice /></ProtectedRoute>} />
                 <Route path="/diary" element={<ProtectedRoute><Diary /></ProtectedRoute>} />
                 <Route path="/userprofile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-                <Route path="/freetranscribetext" element={<ProtectedRoute><FreeTranscribeText /></ProtectedRoute>} />
+                <Route path="/freeusertranscribetext" element={<ProtectedRoute><FreeUserTranscribeText /></ProtectedRoute>} />
+                <Route path="/freeuserupgradepage" element={<ProtectedRoute><FreeUserUpgradePage /></ProtectedRoute>} />
             </Routes>
         </div>
     );
@@ -110,7 +112,7 @@ const ProtectedRoute = ({ children }) => {
     );
 };
 
-// working code for 1 user_type
+// working code for 1 userType
 // const ProtectedRoute = ({ children }) => {
 //     return (
 //       <Authenticator>
