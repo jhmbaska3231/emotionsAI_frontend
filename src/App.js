@@ -60,7 +60,6 @@ const fetchUserDetails = async (userId) => {
 
 const ProtectedRoute = ({ children }) => {
     const [userType, setUserType] = React.useState(null);
-    const [userId, setUserId] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
@@ -72,8 +71,6 @@ const ProtectedRoute = ({ children }) => {
                     setBearerToken(accessToken.toString());
 
                     const userId = idToken.payload.sub;
-                    setUserId(userId);
-
                     const userDetails = await fetchUserDetails(userId);
                     if (userDetails) {
                         setUserType(userDetails.userType);

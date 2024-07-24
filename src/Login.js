@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Amplify } from 'aws-amplify';
 import { Authenticator, View, Image, useTheme, Text, ThemeProvider, TextField, useAuthenticator } from '@aws-amplify/ui-react';
+
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 
-// import axios, { setBearerToken } from './api/axiosConfig';
-// import { fetchAuthSession } from 'aws-amplify/auth';
+import axios, { setBearerToken } from './api/axiosConfig';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 import emotionsAI_logo from './pictures/emotionsAI_logo.png';
 
@@ -58,19 +59,55 @@ const theme = {
     },
 };
 
-// const fetchUserDetails = async (userId) => {
-//     try {
-//         const response = await axios.get(`/api/users/${userId}`);
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error fetching user details:', error);
-//         return null;
-//     }
-// };
+const fetchUserDetails = async (userId) => {
+    try {
+        const response = await axios.get(`/api/users/${userId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+        return null;
+    }
+};
+
+const RedirectHandler = ({ user }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleRedirect = async () => {
+            if (user) {
+                try {
+                    const session = await fetchAuthSession();
+                    const { accessToken, idToken } = session.tokens ?? {};
+                    if (accessToken && idToken) {
+                        setBearerToken(accessToken.toString());
+
+                        const userId = idToken.payload.sub;
+                        const userDetails = await fetchUserDetails(userId);
+                        if (userDetails) {
+                            const userType = userDetails.userType;
+                            if (userType === 'FreeUser') {
+                                navigate('/freeusertranscribetext');
+                            } else {
+                                navigate('/transcribetext');
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error during redirection:', error);
+                }
+            }
+        };
+
+        handleRedirect();
+    }, [user, navigate]);
+
+    return null;
+};
 
 const Login = () => {
 
-    const navigate = useNavigate();
+    // working code for "navigate('/transcribetext');"
+    // const navigate = useNavigate();
 
     const components = {
         Header() {
@@ -118,7 +155,7 @@ const Login = () => {
                 );
             },
         },
-    };    
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -141,12 +178,13 @@ const Login = () => {
                     },
                 }}
             >
-                {({ user }) => {
+                {/* {({ user }) => {
                     if (user) {
                         navigate('/transcribetext');
                     }
                     return null;
-                }}
+                }} */}
+                {({ user }) => <RedirectHandler user={user} />}
             </Authenticator>
         </ThemeProvider>
     );
