@@ -6,14 +6,15 @@ import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
 const AdminPage = () => {
+
     const [forms, setForms] = useState([]);
 
     useEffect(() => {
         const fetchForms = async () => {
             try {
                 const session = await fetchAuthSession();
-                const { accessToken, idToken } = session.tokens ?? {};
-                if (accessToken && idToken) {
+                const { accessToken } = session.tokens ?? {};
+                if (accessToken) {
                     setBearerToken(accessToken.toString());
                     
                     const response = await axios.get(`/api/forms`);
@@ -80,6 +81,7 @@ const AdminPage = () => {
             <Footer />
         </div>
     );
+    
 };
 
 export default AdminPage;
