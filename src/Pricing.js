@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import './Pricing.css';
 import FAQ from './FaqButton';
-import Navbar from './Navbar';
+import PublicNavbar from './PublicNavbar';
 import Footer from './Footer';
 import PaymentPopup from './PaymentPopup'; // Import the PaymentPopup component
 
@@ -20,7 +20,7 @@ const Pricing = () => {
 
   return (
     <>
-      <Navbar />
+      <PublicNavbar />
       <div className="pricing-page">
         <h1 className="pricing-header">Choose Your Subscription</h1>
         <p className="pricing-subheader">Unlock full access to EmotionsAI features without any limitations.</p>

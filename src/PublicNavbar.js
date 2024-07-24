@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './Navbar.css';
+import './PublicNavbar.css';
 import brain_icon from './pictures/brain_icon.png';
 
-const Navbar = () => {
+const PublicNavbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
@@ -23,4 +23,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default PublicNavbar;

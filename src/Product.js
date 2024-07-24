@@ -1,13 +1,13 @@
 import React from 'react';
 import './Product.css';
-import Navbar from './Navbar';
+import PublicNavbar from './PublicNavbar';
 import FaqButton from './FaqButton';
 import Footer from './Footer';
 
 const Product = () => {
     return (
         <>
-            <Navbar />
+            <PublicNavbar />
             <div className="prod-page">
                 <div className="prod-content">
                     <div className="prod-row">

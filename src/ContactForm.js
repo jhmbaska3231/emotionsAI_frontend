@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ContactForm.css';
-import Navbar from './Navbar';
+import PublicNavbar from './PublicNavbar';
 import Footer from './Footer';
 
 import api, { removeBearerToken } from './api/axiosConfig';
@@ -58,7 +58,7 @@ const ContactForm = () => {
 
     return (
         <div>
-            <Navbar />
+            <PublicNavbar />
             <div className="cf-contactFormPage">
                 <div className="cf-contactFormContent">
                     <div className="cf-contactFormContainer">

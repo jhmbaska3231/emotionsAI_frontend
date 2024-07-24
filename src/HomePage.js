@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
-import Navbar from './Navbar';
+import PublicNavbar from './PublicNavbar';
 import FAQ from './FaqButton';
 import Footer from './Footer';
 import slide1 from './pictures/slide1.png';
@@ -37,7 +37,7 @@ const Homepage = () => {
 
     return (
         <div className="hp-container">
-            <Navbar />
+            <PublicNavbar />
             <div className="hp-slideshow">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={prevSlide} className="hp-slide-arrow hp-left-arrow" />
                 <div className="hp-slide-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
