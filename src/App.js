@@ -16,13 +16,15 @@ import Pricing from './Pricing';
 import Contact from './ContactForm';
 import Login from './Login';
 import PaidNavbar from './PaidNavbar';
-import TranscribeText from './TranscribeText'; 
+import TranscribeText from './TranscribeText';
 import TranscribeVoice from './TranscribeVoice';
 import Diary from './Diary';
 import UserProfile from './UserProfile';
 import FreeNavbar from './FreeNavbar';
-import FreeUserTranscribeText from './FreeUserTranscribeText'; 
-import FreeUserUpgradePage from './FreeUserUpgradePage'; 
+import FreeUserTranscribeText from './FreeUserTranscribeText';
+import FreeUserUpgradePage from './FreeUserUpgradePage';
+import AdminNavbar from './AdminNavbar';
+import AdminPage from './AdminPage';
 
 Amplify.configure(awsExports);
 
@@ -42,6 +44,7 @@ function App() {
                 <Route path="/userprofile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
                 <Route path="/freeusertranscribetext" element={<ProtectedRoute><FreeUserTranscribeText /></ProtectedRoute>} />
                 <Route path="/freeuserupgradepage" element={<ProtectedRoute><FreeUserUpgradePage /></ProtectedRoute>} />
+                <Route path="/adminpage" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
             </Routes>
         </div>
     );
@@ -97,11 +100,9 @@ const ProtectedRoute = ({ children }) => {
         <Authenticator>
             {({ user, signOut }) => (
                 <div>
-                    {userType === 'FreeUser' ? (
-                        <FreeNavbar logOut={signOut} />
-                    ) : (
-                        <PaidNavbar logOut={signOut} />
-                    )}
+                    {userType === 'FreeUser' && <FreeNavbar logOut={signOut} />}
+                    {userType === 'PaidUser' && <PaidNavbar logOut={signOut} />}
+                    {userType === 'AdminUser' && <AdminNavbar logOut={signOut} />}
                     {children}
                 </div>
             )}

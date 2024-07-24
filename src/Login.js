@@ -87,8 +87,10 @@ const RedirectHandler = ({ user }) => {
                             const userType = userDetails.userType;
                             if (userType === 'FreeUser') {
                                 navigate('/freeusertranscribetext');
-                            } else {
+                            } else if (userType === 'PaidUser') {
                                 navigate('/transcribetext');
+                            } else {
+                                navigate('/adminpage');
                             }
                         }
                     }
