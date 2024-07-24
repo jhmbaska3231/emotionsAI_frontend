@@ -20,21 +20,18 @@ const FreeUserTranscribeText = () => {
     const isInputEmptyOrWhitespace = inputText.trim().length === 0;
 
     useEffect(() => {
-        const fetchUserIdAndToken = async () => {
+        const fetchAccessToken = async () => {
             try {
                 const session = await fetchAuthSession();
-                const { accessToken, idToken } = session.tokens ?? {};
-                if (accessToken && idToken) {
+                const { accessToken } = session.tokens ?? {};
+                if (accessToken) {
                     setBearerToken(accessToken.toString());
-                    
-                    const userId = idToken.payload.sub;
-                    setUserId(userId);
                 }
             } catch (error) {
                 console.error('Error fetching auth session:', error);
             }
         };
-        fetchUserIdAndToken();
+        fetchAccessToken();
     }, []);
 
     const handleTranscribe = async () => {

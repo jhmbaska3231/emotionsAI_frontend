@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
 import Footer from './Footer';
-import brain_icon from './pictures/brain_icon.png';
-import api from './api/axiosConfig';
+
+import axios, { setBearerToken } from './api/axiosConfig';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 const AdminPage = () => {
     const [forms, setForms] = useState([]);
@@ -10,37 +11,41 @@ const AdminPage = () => {
     useEffect(() => {
         const fetchForms = async () => {
             try {
-                const response = await api.get('/api/forms');
-                setForms(response.data);
+                const session = await fetchAuthSession();
+                const { accessToken, idToken } = session.tokens ?? {};
+                if (accessToken && idToken) {
+                    setBearerToken(accessToken.toString());
+                    
+                    const response = await axios.get(`/api/forms`);
+                    setForms(response.data);
+                } else {
+                    console.error('ID token not found in session');
+                }
             } catch (error) {
-                console.error('Error fetching forms:', error);
+                console.error('Error getting user session:', error);
             }
         };
 
         fetchForms();
     }, []);
 
-    const handleLogout = () => {
-        // Implement your logout functionality here
-    };
-
-    const toggleReadStatus = (formId) => {
-        setForms((prevForms) =>
-            prevForms.map((form) =>
-                form.id === formId ? { ...form, isRead: !form.isRead } : form
-            )
-        );
-    };
+    const toggleReadStatus = async (formId, currentStatus) => {
+        try {
+            const response = await axios.put(`/api/forms/${formId}/read`, {
+                readStatus: !currentStatus
+            });
+            setForms((prevForms) =>
+                prevForms.map((form) =>
+                    form.formId === formId ? { ...form, readStatus: response.data.readStatus } : form
+                )
+            );
+        } catch (error) {
+            console.error('Error updating read status:', error);
+        }
+    };    
 
     return (
         <div className="admin-page">
-            <div className="admin-navbar">
-                <div className="navbar-logo">
-                    <img src={brain_icon} alt="brain_icon" className="logo-image" />
-                    <span className="logo-text">EmotionAI</span>
-                </div>
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
-            </div>
             <div className="admin-content">
                 <div className="admin-forms-container">
                     <div className="form-headers">
@@ -53,13 +58,13 @@ const AdminPage = () => {
                         <div className="form-header">Message</div>
                     </div>
                     {forms.map((form) => (
-                        <div className="form-row" key={form.id}>
+                        <div className="form-row" key={form.formId}>
                             <div className="form-item">
                                 <button 
-                                    className={`status-button ${form.isRead ? 'read' : 'unread'}`}
-                                    onClick={() => toggleReadStatus(form.id)}
+                                    className={`status-button ${form.readStatus ? 'read' : 'unread'}`}
+                                    onClick={() => toggleReadStatus(form.formId, form.readStatus)}
                                 >
-                                    {form.isRead ? 'Read' : 'Unread'}
+                                    {form.readStatus ? 'Read' : 'Unread'}
                                 </button>
                             </div>
                             <div className="form-item">{form.date}</div>
