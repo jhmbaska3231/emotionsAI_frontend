@@ -4,7 +4,7 @@ import Footer from './Footer';
 import './UserProfile.css';
 
 import axios, { setBearerToken } from './api/axiosConfig';
-import { fetchAuthSession } from 'aws-amplify/auth';
+import { fetchAuthSession, signOut } from 'aws-amplify/auth';
 
 const UserProfile = () => {
 
@@ -24,7 +24,6 @@ const UserProfile = () => {
 
                     const userId = idToken.payload.sub;
                     const response = await axios.get(`/api/subscriptions/${userId}`);
-                    console.log('API Response(fetchSubscription):', response.data); // remember to remove this
                     setSubscription(response.data);
                 }
             } catch (error) {
@@ -48,7 +47,6 @@ const UserProfile = () => {
                 });
 
                 const response = await axios.get(`/api/subscriptions/${userId}`);
-                console.log('API Response(handlePlanChange):', response.data); // remember to remove this
                 setSubscription(response.data);
             }
         } catch (error) {
@@ -56,25 +54,26 @@ const UserProfile = () => {
         }
     };
 
-    console.log('Subscription Plan:', subscription?.subscriptionPlan); // remember to remove this
-    console.log('isMonthlyPlan:', isMonthlyPlan); // remember to remove this
-    console.log('isYearlyPlan:', isYearlyPlan); // remember to remove this
-
     const handleUnsubscribe = async () => {
-        try {
-            const session = await fetchAuthSession();
-            const { accessToken, idToken } = session.tokens ?? {};
-            if (accessToken && idToken) {
-                setBearerToken(accessToken.toString());
+        const confirmUnsubscribe = window.confirm('Are you sure you want to unsubscribe?');
 
-                const userId = idToken.payload.sub;
-                await axios.post(`/api/users/${userId}/unsubscribe`);
+        if (confirmUnsubscribe) {
+            try {
+                const session = await fetchAuthSession();
+                const { accessToken, idToken } = session.tokens ?? {};
+                if (accessToken && idToken) {
+                    setBearerToken(accessToken.toString());
 
-                // Redirect to another page or update UI
-                navigate('/some-other-page');
+                    const userId = idToken.payload.sub;
+                    await axios.post(`/api/users/${userId}/unsubscribe`);
+
+                    alert('You have been successfully unsubscribed.');
+                    await signOut({ global: true });
+                    navigate('/');
+                }
+            } catch (error) {
+                console.error('Error unsubscribing:', error);
             }
-        } catch (error) {
-            console.error('Error unsubscribing:', error);
         }
     };
 
@@ -102,17 +101,17 @@ const UserProfile = () => {
                         <span>Change plan to</span>
                         <button
                             className="plan-button"
-                            disabled={isYearlyPlan}
-                            onClick={() => handlePlanChange('YEARLY')}
-                        >
-                            Yearly
-                        </button>
-                        <button
-                            className="plan-button"
                             disabled={isMonthlyPlan}
                             onClick={() => handlePlanChange('MONTHLY')}
                         >
                             Monthly
+                        </button>
+                        <button
+                            className="plan-button"
+                            disabled={isYearlyPlan}
+                            onClick={() => handlePlanChange('YEARLY')}
+                        >
+                            Yearly
                         </button>
                     </div>
                 </div>

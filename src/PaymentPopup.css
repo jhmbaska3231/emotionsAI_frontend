@@ -82,3 +82,9 @@ input {
 .pp-confirm-button:hover {
     background: #333333;
 }
+
+.pp-error {
+    color: red;
+    font-size: 0.8vw;
+    display: block;
+}
