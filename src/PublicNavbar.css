@@ -1,7 +1,7 @@
 .navbar {
     background-color: #202123;
     color: white;
-    padding: 0 20px;
+    padding: 0 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center; 
@@ -25,7 +25,7 @@
 .navbar a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 0 1vw;
 }
 
 .navbar a:hover {
@@ -40,11 +40,11 @@
 }
 
 .navbar-logo img {
-    margin-right: 10px;
+    margin-right: 1vw;
     height: 4vh; /* Adjust the height of the logo to fit within the navbar */
 }
 
 .navbar-logo span {
-    font-size: 24px;
+    font-size: 2vw;
     font-weight: bold;
 }

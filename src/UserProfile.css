@@ -1,7 +1,7 @@
 .user-profile-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: calc(100vh - 10vh);
 }
 
 .user-profile-main-content {
@@ -9,38 +9,38 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 2vh 2vw;
     background-color: #f9f9f9; 
 }
 
 .user-profile-section {
     text-align: center;
-    padding: 20px;
+    padding: 2vh 2vw;
     width: 80%; 
     max-width: 1000px;
 }
 
 .user-profile-section h1 {
-    margin-top: -200px;
-    font-size: 24px;
-    padding-bottom: 10px;
+    margin-top: -20vh;
+    font-size: 2.4vw;
+    padding-bottom: 1vh;
 }
 
 .subscription-details {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
 }
 
 .subscription-item {
-    margin: 0 20px;
+    margin: 0 2vw;
     display: flex;
     align-items: center;
 }
 
 .subscription-item span {
-    margin-right: 10px; 
+    margin-right: 1vw; 
 }
 
 .date {
@@ -50,11 +50,11 @@
 .unsubscribe-button {
     background-color: #333; 
     color: #fff;
-    padding: 10px 20px;
+    padding: 1vh 2vw;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
-    margin-left: 20px; 
+    margin-left: 2vw; 
 }
 
 .unsubscribe-button:hover {
@@ -68,17 +68,17 @@
 }
 
 .change-plan-section span {
-    margin-right: 10px;
+    margin-right: 1vw;
 }
 
 .plan-button {
     background-color: #333;
     color: #fff; 
-    padding: 10px 20px;
+    padding: 1vh 2vw;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0 0.5vw;
 }
 
 .plan-button:hover {

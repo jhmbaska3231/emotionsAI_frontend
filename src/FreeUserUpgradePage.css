@@ -1,0 +1,105 @@
+.free-upgrade-page {
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 10vh); /* Adjusted for navbar and footer height */
+    box-sizing: border-box;
+    background-color: #e0f2f1;
+}
+
+.free-upgrade-header {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.free-upgrade-subheader {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #555;
+}
+
+.free-upgrade-box-container {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.free-upgrade-text-bold {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.free-upgrade-price-container {
+    margin-bottom: 0.5rem;
+}
+
+.free-upgrade-price {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.free-upgrade-period {
+    font-size: 1rem;
+    color: #333;
+}
+
+.free-upgrade-divider {
+    width: 75%;
+    margin: 0.5rem auto;
+    border: 0.5px solid #ccc;
+}
+
+.free-upgrade-features {
+    flex: 1;
+    margin: 1rem 0;
+    height: 20vh; 
+}
+
+.free-upgrade-text-normal {
+    font-size: 1rem;
+    color: #555;
+    text-align: left;
+    margin: 0.3rem 0;
+}
+
+.free-upgrade-box {
+    flex: 1;
+    max-width: 30%;
+    width: 100%;
+    padding: 1.25rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    margin: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 450px;
+    box-shadow: 0 0 16px #74AA9C; /* Added shadow */
+}
+
+.free-upgrade-button {
+    background-color: #74AA9C;
+    color: #fff;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    padding: 0.5rem 1rem; /* Shorter button height */
+    margin-top: 1rem;
+}
+
+.free-upgrade-button:hover {
+    background-color: #444;
+}

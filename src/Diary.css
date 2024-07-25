@@ -214,3 +214,24 @@
 .emotional-correlation-analysis-content {
     padding-top: 4vh;
 }
+
+.diary-search-bar {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.diary-search-bar:focus {
+    border-color: #74AA9C;
+    box-shadow: 0 0 5px rgba(116, 170, 156, 0.5);
+}
+
+.diary-search-bar::placeholder {
+    color: #999;
+}

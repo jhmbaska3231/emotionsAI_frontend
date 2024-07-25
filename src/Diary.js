@@ -259,7 +259,7 @@ const Diary = () => {
                             placeholder="Search diary entries..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            className="search-bar"
+                            className="diary-search-bar"
                         />
                     </div>
                     <div className="diary-ledger-row diary-header-row">

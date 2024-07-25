@@ -5,17 +5,13 @@ import './Pricing.css';
 import FAQ from './FaqButton';
 import PublicNavbar from './PublicNavbar';
 import Footer from './Footer';
-import PaymentPopup from './PaymentPopup'; // Import the PaymentPopup component
+import { useNavigate } from 'react-router-dom';
 
 const Pricing = () => {
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const openPaymentPopup = () => {
-    setIsPaymentPopupOpen(true);
-  };
-
-  const closePaymentPopup = () => {
-    setIsPaymentPopupOpen(false);
+  const handleChoosePlan = () => {
+    navigate('/login');
   };
 
   return (
@@ -45,7 +41,7 @@ const Pricing = () => {
                 Capped Word Count
               </p>
             </div>
-            <button className="pricing-button">Choose this plan</button>
+            <button className="pricing-button" onClick={handleChoosePlan}>Choose this plan</button>
           </div>
           <div className="pricing-box">
             <p className="pricing-text-bold">MONTHLY</p>
@@ -79,7 +75,7 @@ const Pricing = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="pricing-button" onClick={openPaymentPopup}>Choose this plan</button>
+            <button className="pricing-button" onClick={handleChoosePlan}>Choose this plan</button>
           </div>
           <div className="pricing-box">
             <p className="pricing-text-bold">YEARLY</p>
@@ -113,13 +109,12 @@ const Pricing = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="pricing-button" onClick={openPaymentPopup}>Choose this plan</button>
+            <button className="pricing-button" onClick={handleChoosePlan}>Choose this plan</button>
           </div>
         </div>
       </div>
       <FAQ />
       <Footer />
-      <PaymentPopup isOpen={isPaymentPopupOpen} onClose={closePaymentPopup} />
     </>
   );
 }
