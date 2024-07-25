@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 import './FreeUserUpgradePage.css';
 import FAQ from './FaqButton';
 import Footer from './Footer';
@@ -8,8 +10,10 @@ import PaymentPopup from './PaymentPopup';
 
 const FreeUserUpgradePage = () => {
   const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState('');
 
-  const openPaymentPopup = () => {
+  const openPaymentPopup = (plan) => {
+    setSelectedPlan(plan);
     setIsPaymentPopupOpen(true);
   };
 
@@ -43,7 +47,7 @@ const FreeUserUpgradePage = () => {
                 Capped Word Count
               </p>
             </div>
-            <button className="free-upgrade-button" onClick={openPaymentPopup}>Choose this plan</button>
+            <button className="free-upgrade-button" disabled>Current Plan</button>
           </div>
           <div className="free-upgrade-box">
             <p className="free-upgrade-text-bold">MONTHLY</p>
@@ -77,7 +81,7 @@ const FreeUserUpgradePage = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="free-upgrade-button" onClick={openPaymentPopup}>Choose this plan</button>
+            <button className="free-upgrade-button" onClick={() => openPaymentPopup('MONTHLY')}>Choose this plan</button>
           </div>
           <div className="free-upgrade-box">
             <p className="free-upgrade-text-bold">YEARLY</p>
@@ -111,13 +115,13 @@ const FreeUserUpgradePage = () => {
                 Full Word Count
               </p>
             </div>
-            <button className="free-upgrade-button" onClick={openPaymentPopup}>Choose this plan</button>
+            <button className="free-upgrade-button" onClick={() => openPaymentPopup('YEARLY')}>Choose this plan</button>
           </div>
         </div>
       </div>
       <FAQ />
       <Footer />
-      <PaymentPopup isOpen={isPaymentPopupOpen} onClose={closePaymentPopup} />
+      <PaymentPopup isOpen={isPaymentPopupOpen} onClose={closePaymentPopup} subscriptionPlan={selectedPlan} />
     </>
   );
 }

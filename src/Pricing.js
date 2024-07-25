@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 import './Pricing.css';
 import FAQ from './FaqButton';
 import PublicNavbar from './PublicNavbar';
 import Footer from './Footer';
-import { useNavigate } from 'react-router-dom';
 
 const Pricing = () => {
   const navigate = useNavigate();
