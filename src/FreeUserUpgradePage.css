@@ -103,3 +103,8 @@
 .free-upgrade-button:hover {
     background-color: #444;
 }
+
+.free-upgrade-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}

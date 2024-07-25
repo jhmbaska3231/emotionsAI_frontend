@@ -84,3 +84,8 @@
 .plan-button:hover {
     background-color: #555; 
 }
+
+.plan-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
