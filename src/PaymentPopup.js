@@ -27,16 +27,18 @@ const PaymentPopup = ({ isOpen, onClose, subscriptionPlan }) => {
 
     if (value.length === 5) {
       const [month, year] = value.split('/');
-      const currentYear = new Date().getFullYear() % 100;
+      const currentYear = new Date().getFullYear();
       const currentMonth = new Date().getMonth() + 1;
 
-      const monthInt = parseInt(month);
+      const monthInt = parseInt(month, 10);
+      const yearInt = parseInt(year, 10) + 2000;
+
       if (monthInt < 1 || monthInt > 12) {
         setErrors((prevErrors) => ({
           ...prevErrors,
           expiration: 'Month must be between 01 and 12',
         }));
-      } else if (parseInt(year) < currentYear || (parseInt(year) === currentYear && monthInt < currentMonth)) {
+      } else if (yearInt < currentYear || (yearInt === currentYear && monthInt < currentMonth)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
           expiration: 'Expiration date cannot be in the past',
@@ -48,7 +50,7 @@ const PaymentPopup = ({ isOpen, onClose, subscriptionPlan }) => {
         });
       }
     }
-  };
+};
 
   const handleCardNumberInput = (e) => {
     let value = e.target.value.replace(/\D/g, '').slice(0, 16);
@@ -76,6 +78,19 @@ const PaymentPopup = ({ isOpen, onClose, subscriptionPlan }) => {
     }
     if (!expiration) {
       errors.expiration = 'Expiration date is required';
+    } else {
+      const [month, year] = expiration.split('/');
+      const currentYear = new Date().getFullYear();
+      const currentMonth = new Date().getMonth() + 1;
+
+      const monthInt = parseInt(month, 10);
+      const yearInt = parseInt(year, 10) + 2000;
+
+      if (monthInt < 1 || monthInt > 12) {
+          errors.expiration = 'Month must be between 01 and 12';
+      } else if (yearInt < currentYear || (yearInt === currentYear && monthInt < currentMonth)) {
+          errors.expiration = 'Expiration date cannot be in the past';
+      }
     }
     if (!cvc || !/^\d{3}$/.test(cvc)) {
       errors.cvc = 'CVC is required and should be 3 digits';
