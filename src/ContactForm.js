@@ -16,7 +16,12 @@ const ContactForm = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        if (name === 'phone') {
+            const phoneValue = value.replace(/\D/g, '');
+            setFormData({ ...formData, [name]: phoneValue });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const validateForm = () => {
