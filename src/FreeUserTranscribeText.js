@@ -45,7 +45,6 @@ const FreeUserTranscribeText = () => {
         try {
             const response = await axios.post('/api/transcribe', inputText);
             setOutputText(response.data);
-            setIsInputChanged(false);
             setTranscribeCount(prevCount => prevCount + 1);
         } catch (error) {
             setError(error.message);
@@ -57,7 +56,6 @@ const FreeUserTranscribeText = () => {
     const handleClearInputAndOuput = () => {
         setInputText('');
         setOutputText('');
-        setIsInputChanged(true);
     };
 
     return (
@@ -71,14 +69,13 @@ const FreeUserTranscribeText = () => {
                             value={inputText}
                             onChange={(e) => {
                                 setInputText(e.target.value);
-                                setIsInputChanged(true);
                             }}
                             placeholder="Enter text..."
                             className="ft-textarea"
                         />
                         <div className="ft-button-container">
-                            <div className={`ft-transcribeTextWordCount ${wordCount > 280 ? 'ft-wordCountExceeded' : ''}`}>
-                                Words {wordCount}/280
+                            <div className={`ft-transcribeTextWordCount ${wordCount > 80 ? 'ft-wordCountExceeded' : ''}`}>
+                                Words {wordCount}/80
                             </div>
                             <button className="ft-clearInputButton" onClick={handleClearInputAndOuput}>Clear all</button>
                         </div>
@@ -86,7 +83,7 @@ const FreeUserTranscribeText = () => {
                     <button 
                         onClick={handleTranscribe}
                         className="ft-transcribeTextButton"
-                        disabled={wordCount > 280 || isTranscribing || isInputEmptyOrWhitespace || hasReachedLimit}
+                        disabled={wordCount > 80 || isTranscribing || isInputEmptyOrWhitespace || hasReachedLimit}
                     >
                         {isTranscribing ? 'Transcribing...' : hasReachedLimit ? 'Limit Reached' : 'Transcribe ➔'}
                     </button>
