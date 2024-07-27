@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './TranscribeVoice.css';
 import Footer from './Footer';
+import FAQ from './FaqButton';
+
 
 import axios, { setBearerToken } from './api/axiosConfig';
 import { fetchAuthSession } from 'aws-amplify/auth';
@@ -240,6 +242,7 @@ const TranscribeVoice = () => {
                 </div>
             </div>
             <Footer />
+            <FAQ />
         </div>
     );
 

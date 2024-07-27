@@ -80,7 +80,7 @@ const UserProfile = () => {
     return (
         <div className="user-profile-container">
             <div className="user-profile-main-content">
-                <div className="user-profile-section">
+                <div className="user-profile-card"> 
                     <h1>Account Manager</h1>
                     <div className="subscription-details">
                         <div className="subscription-item">
