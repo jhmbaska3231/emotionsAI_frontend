@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
@@ -38,13 +38,13 @@ function App() {
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/transcribetext" element={<ProtectedRoute><TranscribeText /></ProtectedRoute>} />
-                <Route path="/transcribevoice" element={<ProtectedRoute><TranscribeVoice /></ProtectedRoute>} />
-                <Route path="/diary" element={<ProtectedRoute><Diary /></ProtectedRoute>} />
-                <Route path="/userprofile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-                <Route path="/freeusertranscribetext" element={<ProtectedRoute><FreeUserTranscribeText /></ProtectedRoute>} />
-                <Route path="/freeuserupgradepage" element={<ProtectedRoute><FreeUserUpgradePage /></ProtectedRoute>} />
-                <Route path="/adminpage" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+                <Route path="/transcribetext" element={<ProtectedRoute requiredUserType="PaidUser"><TranscribeText /></ProtectedRoute>} />
+                <Route path="/transcribevoice" element={<ProtectedRoute requiredUserType="PaidUser"><TranscribeVoice /></ProtectedRoute>} />
+                <Route path="/diary" element={<ProtectedRoute requiredUserType="PaidUser"><Diary /></ProtectedRoute>} />
+                <Route path="/userprofile" element={<ProtectedRoute requiredUserType="PaidUser"><UserProfile /></ProtectedRoute>} />
+                <Route path="/freeusertranscribetext" element={<ProtectedRoute requiredUserType="FreeUser"><FreeUserTranscribeText /></ProtectedRoute>} />
+                <Route path="/freeuserupgradepage" element={<ProtectedRoute requiredUserType="FreeUser"><FreeUserUpgradePage /></ProtectedRoute>} />
+                <Route path="/adminpage" element={<ProtectedRoute requiredUserType="AdminUser"><AdminPage /></ProtectedRoute>} />
             </Routes>
         </div>
     );
@@ -61,9 +61,12 @@ const fetchUserDetails = async (userId) => {
     }
 };
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, requiredUserType }) => {
+    // const location = useLocation();
+    const navigate = useNavigate();
     const [userType, setUserType] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+    const [isAuthorized, setIsAuthorized] = React.useState(true);
 
     React.useEffect(() => {
         const fetchUserType = async () => {
@@ -88,12 +91,23 @@ const ProtectedRoute = ({ children }) => {
         fetchUserType();
     }, []);
 
+    React.useEffect(() => {
+        if (!loading) {
+            if (userType && userType !== requiredUserType) {
+                setIsAuthorized(false);
+                navigate(-1);
+            } else if (!userType) {
+                navigate('/');
+            }
+        }
+    }, [userType, requiredUserType, loading, navigate]);
+
     if (loading) {
-        return <div>Loading...</div>; // show loading spinner or message
+        return <div>Loading...</div>;
     }
 
-    if (!userType) {
-        return <Home />; // redirect to Home if no user type
+    if (!isAuthorized || !userType) {
+        return null;
     }
 
     return (
