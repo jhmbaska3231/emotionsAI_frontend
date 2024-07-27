@@ -78,7 +78,7 @@
 .hp-product-introduction {
     text-align: center;
     height: 48vh; /* 45% of the viewport height */
-    margin: 1vw 0; /* Adjusted margin to reduce space */
+    margin: 0.5vw 0; /* Adjusted margin to reduce space */
 }
 
 /* Heading styling */
@@ -87,6 +87,7 @@
     padding: 0.5vw 0; /* Adjusted padding to reduce space */
     font-size: 2rem;
     color: #333;
+    padding-top: 1vw;
 }
 
 /* Content wrapper with flexbox */
@@ -101,7 +102,7 @@
 
 /* Text box styling */
 .hp-text-box {
-    max-width: 27vw; /* Use viewport width for responsiveness */
+    max-width: 26vw; /* Use viewport width for responsiveness */
     padding: 1vw; /* Added padding for better readability */
     margin: 0;
 }

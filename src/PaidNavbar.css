@@ -40,12 +40,12 @@
 }
 
 .paid-navbar-logo img {
-    margin-right: 1vw; /* Adjusted for responsiveness */
+    margin-right: 0.5vw; /* Adjusted for responsiveness */
     height: 4vh; /* Same height as the logo in the navbar */
 }
 
 .paid-navbar-logo span {
-    font-size: 2vw; /* Adjusted for responsiveness */
+    font-size: 1.5vw; /* Adjusted for responsiveness */
     font-weight: bold;
 }
 

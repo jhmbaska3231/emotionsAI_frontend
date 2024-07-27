@@ -40,11 +40,11 @@
 }
 
 .navbar-logo img {
-    margin-right: 1vw;
+    margin-right: 0.5vw;
     height: 4vh; /* Adjust the height of the logo to fit within the navbar */
 }
 
 .navbar-logo span {
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-weight: bold;
 }
