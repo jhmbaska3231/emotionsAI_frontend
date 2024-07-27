@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
@@ -62,7 +62,6 @@ const fetchUserDetails = async (userId) => {
 };
 
 const ProtectedRoute = ({ children, requiredUserType }) => {
-    // const location = useLocation();
     const navigate = useNavigate();
     const [userType, setUserType] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
