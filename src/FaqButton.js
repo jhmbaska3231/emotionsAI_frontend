@@ -27,7 +27,7 @@ const FaqButton = () => {
             <ul>
                 <li>Enter text</li>
                 <li>Click transcribe</li>
-                <li>See Target Emotion, Emotional Intensity, Overall Sentiment</li>
+                <li>See Target Emotion, Emotional Intensity, Overall Sentiment, Explanation</li>
             </ul>
         </div>
     );
@@ -39,7 +39,7 @@ const FaqButton = () => {
             <ul>
                 <li>Upload audio file</li>
                 <li>Click transcribe</li>
-                <li>See Target Emotion, Emotional Intensity, Overall Sentiment</li>
+                <li>See Target Emotion, Emotional Intensity, Overall Sentiment, Explanation</li>
             </ul>
         </div>
     );

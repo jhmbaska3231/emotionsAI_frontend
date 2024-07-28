@@ -32,6 +32,7 @@ const Diary = () => {
     const [emotionCorrelationData, setEmotionCorrelationData] = useState([]);
     const [currentMonth, setCurrentMonth] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const [sortOrder, setSortOrder] = useState('asc');
     const entryRef = useRef(null);
 
     useEffect(() => {
@@ -249,8 +250,21 @@ const Diary = () => {
         );
     };
 
+    const toggleSortOrder = () => {
+        setSortOrder(prevOrder => prevOrder === 'asc' ? 'desc' : 'asc');
+    };
+
+    const sortDiaryEntries = (entries) => {
+        return entries.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+        });
+    };
+
     const renderContent = () => {
         if (activeTab === 'DiaryLedger') {
+            const sortedEntries = sortDiaryEntries(diaryEntries);
             return (
                 <div className="diary-ledger-content">
                     <div className="tab-content">
@@ -261,6 +275,9 @@ const Diary = () => {
                             onChange={handleSearchChange}
                             className="diary-search-bar"
                         />
+                        <button onClick={toggleSortOrder}>
+                            Sort by Date ({sortOrder === 'asc' ? 'Oldest First' : 'Newest First'})
+                        </button>
                     </div>
                     <div className="diary-ledger-row diary-header-row">
                         <div className="diary-ledger-column diary-date-column">
@@ -276,7 +293,8 @@ const Diary = () => {
                             <h3>Explanation</h3>
                         </div>
                     </div>
-                    {diaryEntries
+                    {/* {diaryEntries */}
+                    {sortedEntries
                         .filter(entry => entry.inputText.toLowerCase().includes(searchQuery.toLowerCase()))
                         .map(entry => (
                             <div className="diary-ledger-row" key={entry.diaryId}>
