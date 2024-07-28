@@ -419,6 +419,16 @@ const Diary = () => {
                                 border: "1px solid #ccc"
                             };
                         }}
+                        xLabelsStyle={(index) => ({
+                            transform: 'rotate(-90deg)',
+                            transformOrigin: 'center',
+                            whiteSpace: 'nowrap',
+                            padding: '10px',
+                            overflow: 'visible'
+                        })}
+                        yLabelsStyle={(index) => ({
+                            padding: '0 5px',
+                        })}
                         cellHeight="50px"
                         cellWidth="50px"
                         square
