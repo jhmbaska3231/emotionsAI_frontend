@@ -235,3 +235,33 @@
 .diary-search-bar::placeholder {
     color: #999;
 }
+
+.sort-button {
+    background-color: white; 
+    color: #333; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-flex; 
+    align-items: center;
+}
+
+.sort-button:hover {
+    background-color: #f0f0f0; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sort-button:active {
+    background-color: #e0e0e0; 
+    transform: translateY(0); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.sort-button span {
+    margin-left: 8px; 
+}

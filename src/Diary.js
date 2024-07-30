@@ -275,8 +275,8 @@ const Diary = () => {
                             onChange={handleSearchChange}
                             className="diary-search-bar"
                         />
-                        <button onClick={toggleSortOrder}>
-                            Sort by Date ({sortOrder === 'asc' ? 'Oldest First' : 'Newest First'})
+                        <button className="sort-button" onClick={toggleSortOrder}>
+                            Sort by Date ({sortOrder === 'asc' ? 'Acending' : 'Decending'})
                         </button>
                     </div>
                     <div className="diary-ledger-row diary-header-row">
