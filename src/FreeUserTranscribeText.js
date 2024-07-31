@@ -29,7 +29,7 @@ const FreeUserTranscribeText = () => {
                     const userId = idToken.payload.sub;
                     const response = await axios.get(`/api/users/${userId}/transcribe-usage`);
                     setTranscribeCount(response.data.transcribeCount);
-                    setHasReachedLimit(response.data.hasReachedLimit);
+                    setHasReachedLimit(response.data.transcribeCount >= TRANSCRIBE_LIMIT);
                 }
             } catch (error) {
                 console.error('Error fetching auth session:', error);
@@ -60,9 +60,9 @@ const FreeUserTranscribeText = () => {
                 const incrementResponse = await axios.post(`/api/users/${userId}/update-freeuser-limit`, { transcribeTime });
                 
                 if (incrementResponse.status === 200) {
-                    setTranscribeCount(prevCount => prevCount + 1);
-                    // check if the limit is reached after incrementing
-                    if (transcribeCount + 1 >= TRANSCRIBE_LIMIT) {
+                    const newCount = transcribeCount + 1;
+                    setTranscribeCount(newCount);
+                    if (newCount >= TRANSCRIBE_LIMIT) {
                         setHasReachedLimit(true);
                     }
                 }
