@@ -51,7 +51,6 @@ const FreeUserTranscribeText = () => {
             };
             const response = await axios.post('/api/transcribe', payload);
             setOutputText(response.data);
-            setIsInputChanged(false);
 
             // increment transcribe count and update transcribe time
             const transcribeTime = new Date().toISOString();
