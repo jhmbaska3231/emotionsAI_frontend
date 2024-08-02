@@ -73,12 +73,30 @@ const TranscribeVoice = () => {
         }
     };    
 
+    // const handleTranscribe = async () => {
+    //     setIsTranscribing(true);
+    //     setError('');
+
+    //     try {
+    //         const response = await axios.post('/api/transcribe', inputText);
+    //         setOutputText(response.data);
+    //         setIsInputChanged(false);
+    //     } catch (error) {
+    //         setError(error.message);
+    //     } finally {
+    //         setIsTranscribing(false);
+    //     }
+    // };
+
     const handleTranscribe = async () => {
         setIsTranscribing(true);
         setError('');
-
         try {
-            const response = await axios.post('/api/transcribe', inputText);
+            const payload = {
+                userId,
+                inputText
+            };
+            const response = await axios.post('/api/transcribe', payload);
             setOutputText(response.data);
             setIsInputChanged(false);
         } catch (error) {
