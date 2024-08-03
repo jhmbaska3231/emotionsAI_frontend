@@ -42,6 +42,10 @@ const FreeUserTranscribeText = () => {
     }, []);
 
     const handleTranscribe = async () => {
+        if (hasReachedLimit || !userId) {
+            return;
+        }
+        
         setIsTranscribing(true);
         setError('');
         try {
