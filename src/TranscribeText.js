@@ -70,7 +70,7 @@ const TranscribeText = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        const emotionRegex = /Detected Emotion\(s\):\s*([\w\s%,\*\(\)]+(?:,\s*included in [\w\s]+)?)/;
+        const emotionRegex = /Detected Emotions?:\s*([\w\s%,\(\)]+)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
