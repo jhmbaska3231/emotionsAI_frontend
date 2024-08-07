@@ -107,7 +107,7 @@ const TranscribeVoice = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        const emotionRegex = /Detected Emotions?:\s*([\w\s%,\(\)]+)/;
+        const emotionRegex = /Detected Emotion\(s\)?:\s*([\w\s%,\(\)]+)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
