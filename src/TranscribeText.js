@@ -70,7 +70,7 @@ const TranscribeText = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        const emotionRegex = /Detected Emotions?:\s*([\w\s%,\(\)]+)/;
+        const emotionRegex = /Detected Emotion\(s\)?:\s*([\w\s%,\(\)]+)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
@@ -100,6 +100,12 @@ const TranscribeText = () => {
         const overallSentiment = sentimentMatch ? sentimentMatch[1].trim() : '';
         const sentimentDetails = sentimentMatch ? sentimentMatch[2].trim() : '';
         const explanation = explanationMatch ? explanationMatch[1].trim() : '';
+
+        // remember to delete
+        console.log('Emotional Intensity:', emotionalIntensity);
+        console.log('Overall Sentiment:', `${overallSentiment} (${sentimentDetails})`);
+        console.log('Explanation:', explanation);
+        console.log('Target Emotions:', targetEmotions);
 
         return { emotionalIntensity, overallSentiment: `${overallSentiment} (${sentimentDetails})`, explanation, targetEmotions };
     };
