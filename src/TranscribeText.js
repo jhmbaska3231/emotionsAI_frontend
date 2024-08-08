@@ -70,7 +70,7 @@ const TranscribeText = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        const emotionRegex = /Detected Emotion\(s\)?:\s*([\w\s%,\(\)]+)/;
+        const emotionRegex = /Detected Emotions?:\s*([\w\s%,()-]+)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
@@ -79,7 +79,7 @@ const TranscribeText = () => {
         const intensityMatch = output.match(intensityRegex);
         const sentimentMatch = output.match(sentimentRegex);
         const explanationMatch = output.match(explanationRegex);
-        
+
         let targetEmotions = [];
         if (emotionsMatch && emotionsMatch[1]) {
             const emotionsString = emotionsMatch[1].trim();
@@ -87,10 +87,10 @@ const TranscribeText = () => {
                 const emotionsArray = emotionsString.split(', ');
 
                 targetEmotions = emotionsArray.map(emotionString => {
-                    const [emotion, percentage] = emotionString.split(' (');
+                    const emotionMatch = emotionString.match(/([\w\s]+)\s*\((\d+)%\)/);
                     return {
-                        emotion: emotion.trim(),
-                        emotionPercentage: percentage ? parseFloat(percentage.replace('%)', '').trim()) : 0
+                        emotion: emotionMatch ? emotionMatch[1].trim() : emotionString.trim(),
+                        emotionPercentage: emotionMatch ? parseFloat(emotionMatch[2]) : 0
                     };
                 });
             }
@@ -100,12 +100,6 @@ const TranscribeText = () => {
         const overallSentiment = sentimentMatch ? sentimentMatch[1].trim() : '';
         const sentimentDetails = sentimentMatch ? sentimentMatch[2].trim() : '';
         const explanation = explanationMatch ? explanationMatch[1].trim() : '';
-
-        // remember to delete
-        console.log('Emotional Intensity:', emotionalIntensity);
-        console.log('Overall Sentiment:', `${overallSentiment} (${sentimentDetails})`);
-        console.log('Explanation:', explanation);
-        console.log('Target Emotions:', targetEmotions);
 
         return { emotionalIntensity, overallSentiment: `${overallSentiment} (${sentimentDetails})`, explanation, targetEmotions };
     };

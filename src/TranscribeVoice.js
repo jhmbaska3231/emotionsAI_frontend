@@ -107,7 +107,7 @@ const TranscribeVoice = () => {
     };
 
     const parseTranscriptionOutput = (output) => {
-        const emotionRegex = /Detected Emotion\(s\)?:\s*([\w\s%,\(\)]+)/;
+        const emotionRegex = /Detected Emotions?:\s*([\w\s%,()-]+)/;
         const intensityRegex = /Overall Emotional Intensity:\s*(\w+)/;
         const sentimentRegex = /Overall Sentiment:\s*([^(]+)\s*\(([^)]+)\)/;
         const explanationRegex = /Explanation:\s*(.*)/;
@@ -116,7 +116,7 @@ const TranscribeVoice = () => {
         const intensityMatch = output.match(intensityRegex);
         const sentimentMatch = output.match(sentimentRegex);
         const explanationMatch = output.match(explanationRegex);
-        
+
         let targetEmotions = [];
         if (emotionsMatch && emotionsMatch[1]) {
             const emotionsString = emotionsMatch[1].trim();
@@ -124,10 +124,10 @@ const TranscribeVoice = () => {
                 const emotionsArray = emotionsString.split(', ');
 
                 targetEmotions = emotionsArray.map(emotionString => {
-                    const [emotion, percentage] = emotionString.split(' (');
+                    const emotionMatch = emotionString.match(/([\w\s]+)\s*\((\d+)%\)/);
                     return {
-                        emotion: emotion.trim(),
-                        emotionPercentage: percentage ? parseFloat(percentage.replace('%)', '').trim()) : 0
+                        emotion: emotionMatch ? emotionMatch[1].trim() : emotionString.trim(),
+                        emotionPercentage: emotionMatch ? parseFloat(emotionMatch[2]) : 0
                     };
                 });
             }
