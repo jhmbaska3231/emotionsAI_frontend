@@ -242,9 +242,14 @@ const Diary = () => {
         setSearchQuery(e.target.value);
     };
 
+    const escapeRegExp = (string) => {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    };
+
     const highlightSearchQuery = (text) => {
         if (!searchQuery) return text;
-        const regex = new RegExp(`(${searchQuery})`, 'gi');
+        const escapedQuery = escapeRegExp(searchQuery);
+        const regex = new RegExp(`(${escapedQuery})`, 'gi');
         return text.split(regex).map((part, index) =>
             part.toLowerCase() === searchQuery.toLowerCase() ? <mark key={index}>{part}</mark> : part
         );
